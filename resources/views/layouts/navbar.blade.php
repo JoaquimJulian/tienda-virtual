@@ -1,13 +1,14 @@
 <div x-data="{ open: false, abierto: false }" 
-    :class="open ? 'h-full' : 'h-auto'"
+    :class="{'h-full' : open, 'h-auto' : !open, 'items-center' : !abierto, 'items-stretch' : abierto}"
     @mouseenter="abierto = true" 
     @mouseleave="abierto = false"
-    class="fixed w-full bg-custom-black text-white 
+    class="fixed w-full bg-custom-black text-white
     inset-x-0 top-0 sm:w-[100px] sm:flex sm:flex-col sm:align-center
     sm:inset-y-0 sm:left-0 transition-all duration-300 sm:hover:w-[400px]">
     
     <div class="flex justify-end">
-        <img @click="open = !open" class="w-20 h-15 mt-3 mb-3 mr-3 cursor-pointer" 
+        <img @click="open = !open" class="w-15 h-10 mt-3 mb-3 mr-3 mr-3 cursor-pointer" 
+            :class="{'sm:mr-3': abierto, 'sm:mr-0': !abierto}"
              src="{{ asset('images/rayas_navegacion.png') }}" 
              alt="navegacion">
     </div>
