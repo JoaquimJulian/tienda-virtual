@@ -9,9 +9,14 @@
             <img src="{{ asset('images/icono_usuario.png') }}" alt="">
             <p>Iniciar sesion</p>
         </div>
-        <div class="flex items-center sm:gap-2 gap-1 cursor-pointer">
+        <div id="user-trigger" class="flex items-center sm:gap-2 gap-1 cursor-pointer">
             <img src="{{ asset('images/bandera_sp.png') }}" alt="" class="w-6">
             <img src="{{ asset('images/flecha_abajo.png') }}" alt="">
+        </div>
+        <div id="dropdownHeader" class="hidden absolute top-full left-0 mt-2 bg-white shadow-lg rounded-lg w-48 p-2">
+            <a href="#" class="block px-4 py-2 hover:bg-gray-200">Inglés</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-200">Alemán</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-200">Francés</a>
         </div>
     </div>
 </div>
