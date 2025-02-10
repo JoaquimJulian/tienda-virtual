@@ -7,10 +7,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
-<body>
-    @include ('layouts.navbar')
+<body class="sm:flex relative">
+    <div>
+        @include ('layouts.navbar')
+    </div>  
 
     <div>
+        @include ('layouts.header')
         @yield('content')
     </div>
 

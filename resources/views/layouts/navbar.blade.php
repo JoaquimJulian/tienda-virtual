@@ -1,9 +1,9 @@
 <div x-data="{ open: false, abierto: false }" 
-    :class="{'h-full' : open, 'h-auto' : !open, 'items-center' : !abierto, 'items-stretch' : abierto}"
+    :class="{'h-screen fixed' : open, 'h-auto' : !open, 'items-center' : !abierto, 'items-stretch sm:fixed' : abierto}"
     @mouseenter="abierto = true" 
     @mouseleave="abierto = false"
-    class="fixed w-full bg-custom-black text-white
-    inset-x-0 top-0 sm:w-[100px] sm:flex sm:flex-col sm:align-center
+    class="sticky w-full bg-custom-black text-white
+    inset-x-0 top-0 sm:w-[100px] sm:flex sm:flex-col sm:align-center sm:h-screen
     sm:inset-y-0 sm:left-0 transition-all duration-300 sm:hover:w-[400px]">
     
     <div class="flex justify-end">
