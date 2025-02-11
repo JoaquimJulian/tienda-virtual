@@ -7,7 +7,7 @@
     <div class="flex items-center gap-5 sm:gap-10">
         <div class="flex items-center sm:gap-2 gap-1 cursor-pointer">
             <img src="{{ asset('images/icono_usuario.png') }}" alt="">
-            <p>Iniciar sesion</p>
+            <a href="{{ route('login.form') }}">Iniciar sesión</a>
         </div>
         <div id="user-trigger" class="flex items-center sm:gap-2 gap-1 cursor-pointer">
             <img src="{{ asset('images/bandera_sp.png') }}" alt="" class="w-6">

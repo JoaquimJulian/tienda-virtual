@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("dropdown ejecutado");
-
     const trigger = document.getElementById("user-trigger");
     const dropdown = document.getElementById("dropdownHeader");
 

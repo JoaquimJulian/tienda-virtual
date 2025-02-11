@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => env('AUTH_GUARD', 'web'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
+        'passwords' => env('AUTH_PASSWORD_BROKER', 'trabajadores'),
     ],
 
     /*
@@ -36,9 +36,9 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'trabajadores' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'trabajadores',
         ],
     ],
 
@@ -60,10 +60,10 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
+            'trabajadores' => [
+                'driver' => 'eloquent',
+                'model' => App\Models\Trabajador::class,
+            ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -90,14 +90,12 @@ return [
     |
     */
 
-    'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+    /*'passwords' => [
+        'trabajadores' => [  // Asegúrate de tener un broker de contraseñas para trabajadores
+            'provider' => 'trabajadores',
             'expire' => 60,
-            'throttle' => 60,
         ],
-    ],
+    ],*/
 
     /*
     |--------------------------------------------------------------------------

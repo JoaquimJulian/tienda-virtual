@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Trabajador;
 
 class TrabajadorController extends Controller
 {
@@ -11,7 +12,8 @@ class TrabajadorController extends Controller
      */
     public function index()
     {
-        //
+        $trabajadores = Trabajador::all();  // Obtener todos los trabajadores
+        return response()->json($trabajadores);
     }
 
     /**
