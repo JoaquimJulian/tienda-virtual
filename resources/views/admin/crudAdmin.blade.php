@@ -1,8 +1,16 @@
+@extends('layouts.app') <!-- Aquí extiendes tu layout principal -->
+
+@section('title', 'CRUD Admin')
+
+@section('content')
+<div id="categorias">
+
+</div>
 
 <div class="">
     <div class="me-4">
         <h2>Nueva categoría</h2>
-        <form action="{{ route('categoria.store') }}" method="post">
+        <form id="categoriaForm">
             @csrf
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required class="form-control">
@@ -39,3 +47,6 @@
         </form>
     </div>
 </div>
+@endsection
+
+@vite(['resources/js/services/crudAdmin.js'])

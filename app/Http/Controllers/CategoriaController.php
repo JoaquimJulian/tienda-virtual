@@ -12,8 +12,9 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        
+        return response()->json(Categoria::all());
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -28,8 +29,17 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        Categoria::create([
-            'nombre'=>request('nombre')
+        $request->validate([
+            'nombre' => 'required|string|max:255'
+        ]);
+
+        $categoria = Categoria::create([
+            'nombre' => $request->nombre
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'categoria' => $categoria
         ]);
     }
 
