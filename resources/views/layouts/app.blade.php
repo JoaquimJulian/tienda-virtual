@@ -13,9 +13,9 @@
         @include ('layouts.navbar')
     </div>  
 
-    <div class="flex flex-col w-full sm:ml-[100px]">
+    <div class="flex flex-col w-full sm:ml-[100px] h-screen">
         @include ('layouts.header')
-        <div class="h-full">
+        <div class="flex-1 overflow-auto">
             @yield('content')
         </div>
     </div>

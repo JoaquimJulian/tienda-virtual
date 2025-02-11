@@ -1,30 +1,52 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex items-center justify-center h-full">
-    <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
-        <h2 class="text-2xl font-semibold text-center text-gray-700 mb-4">Iniciar Sesión</h2>
+<div class="flex flex-col items-center justify-center h-full">
+    <form method="POST" action="{{ route('login') }}" class="w-full max-w-sm space-y-4">
+        @csrf
 
-        <form method="POST" action="{{ route('login') }}" class="space-y-4" id="loginForm">
-            @csrf
+        <!-- Email field -->
+        <div>
+            <label for="nombre" class="block text-sm text-gray-800 mb-1">Nombre de usuario</label>
+            <input 
+                type="nombre" 
+                id="nombre" 
+                name="nombre" 
+                required 
+                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-gray-500"
+            >
+        </div>
 
-            <div>
-                <label for="user" class="block text-sm font-medium text-gray-700">Usuario</label>
-                <input type="text" id="user" name="user" required autofocus
-                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-            </div>
+        <!-- Password field -->
+        <div>
+            <label for="password" class="block text-sm text-gray-800 mb-1">Contraseña</label>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                required
+                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-gray-500"
+            >
+        </div>
 
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                <input type="password" id="password" name="password" required
-                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-            </div>
+        <!-- Login button -->
+        <button 
+            type="submit"
+            class="w-full bg-custom-black text-white py-2 px-4 rounded hover:bg-gray-800 transition duration-200"
+        >
+            Iniciar Sesion
+        </button>
 
-            <button type="submit" id="btnLogin"
-                class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300">
-                Ingresar
-            </button>
-        </form>
-    </div>
+        <!-- Registration link -->
+        <div class="flex items-center justify-between mt-4">
+            <span class="text-sm text-gray-600">No tienes cuenta? Registrate:</span>
+            <a 
+                href="" 
+                class="bg-custom-black  text-white px-4 py-2 text-sm rounded hover:bg-gray-800 transition duration-200"
+            >
+                Registrarse
+            </a>
+        </div>
+    </form>
 </div>
 @endsection
