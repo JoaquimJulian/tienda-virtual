@@ -1,5 +1,4 @@
 import './bootstrap';
-import './components/dropdownHeader';
 
 import Alpine from 'alpinejs';
 

@@ -3,22 +3,12 @@
 @section('title', 'CRUD Admin')
 
 @section('content')
-<div id="categorias">
 
-</div>
 
 <div class="">
-    <div class="me-4">
-        <h2>Nueva categoría</h2>
-        <form id="categoriaForm">
-            @csrf
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required class="form-control">
-            <input type="submit" value="Crear categoría" class="btn btn-success mt-2">
-        </form>
-    </div>
 
-    <div>
+    <div id="productos"></div>
+    <div class="">
         <h2>Nuevo producto</h2>
         <form action="{{ route('producto.store') }}" method="post">
             @csrf
@@ -46,6 +36,18 @@
             <input type="submit" value="Crear producto" class="btn btn-success mt-2">
         </form>
     </div>
+
+    <div class="me-4">
+        <h2>Nueva categoría</h2>
+        <form id="categoriaForm">
+            @csrf
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required class="form-control">
+            <input type="submit" value="Crear categoría" class="btn btn-success mt-2">
+        </form>
+    </div>
+
+    <div id="categorias"></div>
 </div>
 @endsection
 

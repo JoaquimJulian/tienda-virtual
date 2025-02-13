@@ -3,5 +3,7 @@
 @section('title', 'Página de Inicio') <!-- Aquí defines un título específico para esta página -->
 
 @section('content')
-    <p class="text-center"><a href="{{ route('categoria.create') }}">Crear productos o categorías</a></p>
+    <div class="bg-beig">
+        <p class="text-center"><a href="{{ route('categoria.create') }}">Crud Admin</a></p>
+    </div>
 @endsection

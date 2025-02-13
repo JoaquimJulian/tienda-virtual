@@ -15,7 +15,10 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors : {
-                'custom-black': '#181c16'
+                'naranja': '#EA580C',
+                'beig': '#FFEDD5',
+                'marron': '#7C2D12',
+                'carne': '#FDBA74'
             }
         },
     },

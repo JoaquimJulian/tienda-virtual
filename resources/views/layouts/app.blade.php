@@ -8,17 +8,17 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
-<body class="sm:flex">
-    <div class="sm:fixed">
-        @include ('layouts.navbar')
-    </div>  
-
-    <div class="flex flex-col w-full sm:ml-[100px] h-screen">
+<body class="flex flex-col min-h-screen relative">
+    <header>
         @include ('layouts.header')
-        <div class="flex-1 overflow-auto">
-            @yield('content')
-        </div>
+    </header>
+
+    <div class="flex-grow">
+        @yield('content')
     </div>
 
+    <footer>
+        @include ('layouts.footer')
+    </footer>
 </body>
 </html>
