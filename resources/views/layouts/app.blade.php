@@ -13,12 +13,18 @@
         @include ('layouts.header')
     </header>
 
-    <div class="flex-grow">
+    <div class="flex flex-col flex-grow">
         @yield('content')
     </div>
-
+    
     <footer>
         @include ('layouts.footer')
     </footer>
+
+    <!-- POPUPS -->
+
+    <x-popup-login />
+    <x-popup-registro />
+
 </body>
 </html>

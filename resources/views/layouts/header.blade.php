@@ -7,7 +7,7 @@
 
     <!-- Navigation -->
     <nav class="flex items-center space-x-8">
-      <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Comprar</a>
+      <a href="{{ route('app') }}" class="text-gray-700 hover:text-[#8B2E00]">Comprar</a>
       <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Categorias</a>
       <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Ofertas</a>
       <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Sobre nosotros</a>
@@ -17,7 +17,7 @@
     <div class="flex items-center bg-beig rounded-lg px-4 py-1 w-72">
       <input 
         type="text" 
-        placeholder="Search products..." 
+        placeholder="Buscar productos..." 
         class="bg-transparent w-full outline-none border-none focus:outline-none focus:ring-0 text-gray-700 placeholder-gray-400"
         >
       <button class="text-gray-400 hover:text-[#8B2E00]">
@@ -30,11 +30,13 @@
     <!-- User Actions -->
     <div class="flex items-center space-x-4">
       <!-- Account -->
-      <a href="#" class="text-gray-700 hover:text-[#8B2E00]">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-        </svg>
-      </a>
+      <button 
+          onclick="abrirPopup('loginPopup')" 
+          class="text-gray-700 hover:text-[#8B2E00] focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          </svg>
+      </button>
       <!-- Cart -->
       <a href="#" class="relative text-gray-700 hover:text-[#8B2E00]">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
