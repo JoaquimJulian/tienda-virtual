@@ -19,6 +19,10 @@
             </div>
             <button class="bg-marron text-white py-2 px-4 rounded-full absolute right-8">Nuevo producto</button>
         </div>
+
+        <div id="productosLista">
+
+        </div>
         
     </div>
 
@@ -33,9 +37,17 @@
                     </svg>
                 </button>
             </div>
-            <button class="bg-marron text-white py-2 px-4 rounded-full absolute right-8">Nueva categoria</button>
+            <button class="bg-marron text-white py-2 px-4 rounded-full absolute right-8" id="btnDropdownCategoria">Nueva categoria</button>
+            <div id="dropdownCrearCategoria" class="fixed right-8 mt-2 w-64 bg-white rounded-lg shadow-lg hidden p-6 flex gap-4">
+                <input type="text" id="inputNuevaCategoria" placeholder="Nombre" class="w-full p-1 border-t-0 border-l-0 border-r-0 border-b border-marron border-b-2 focus:outline-none focus:border-marron focus:ring-0">
+                <button class="rounded-full py-1 px-2 bg-marron text-white" id="btnCrearCategoria">Crear</button>
+            </div>
         </div>
         
+        <div id="categoriasLista" class="mt-8 w-1/4">
+        
+        </div>
+
     </div>
 </div>
 @endsection

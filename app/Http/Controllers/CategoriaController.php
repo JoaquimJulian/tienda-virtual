@@ -72,6 +72,20 @@ class CategoriaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $categoria = Categoria::find($id);
+
+        if ($categoria) {
+            $categoria->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Categoría eliminada con éxito.'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Categoría no encontrada.'
+        ], 404);
     }
 }
