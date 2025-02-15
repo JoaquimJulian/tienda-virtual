@@ -2,7 +2,6 @@
 function abrirPopup(popupId) {
     const popups = document.querySelectorAll('.popup');
     popups.forEach((popup) => {
-        console.log("entra")
         popup.classList.add('hidden');
     });
 

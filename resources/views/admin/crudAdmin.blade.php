@@ -5,49 +5,38 @@
 @section('content')
 
 
-<div class="">
-
-    <div id="productos"></div>
-    <div class="">
-        <h2>Nuevo producto</h2>
-        <form action="{{ route('producto.store') }}" method="post">
-            @csrf
-            <label for="codigo">Código:</label>
-            <input type="text" id="codigo" name="codigo" class="form-control">
-            
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required class="form-control">
-            
-            <label for="descripcion">Descripción:</label>
-            <input type="text" id="descripcion" name="descripcion" required class="form-control">
-            
-            <label for="categoria">Categoría:</label>
-            <input type="text" id="categoria" name="categoria" class="form-control">
-            
-            <label for="precio_unidad">Precio:</label>
-            <input type="text" id="precio_unicad" name="precio_unidad" class="form-control">
-            
-            <label for="stock">Stock:</label>
-            <input type="text" id="stock" name="stock" class="form-control">
-            
-            <label for="destacado">Destacado:</label>
-            <input type="checkbox" id="destacado" name="destacado">
-            
-            <input type="submit" value="Crear producto" class="btn btn-success mt-2">
-        </form>
+<div class="flex pl-20 pr-20 pt-6 pb-6 bg-beig h-screen">
+    <div class="w-2/4 flex flex-col items-center">
+        <p class="font-semibold text-marron mb-3 text-xl">Productos</p>
+        <div class="w-full flex items-center relative">
+            <div class="flex w-3/6 h-12 bg-white rounded-full pl-6 pr-8 justify-between mx-auto">
+                <input class="border-none focus:outline-none focus:ring-0 h-full w-full" placeholder="Buscar producto...">
+                <button class="text-gray-400 hover:text-[#8B2E00]">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </button>
+            </div>
+            <button class="bg-marron text-white py-2 px-4 rounded-full absolute right-8">Nuevo producto</button>
+        </div>
+        
     </div>
 
-    <div class="me-4">
-        <h2>Nueva categoría</h2>
-        <form id="categoriaForm">
-            @csrf
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required class="form-control">
-            <input type="submit" value="Crear categoría" class="btn btn-success mt-2">
-        </form>
+    <div class="w-2/4 flex flex-col items-center">
+        <p class="font-semibold text-marron mb-3 text-xl">Categorias</p>
+        <div class="w-full flex items-center relative">
+            <div class="flex w-3/6 h-12 bg-white rounded-full pl-6 pr-8 justify-between mx-auto">
+                <input class="border-none focus:outline-none focus:ring-0 h-full w-full" placeholder="Buscar categoria...">
+                <button class="text-gray-400 hover:text-[#8B2E00]">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </button>
+            </div>
+            <button class="bg-marron text-white py-2 px-4 rounded-full absolute right-8">Nueva categoria</button>
+        </div>
+        
     </div>
-
-    <div id="categorias"></div>
 </div>
 @endsection
 
