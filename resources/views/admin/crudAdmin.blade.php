@@ -20,8 +20,21 @@
             <button class="bg-marron text-white py-2 px-4 rounded-full absolute right-8">Nuevo producto</button>
         </div>
 
-        <div id="productosLista">
-
+        <div id="productosLista" class="mt-2 w-full flex justify-center">
+            <table id="tablaProductosLista" class="w-3/4 mx-auto border-collapse h-auto">
+                <thead>
+                    <tr class="h-auto">
+                        <th class="text-marron font-semibold px-4 py-8 h-auto w-24"></th> <!-- Columna para imagen -->
+                        <th class="text-marron font-semibold text-left px-4 py-8 h-auto">Nombre</th>
+                        <th class="text-marron font-semibold text-left px-4 py-8 h-auto">Categoría</th>
+                        <th class="text-marron font-semibold text-left px-4 py-8 h-auto">Precio</th>
+                        <th class="text-marron font-semibold px-4 py-8 h-auto w-32"></th> <!-- Columna para iconos -->
+                    </tr>
+                </thead>
+                <tbody id="tablaProductos" class="h-auto">
+                    <!-- Los productos se insertarán aquí -->
+                </tbody>
+            </table>
         </div>
         
     </div>

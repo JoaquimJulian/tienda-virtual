@@ -1,3 +1,5 @@
+// LOGICA CATEGORIAS
+
 const dropdownMenuCategoria = document.getElementById('dropdownCrearCategoria');
 const btnDropdownCategoria = document.getElementById('btnDropdownCategoria')
 const btnCrearCategoria = document.getElementById('btnCrearCategoria')
@@ -135,3 +137,46 @@ function eliminarCategoria(id) {
     .catch(error => console.error('Error:', error));
 }
 
+
+// LOGICA PRODUCTOS
+const tablaProductos = document.getElementById('tablaProductos')
+
+mostrarProductos()
+
+function mostrarProductos(){
+    fetch("/producto", {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(producto => {
+            tablaProductos.innerHTML += `
+                <tr class="bg-white rounded-xl overflow-hidden">
+                    <td class="px-4 py-4 h-auto rounded-l-xl">
+                        <img src="${producto.imagen}" alt="${producto.nombre}" class="w-16 h-16 object-cover rounded-lg">
+                    </td>
+                    <td class="px-4 py-4 text-marron h-auto text-center">
+                        ${producto.nombre}
+                    </td>
+                    <td class="px-4 py-4 text-marron h-auto text-center">
+                        ${producto.categoria.nombre}
+                    </td>
+                    <td class="px-4 py-4 text-marron h-auto text-center">
+                        ${producto.precio_unidad}$
+                    </td>
+                    <td class="px-4 py-4 h-auto rounded-r-xl">
+                        <div class="flex items-center justify-center gap-4 roundex-xl">
+                            <button class="bg-marron text-white px-4 py-2 rounded-lg">Ver</button>
+                            <img src="/images/papelera.png">
+                        </div>
+                    </td>
+                </tr>
+            `;
+        })
+    })
+    .catch(error => console.error('Error:', error));
+}
