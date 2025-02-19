@@ -71,7 +71,7 @@ function mostrarCategorias(nombreNuevaCategoria){
                 categoriaElement.setAttribute('id', `categoria_${categoria.id}`);
                 categoriaElement.className = 'w-full flex items-center justify-between bg-white p-4 rounded-lg shadow-md mb-4';
                 categoriaElement.innerHTML = `
-                    <input id="${categoria.id}" class="text-marron border-none focus:outline-none focus:ring-0 w-full" value="${categoria.nombre}">
+                    <input id="${categoria.id}" class="text-marron border-none focus:outline-none focus:ring-0 w-full" value="${categoria.nombre}" readonly>
                 `;
                 categoriaElement.innerHTML += `
                     <div class="flex gap-4 pr-2">
@@ -96,12 +96,12 @@ function mostrarCategorias(nombreNuevaCategoria){
         } else {
             let contador = 1
             data.forEach(categoria => {
-                if (categoria.nombre = nombreNuevaCategoria && contador === 1) {
+                if (categoria.nombre == nombreNuevaCategoria && contador === 1) {
                     const categoriaElement = document.createElement('div');
                     categoriaElement.setAttribute('id', `categoria_${categoria.id}`);
                     categoriaElement.className = 'w-full flex items-center justify-between bg-white p-4 rounded-lg shadow-md mb-4';
                     categoriaElement.innerHTML = `
-                        <input id="inputCategoria" class="text-marron border-none focus:outline-none focus:ring-0 w-full" value="${nombreNuevaCategoria}">
+                        <input id="${categoria.id}" class="text-marron border-none focus:outline-none focus:ring-0 w-full" value="${categoria.nombre}" readonly>
                     `;
                     categoriaElement.innerHTML += `
                         <div class="flex gap-4 pr-2">
@@ -139,7 +139,7 @@ function eliminarCategoria(id) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-           
+            document.getElementById(`categoria_${id}`).remove();
         } else {
             console.error(data.message); 
         }
@@ -150,24 +150,33 @@ function eliminarCategoria(id) {
 
 function editarCategoria(id){
     let inputCategoria = document.getElementById(id)
-    
-    fetch(`/categoria/${id}`, {
-        method: "PUT", 
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify({ nombre: inputCategoria.value })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            console.log("editado")
-        } else {
-            console.error("Error al actualizar:", data.error);
-        }
-    })
-    .catch(error => console.error("Error:", error));
+    const botonEditar = document.getElementById(`editarC_${id}`);
+
+    if (botonEditar.src.includes("/images/lapiz.png")) {
+        inputCategoria.removeAttribute("readonly");
+        botonEditar.src = "/images/tick.png"
+        botonEditar.classList.add("w-6");
+    } else {
+        fetch(`/categoria/${id}`, {
+            method: "PUT", 
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ nombre: inputCategoria.value })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log("editado")
+                botonEditar.src = "/images/lapiz.png"
+                inputCategoria.setAttribute("readonly", "true");
+            } else {
+                console.error("Error al actualizar:", data.error);
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    }
     
 }
 
