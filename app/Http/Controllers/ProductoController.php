@@ -21,7 +21,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view("admin.crudAdmin");
+        return view("admin.crearProducto");
     }
 
     /**
