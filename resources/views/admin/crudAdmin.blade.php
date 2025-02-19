@@ -57,7 +57,7 @@
             </div>
         </div>
         
-        <div id="categoriasLista" class="mt-8 w-1/4">
+        <div id="categoriasLista" class="mt-8 w-auto">
         
         </div>
 

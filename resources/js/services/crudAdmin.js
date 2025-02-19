@@ -71,11 +71,11 @@ function mostrarCategorias(nombreNuevaCategoria){
                 categoriaElement.setAttribute('id', `categoria_${categoria.id}`);
                 categoriaElement.className = 'w-full flex items-center justify-between bg-white p-4 rounded-lg shadow-md mb-4';
                 categoriaElement.innerHTML = `
-                    <span class="text-marron">${categoria.nombre}</span>
+                    <input id="${categoria.id}" class="text-marron border-none focus:outline-none focus:ring-0 w-full" value="${categoria.nombre}">
                 `;
                 categoriaElement.innerHTML += `
-                    <div class="flex gap-4">
-                        <img src="/images/lapiz.png" class="hover:cursor-pointer" id="editar_${categoria.id}"> 
+                    <div class="flex gap-4 pr-2">
+                        <img src="/images/lapiz.png" class="hover:cursor-pointer" id="editarC_${categoria.id}"> 
                         <img src="/images/papelera.png" class="hover:cursor-pointer" id="eliminarC_${categoria.id}">
                     </div>
                 `                    
@@ -84,6 +84,13 @@ function mostrarCategorias(nombreNuevaCategoria){
                 const botonEliminar = document.getElementById(`eliminarC_${categoria.id}`);
                     botonEliminar.addEventListener('click', () => {
                     eliminarCategoria(categoria.id)
+                });
+                const botonEditar = document.getElementById(`editarC_${categoria.id}`);
+                botonEditar.addEventListener('click', () => {
+                    if (botonEditar.id == `editarC_${categoria.id}`) {
+                        console.log("entra")
+                        editarCategoria(categoria.id)
+                    }
                 });
             });
         } else {
@@ -94,19 +101,24 @@ function mostrarCategorias(nombreNuevaCategoria){
                     categoriaElement.setAttribute('id', `categoria_${categoria.id}`);
                     categoriaElement.className = 'w-full flex items-center justify-between bg-white p-4 rounded-lg shadow-md mb-4';
                     categoriaElement.innerHTML = `
-                        <span class="text-marron">${nombreNuevaCategoria}</span>
+                        <input id="inputCategoria" class="text-marron border-none focus:outline-none focus:ring-0 w-full" value="${nombreNuevaCategoria}">
                     `;
                     categoriaElement.innerHTML += `
-                        <div class="flex gap-4">
-                            <img src="/images/lapiz.png" class="hover:cursor-pointer" id="editar_${categoria.id}"> 
+                        <div class="flex gap-4 pr-2">
+                            <img src="/images/lapiz.png" class="hover:cursor-pointer" id="editarC_${categoria.id}"> 
                             <img src="/images/papelera.png" class="hover:cursor-pointer" id="eliminarC_${categoria.id}">
                         </div>
                     `
                     listaCategorias.appendChild(categoriaElement);
 
                     const botonEliminar = document.getElementById(`eliminarC_${categoria.id}`);
-                        botonEliminar.addEventListener('click', () => {
+                    botonEliminar.addEventListener('click', () => {
                         eliminarCategoria(categoria.id)
+                    });
+
+                    const botonEditar = document.getElementById(`editarC_${categoria.id}`);
+                    botonEditar.addEventListener('click', () => {
+                        editarCategoria(categoria.id)
                     });
                 }
                 contador ++;
@@ -127,9 +139,7 @@ function eliminarCategoria(id) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            console.log(data.message); 
-          
-            document.getElementById(`categoria_${id}`).remove();
+           
         } else {
             console.error(data.message); 
         }
@@ -138,7 +148,31 @@ function eliminarCategoria(id) {
 }
 
 
+function editarCategoria(id){
+    let inputCategoria = document.getElementById(id)
+    
+    fetch(`/categoria/${id}`, {
+        method: "PUT", 
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ nombre: inputCategoria.value })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log("editado")
+        } else {
+            console.error("Error al actualizar:", data.error);
+        }
+    })
+    .catch(error => console.error("Error:", error));
+    
+}
+
 // LOGICA PRODUCTOS
+
 const tablaProductos = document.getElementById('tablaProductos')
 
 mostrarProductos()

@@ -64,7 +64,20 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            return response()->json(['error' => 'Categoría no encontrada'], 404);
+        }
+
+        $request->validate([
+            'nombre' => 'required|string|max:255'
+        ]);
+
+        $categoria->nombre = $request->input('nombre');
+        $categoria->save();
+
+        return response()->json(['success' => true, 'categoria' => $categoria]);
     }
 
     /**
