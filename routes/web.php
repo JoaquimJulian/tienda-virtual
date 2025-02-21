@@ -36,3 +36,5 @@ Route::prefix('auth')->group(function () {
     // Cerrar sesión (POST)
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
+
+

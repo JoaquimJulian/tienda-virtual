@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Producto extends Model
 {
+
+    protected $primaryKey = 'codigo'; 
+    
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = ['codigo', 'nombre', 'descripcion', 'categoria_id', 'precio_unidad', 'stock', 'destacado'];
 
     public function fotografias(): HasMany{

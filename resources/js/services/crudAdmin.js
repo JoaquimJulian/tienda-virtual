@@ -213,13 +213,25 @@ function mostrarProductos(){
                     </td>
                     <td class="px-4 py-4 h-auto rounded-r-xl">
                         <div class="flex items-center justify-center gap-4 roundex-xl">
-                            <button class="bg-marron text-white px-4 py-2 rounded-lg">Ver</button>
+                            <button id="editar_${producto.codigo}" class="bg-marron text-white px-4 py-2 rounded-lg">Ver</button>
                             <img src="/images/papelera.png">
                         </div>
                     </td>
                 </tr>
             `;
+
+            let btnEditar = document.getElementById(`editar_${producto.codigo}`)
+            btnEditar.onclick = () => editarProducto(producto.codigo)
+
         })
     })
     .catch(error => console.error('Error:', error));
+
+    function editarProducto(codigo){
+        window.location.href = `/producto/${codigo}/edit`
+    }
+
 }
+
+
+
