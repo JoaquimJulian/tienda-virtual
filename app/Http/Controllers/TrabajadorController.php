@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Trabajador;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class TrabajadorController extends Controller
 {
@@ -62,5 +64,29 @@ class TrabajadorController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        $trabajador = Trabajador::where('nombre', $request->nombre)->first();
+
+        if ($trabajador && Hash::check($request->password, $trabajador->password)) {
+            Auth::login($trabajador);
+            
+            return redirect('/');
+        }
+
+        return back()->withErrors(['nombre' => 'Credenciales incorrectas']);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login'); // Redirige al login después de cerrar sesión
     }
 }

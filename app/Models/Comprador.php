@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany; 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Comprador extends Model
+
+class Comprador extends Authenticatable
 {
     protected $table = "compradores";
 
@@ -13,5 +15,10 @@ class Comprador extends Model
 
     public function compras(): HasMany{
         return $this->hasMany(Compra::class);
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'nombre';  // o el nombre del campo que uses para la autenticación
     }
 }

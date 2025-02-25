@@ -36,9 +36,15 @@ return [
     */
 
     'guards' => [
-        'trabajadores' => [
+        'trabajador' => [
             'driver' => 'session',
-            'provider' => 'trabajadores',
+            'provider' => 'trabajadores', // Usamos el provider de trabajadores
+        ],
+
+        // Guard para compradores
+        'comprador' => [
+            'driver' => 'session',
+            'provider' => 'compradores', // Usamos el provider de compradores
         ],
     ],
 
@@ -63,6 +69,10 @@ return [
             'trabajadores' => [
                 'driver' => 'eloquent',
                 'model' => App\Models\Trabajador::class,
+            ],
+            'compradores' => [
+                'driver' => 'eloquent',
+                'model' => App\Models\Comprador::class,
             ],
 
         // 'users' => [
