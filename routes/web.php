@@ -26,6 +26,11 @@ Route::get('/', function () {
     return view('home');
 })->name('app');
 
+Route::get('/nosotros', function () {
+    return view('nosotros.nosotros');
+})->name('sobrenosotros');
+
+
 Route::prefix('auth')->group(function () {
     // Mostrar el formulario de login (GET)
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
