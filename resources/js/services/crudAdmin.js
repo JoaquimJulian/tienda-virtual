@@ -198,7 +198,7 @@ function mostrarProductos(){
     .then(data => {
         data.forEach(producto => {
             tablaProductos.innerHTML += `
-                <tr class="bg-white rounded-xl overflow-hidden">
+                <tr class="bg-white rounded-xl overflow-hidden" id="producto_${producto.codigo}">
                     <td class="px-4 py-4 h-auto rounded-l-xl">
                         <img src="${producto.imagen}" alt="${producto.nombre}" class="w-16 h-16 object-cover rounded-lg">
                     </td>
@@ -214,7 +214,7 @@ function mostrarProductos(){
                     <td class="px-4 py-4 h-auto rounded-r-xl">
                         <div class="flex items-center justify-center gap-4 roundex-xl">
                             <button id="editar_${producto.codigo}" class="bg-marron text-white px-4 py-2 rounded-lg">Ver</button>
-                            <img src="/images/papelera.png">
+                            <img id="eliminar_${producto.codigo}" class="hover:cursor-pointer" src="/images/papelera.png">
                         </div>
                     </td>
                 </tr>
@@ -223,15 +223,34 @@ function mostrarProductos(){
             let btnEditar = document.getElementById(`editar_${producto.codigo}`)
             btnEditar.onclick = () => editarProducto(producto.codigo)
 
+            let btnEliminar = document.getElementById(`eliminar_${producto.codigo}`)
+            btnEliminar.onclick = () => eliminarProducto(producto.codigo)
         })
     })
     .catch(error => console.error('Error:', error));
 
-    function editarProducto(codigo){
-        window.location.href = `/producto/${codigo}/edit`
-    }
-
 }
 
+function editarProducto(codigo){
+    window.location.href = `/producto/${codigo}/edit`
+}
 
+function eliminarProducto(codigo){
+    fetch(`/producto/${codigo}`, {
+        method: 'DELETE', 
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') 
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById(`producto_${codigo}`).remove();
+        } else {
+            console.error(data.message); 
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
 

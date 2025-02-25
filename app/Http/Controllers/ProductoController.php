@@ -106,8 +106,22 @@ class ProductoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $codigo)
     {
-        //
+        $producto = Producto::find($codigo);
+
+        if ($producto) {
+            $producto->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Categoría eliminada con éxito.'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Categoría no encontrada.'
+        ], 404);
     }
 }

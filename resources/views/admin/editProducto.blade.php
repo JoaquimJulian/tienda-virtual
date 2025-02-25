@@ -63,7 +63,7 @@
             </div>
 
             
-            <input type="submit" class="bg-marron text-white py-2 rounded hover:bg-marron-dark cursor-pointer mt-4">
+            <input type="submit" value="Guardar Cambios" class="bg-marron text-white py-2 rounded hover:bg-marron-dark cursor-pointer mt-4">
         </form>
     </div>
     <div>
