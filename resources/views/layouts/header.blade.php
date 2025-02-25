@@ -1,7 +1,7 @@
 <div class="w-full px-4 py-4 border-b border-gray-200">
   <div class="max-w-6xl mx-auto flex items-center justify-between">
     <!-- Logo -->
-    <a href="#" class="text-2xl font-bold text-[#8B2E00]">
+    <a href="{{ route('app') }}" class="text-2xl font-bold text-[#8B2E00]">
       Tempo & Tono
     </a>
 
@@ -10,7 +10,7 @@
       <a href="{{ route('app') }}" class="text-gray-700 hover:text-[#8B2E00]">Comprar</a>
       <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Categorias</a>
       <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Ofertas</a>
-      <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Sobre nosotros</a>
+      <a href="{{ route('sobrenosotros') }}" class="text-gray-700 hover:text-[#8B2E00]">Sobre nosotros</a>
     </nav>
 
     <!-- Search Bar -->

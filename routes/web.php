@@ -30,3 +30,21 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/', function () {
     return view('home');
 })->name('app');
+
+Route::get('/nosotros', function () {
+    return view('nosotros.nosotros');
+})->name('sobrenosotros');
+
+
+Route::prefix('auth')->group(function () {
+    // Mostrar el formulario de login (GET)
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
+    
+    // Procesar el login (POST)
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+    
+    // Cerrar sesión (POST)
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
+
