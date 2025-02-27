@@ -22,14 +22,13 @@ Route::resources([
 ]);
 
 Route::middleware([ComprobarUsuario::class])->group(function () {
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/', function () {
+        return view('home');
+    })->name('app');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/', function () {
-    return view('home');
-})->name('app');
 
 Route::get('/nosotros', function () {
     return view('nosotros.nosotros');

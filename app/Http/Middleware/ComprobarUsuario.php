@@ -17,9 +17,8 @@ class ComprobarUsuario
      */
     public function handle(Request $request, Closure $next)
     {
-        Log::info('entra');
         if (Auth::check()) {
-
+            Log::info('entra');
             $user = Auth::user();
             log::info($request);
 
