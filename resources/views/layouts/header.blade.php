@@ -29,21 +29,45 @@
 
     <!-- User Actions -->
     <div class="flex items-center space-x-4">
-      <!-- Account -->
-      <button 
-          onclick="abrirPopup('loginPopup')" 
-          class="text-gray-700 hover:text-[#8B2E00] focus:outline-none">
+      @if(session('user_type') === 'trabajador')
+        <a href="{{ route('categoria.create') }}" class="text-gray-700 hover:text-[#8B2E00]">Gestionar productos y categorias</a>
+        <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Gestionar pedidos</a>
+        <form action="{{ route('logout') }}" method="POST">
+          @csrf
+          <button type="submit">Cerrar sesión</button>
+        </form>
+
+      @elseif(session('user_type') === 'comprador')
+        <button 
+            onclick="abrirPopup('loginPopup')" 
+            class="text-gray-700 hover:text-[#8B2E00] focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+        </button>
+
+        <a href="#" class="relative text-gray-700 hover:text-[#8B2E00]">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
           </svg>
-      </button>
-      <!-- Cart -->
-      <a href="#" class="relative text-gray-700 hover:text-[#8B2E00]">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-        </svg>
-        <span class="absolute -top-2 -right-2 bg-[#FF6B35] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-      </a>
+          <span class="absolute -top-2 -right-2 bg-[#FF6B35] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+        </a>
+      @else
+        <button 
+            onclick="abrirPopup('loginPopup')" 
+            class="text-gray-700 hover:text-[#8B2E00] focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+        </button>
+
+        <a href="#" class="relative text-gray-700 hover:text-[#8B2E00]">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+          <span class="absolute -top-2 -right-2 bg-[#FF6B35] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+        </a>
+      @endif
     </div>
   </div>
 </div>

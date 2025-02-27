@@ -31,6 +31,7 @@ class AuthController extends Controller
             // Determina el guard correcto dependiendo del tipo de usuario
             if ($usuario instanceof \App\Models\Trabajador) {
                 Auth::guard('trabajador')->login($usuario);  // Usamos el guard de trabajador
+                Log::info('aqui si que me entra chatGPT');
             } elseif ($usuario instanceof \App\Models\Comprador) {
                 Auth::guard('comprador')->login($usuario);  // Usamos el guard de comprador
             }
@@ -45,6 +46,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('app');
     }
 }

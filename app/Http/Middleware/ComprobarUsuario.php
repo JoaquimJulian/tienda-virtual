@@ -17,18 +17,22 @@ class ComprobarUsuario
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            Log::info('entra');
-            $user = Auth::user();
-            log::info($request);
+        // Verifica si el usuario está autenticado como 'trabajador'
+        if (Auth::guard('trabajador')->check()) {
+            session(['user_type' => 'trabajador']);
+        }
 
-            if ($user instanceof \App\Models\Trabajador) {
-                session(['user_type' => 'trabajador']);
-            } elseif ($user instanceof \App\Models\Comprador) {
-                session(['user_type' => 'comprador']);
-            }
+        // Verifica si el usuario está autenticado como 'comprador'
+        elseif (Auth::guard('comprador')->check()) {
+            session(['user_type' => 'comprador']);
+        }
+
+        // Si el usuario no está autenticado en ninguno de los guards
+        else {
+            Log::info('No autenticado');
         }
 
         return $next($request);
     }
 }
+

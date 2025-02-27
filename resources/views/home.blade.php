@@ -4,6 +4,6 @@
 
 @section('content')
     <div class="bg-beig">
-        <p class="text-center"><a href="{{ route('categoria.create') }}">Crud Admin</a></p>
+        <p>La pagina principal</p>
     </div>
 @endsection
