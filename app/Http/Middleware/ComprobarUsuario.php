@@ -29,6 +29,8 @@ class ComprobarUsuario
 
         // Si el usuario no está autenticado en ninguno de los guards
         else {
+            request()->session()->forget('user_type');
+
             Log::info('No autenticado');
         }
 
