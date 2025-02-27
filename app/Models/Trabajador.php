@@ -23,13 +23,4 @@ class Trabajador extends Authenticatable
     // Si el campo es "password", asegúrate de que esté protegido
     protected $hidden = ['password'];
 
-    // Opcionalmente, si usas un hash para la contraseña al crear o actualizar el modelo
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($trabajador) {
-            $trabajador->password = bcrypt($trabajador->password);
-        });
-    }
 }

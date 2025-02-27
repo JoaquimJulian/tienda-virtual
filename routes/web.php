@@ -38,13 +38,13 @@ Route::get('/nosotros', function () {
 
 Route::prefix('auth')->group(function () {
     // Mostrar el formulario de login (GET)
-    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
     
     // Procesar el login (POST)
-    Route::post('/login', [LoginController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
     
     // Cerrar sesión (POST)
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 

@@ -27,11 +27,7 @@ class AuthController extends Controller
             $usuario = Comprador::where('nombre', $request->nombre)->first();
         }
 
-        $password = trim($request->password, '"');  // Eliminar comillas alrededor de la contraseña
-        $hashedPassword = trim($usuario->password, '"');
-
-        if ($usuario && Hash::check($password, $hashedPassword)) {
-            log::info('hola');
+        if ($usuario && Hash::check($request->password, $usuario->password)) {
             // Determina el guard correcto dependiendo del tipo de usuario
             if ($usuario instanceof \App\Models\Trabajador) {
                 Auth::guard('trabajador')->login($usuario);  // Usamos el guard de trabajador
