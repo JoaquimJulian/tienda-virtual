@@ -74,4 +74,4 @@
 </div>
 @endsection
 
-@vite(['resources/js/services/editarProducto.js'])
+@vite(['resources/js/services/admin/editarProducto.js'])

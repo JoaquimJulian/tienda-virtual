@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('compradores_id');
+            $table->foreignId('comprador_id')->constrained('compradores')->onDelete('cascade');
             $table->double('precio_total');
             $table->string('estado');
             $table->date('fecha_compra');

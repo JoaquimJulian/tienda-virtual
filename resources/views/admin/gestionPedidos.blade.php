@@ -5,7 +5,7 @@
 @section('content')
 
 
-<div class="flex pl-20 pr-20 pt-6 pb-6 bg-beig h-screen">
+<div class="flex pl-20 pr-20 pt-6 pb-6 bg-beig h-screen justify-center">
     <div class="w-2/4 flex flex-col items-center">
         <p class="font-semibold text-marron mb-3 text-xl">Pedidos</p>
         <div class="w-full flex items-center relative">
@@ -20,17 +20,16 @@
         </div>
 
         <div id="pedidosLista" class="mt-2 w-full flex justify-center">
-            <table id="tablaPedidosLista" class="w-3/4 mx-auto border-collapse h-auto">
+            <table id="tablaPedidosLista" class="w-full mx-auto border-collapse h-auto">
                 <thead>
                     <tr class="h-auto">
-                        <th class="text-marron font-semibold text-left px-4 py-8 h-auto">Fecha</th>
-                        <th class="text-marron font-semibold text-left px-4 py-8 h-auto">Cliente</th>
-                        <th class="text-marron font-semibold text-left px-4 py-8 h-auto">Precio</th>
-                        <th class="text-marron font-semibold px-4 py-8 h-auto w-32"></th> <!-- Columna para iconos -->
+                        <th class="text-marron font-semibold text-left px-4 py-8 w-1/3 text-center">Fecha</th>
+                        <th class="text-marron font-semibold text-left px-4 py-8 w-1/3 text-center">Cliente</th>
+                        <th class="text-marron font-semibold text-left px-4 py-8 w-1/3 text-center">Estado</th>
                     </tr>
                 </thead>
                 <tbody id="tablaPedidos" class="h-auto">
-                    <!-- Los productos se insertarán aquí -->
+                    <!-- Los pedidos se insertarán aquí -->
                 </tbody>
             </table>
         </div>
@@ -39,3 +38,4 @@
 </div>
 @endsection
 
+@vite(['resources/js/services/admin/gestionPedidos.js'])

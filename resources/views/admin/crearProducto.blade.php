@@ -56,4 +56,4 @@
 </div>
 @endsection
 
-@vite(['resources/js/services/crearProducto.js'])
+@vite(['resources/js/services/admin/crearProducto.js'])

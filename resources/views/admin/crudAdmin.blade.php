@@ -65,4 +65,4 @@
 </div>
 @endsection
 
-@vite(['resources/js/services/crudAdmin.js'])
+@vite(['resources/js/services/admin/crudAdmin.js'])

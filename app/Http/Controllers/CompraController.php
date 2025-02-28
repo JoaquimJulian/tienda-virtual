@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Compra;
 
 class CompraController extends Controller
 {
@@ -11,7 +12,8 @@ class CompraController extends Controller
      */
     public function index()
     {
-        //
+        $compras = Compra::with('comprador')->get();
+        return response()->json($compras);
     }
 
     /**

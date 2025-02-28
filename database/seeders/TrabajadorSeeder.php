@@ -19,7 +19,7 @@ class TrabajadorSeeder extends Seeder
             [
                 'nombre' => 'admin',
                 'password' => 'admin',
-                'password' => Hash::make('password')
+                'password' => Hash::make('admin')
             ],
         ]);
     }
