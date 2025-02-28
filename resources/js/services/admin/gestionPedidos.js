@@ -14,19 +14,26 @@ function mostrarPedidos() {
     .then(data => {
         data.forEach(compra => {
             tablaPedidos.innerHTML += `
-                <tr class="bg-white rounded-xl overflow-hidden" id="pedido_${compra.id}">
-                    <td class="px-4 py-4 text-marron h-auto text-center">
+                <tr id="pedido_${compra.id}" class="bg-white overflow-hidden rounded-xl cursor-pointer
+                transition-all duration-200 hover:shadow-lg hover:bg-gray-50">
+                    <td class="px-4 py-4 text-marron h-auto text-center rounded-l-xl overflow-hidden">
                         ${compra.fecha_compra}
                     </td>
                     <td class="px-4 py-4 text-marron h-auto text-center">
-                        ${compra.comprador.id}
+                        ${compra.comprador.nombre}
                     </td>
-                    <td class="px-4 py-4 text-marron h-auto text-center">
+                    <td class="px-4 py-4 text-marron h-auto text-center rounded-r-xl overflow-hidden">
                         ${compra.estado}
                     </td>
                 </tr>
             `;
+
+            tablaPedidos.addEventListener('click', function() {
+                console.log('entra')
+                window.location.href = `/compra/${compra.id}/edit`
+            })
         });
+
     })
     .catch(error => console.error('Error:', error));
 }

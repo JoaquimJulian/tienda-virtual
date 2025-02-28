@@ -20,15 +20,15 @@
         </div>
 
         <div id="pedidosLista" class="mt-2 w-full flex justify-center">
-            <table id="tablaPedidosLista" class="w-full mx-auto border-collapse h-auto">
+            <table id="tablaPedidosLista" class="w-full mx-auto h-auto">
                 <thead>
                     <tr class="h-auto">
-                        <th class="text-marron font-semibold text-left px-4 py-8 w-1/3 text-center">Fecha</th>
+                        <th class="text-marron font-semibold text-left px-4 py-8 w-1/3 text-center">Fecha de compra</th>
                         <th class="text-marron font-semibold text-left px-4 py-8 w-1/3 text-center">Cliente</th>
                         <th class="text-marron font-semibold text-left px-4 py-8 w-1/3 text-center">Estado</th>
                     </tr>
                 </thead>
-                <tbody id="tablaPedidos" class="h-auto">
+                <tbody id="tablaPedidos" class="h-auto border-separate border-spacing-0">
                     <!-- Los pedidos se insertarán aquí -->
                 </tbody>
             </table>

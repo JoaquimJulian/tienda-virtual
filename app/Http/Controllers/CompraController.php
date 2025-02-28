@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Compra;
+use App\Models\Comprador;
 
 class CompraController extends Controller
 {
@@ -21,7 +22,7 @@ class CompraController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.gestionPedidos");
     }
 
     /**
@@ -45,7 +46,10 @@ class CompraController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $compra = Compra::findOrFail($id);
+        $comprador = Comprador::findOrFail($compra->comprador_id);
+
+        return view('admin.editCompra', compact('compra', 'comprador'));
     }
 
     /**
@@ -53,7 +57,18 @@ class CompraController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'estado' => 'required|string|max:255',
+            'fecha_envio' => 'nullable|string',
+        ]);
+
+        $compra = Compra::findOrFail($id);
+        $compra->update([
+            'estado' => $request->estado,
+            'fecha_envio' => $request->fecha_envio,
+        ]);
+
+        return redirect()->route('compra.create')->with('success', 'Producto actualizado exitosamente');
     }
 
     /**
