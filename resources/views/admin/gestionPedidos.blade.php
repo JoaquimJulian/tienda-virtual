@@ -10,7 +10,7 @@
         <p class="font-semibold text-marron mb-3 text-xl">Pedidos</p>
         <div class="w-full flex items-center relative">
             <div class="flex w-3/6 h-12 bg-white rounded-full pl-6 pr-8 justify-between mx-auto">
-                <input class="border-none focus:outline-none focus:ring-0 h-full w-full" placeholder="Buscar pedido...">
+                <input id="busquedaPedidos" class="border-none focus:outline-none focus:ring-0 h-full w-full" placeholder="Buscar pedido...">
                 <button class="text-gray-400 hover:text-[#8B2E00]">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>

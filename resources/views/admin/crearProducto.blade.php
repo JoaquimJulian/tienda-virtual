@@ -42,7 +42,7 @@
             
             <div class="flex gap-4">
                 <label for="destacado" class="text-marron font-semibold mb-1">Destacado</label>
-                <input type="checkbox" name="destacado" id="destacado" class="h-6 w-6 bg-beig border-marron border-2 rounded" required>
+                <input type="checkbox" name="destacado" id="destacado" class="h-6 w-6 bg-beig border-marron border-2 rounded">
             </div>
             
             <input type="submit" class="bg-marron text-white py-2 rounded hover:bg-marron-dark cursor-pointer mt-4">

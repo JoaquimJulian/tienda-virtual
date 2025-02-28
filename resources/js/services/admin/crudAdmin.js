@@ -183,10 +183,21 @@ function editarCategoria(id){
 // LOGICA PRODUCTOS
 
 const tablaProductos = document.getElementById('tablaProductos')
+let busquedaProductos = document.getElementById('busquedaProductos')
+let debounceTimer;
 
 mostrarProductos()
 
-function mostrarProductos(){
+busquedaProductos.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+
+    debounceTimer = setTimeout(() => {
+        mostrarProductos(busquedaProductos.value);
+    }, 300); 
+});
+
+function mostrarProductos(busqueda = ""){
+    tablaProductos.innerHTML = '';
     fetch("/producto", {
         method: "GET",
         headers: {
@@ -197,34 +208,68 @@ function mostrarProductos(){
     .then(response => response.json())
     .then(data => {
         data.forEach(producto => {
-            tablaProductos.innerHTML += `
-                <tr class="bg-white rounded-xl overflow-hidden" id="producto_${producto.codigo}">
-                    <td class="px-4 py-4 h-auto rounded-l-xl">
-                        <img src="${producto.imagen}" alt="${producto.nombre}" class="w-16 h-16 object-cover rounded-lg">
-                    </td>
-                    <td class="px-4 py-4 text-marron h-auto text-center">
-                        ${producto.nombre}
-                    </td>
-                    <td class="px-4 py-4 text-marron h-auto text-center">
-                        ${producto.categoria.nombre}
-                    </td>
-                    <td class="px-4 py-4 text-marron h-auto text-center">
-                        ${producto.precio_unidad}$
-                    </td>
-                    <td class="px-4 py-4 h-auto rounded-r-xl">
-                        <div class="flex items-center justify-center gap-4 roundex-xl">
-                            <button id="editar_${producto.codigo}" class="bg-marron text-white px-4 py-2 rounded-lg">Ver</button>
-                            <img id="eliminar_${producto.codigo}" class="hover:cursor-pointer" src="/images/papelera.png">
-                        </div>
-                    </td>
-                </tr>
-            `;
+            if(busqueda == ""){
+                tablaProductos.innerHTML += `
+                    <tr class="bg-white rounded-xl overflow-hidden" id="producto_${producto.codigo}">
+                        <td class="px-4 py-4 h-auto rounded-l-xl">
+                            <img src="${producto.imagen}" alt="${producto.nombre}" class="w-16 h-16 object-cover rounded-lg">
+                        </td>
+                        <td class="px-4 py-4 text-marron h-auto text-center">
+                            ${producto.nombre}
+                        </td>
+                        <td class="px-4 py-4 text-marron h-auto text-center">
+                            ${producto.categoria.nombre}
+                        </td>
+                        <td class="px-4 py-4 text-marron h-auto text-center">
+                            ${producto.precio_unidad}$
+                        </td>
+                        <td class="px-4 py-4 h-auto rounded-r-xl">
+                            <div class="flex items-center justify-center gap-4 roundex-xl">
+                                <button id="editar_${producto.codigo}" class="bg-marron text-white px-4 py-2 rounded-lg">Ver</button>
+                                <img id="eliminar_${producto.codigo}" class="hover:cursor-pointer" src="/images/papelera.png">
+                            </div>
+                        </td>
+                    </tr>
+                `;
 
-            let btnEditar = document.getElementById(`editar_${producto.codigo}`)
-            btnEditar.onclick = () => editarProducto(producto.codigo)
+                let btnEditar = document.getElementById(`editar_${producto.codigo}`)
+                btnEditar.onclick = () => editarProducto(producto.codigo)
 
-            let btnEliminar = document.getElementById(`eliminar_${producto.codigo}`)
-            btnEliminar.onclick = () => eliminarProducto(producto.codigo)
+                let btnEliminar = document.getElementById(`eliminar_${producto.codigo}`)
+                btnEliminar.onclick = () => eliminarProducto(producto.codigo)
+            } else {
+                if (producto.nombre.toLowerCase().includes(busqueda) || producto.categoria.nombre.toLowerCase().includes(busqueda)) {
+                    console.log('entra')
+                    tablaProductos.innerHTML += `
+                        <tr class="bg-white rounded-xl overflow-hidden" id="producto_${producto.codigo}">
+                            <td class="px-4 py-4 h-auto rounded-l-xl">
+                                <img src="${producto.imagen}" alt="${producto.nombre}" class="w-16 h-16 object-cover rounded-lg">
+                            </td>
+                            <td class="px-4 py-4 text-marron h-auto text-center">
+                                ${producto.nombre}
+                            </td>
+                            <td class="px-4 py-4 text-marron h-auto text-center">
+                                ${producto.categoria.nombre}
+                            </td>
+                            <td class="px-4 py-4 text-marron h-auto text-center">
+                                ${producto.precio_unidad}$
+                            </td>
+                            <td class="px-4 py-4 h-auto rounded-r-xl">
+                                <div class="flex items-center justify-center gap-4 roundex-xl">
+                                    <button id="editar_${producto.codigo}" class="bg-marron text-white px-4 py-2 rounded-lg">Ver</button>
+                                    <img id="eliminar_${producto.codigo}" class="hover:cursor-pointer" src="/images/papelera.png">
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+
+                    let btnEditar = document.getElementById(`editar_${producto.codigo}`)
+                    btnEditar.onclick = () => editarProducto(producto.codigo)
+
+                    let btnEliminar = document.getElementById(`eliminar_${producto.codigo}`)
+                    btnEliminar.onclick = () => eliminarProducto(producto.codigo)
+                }
+            }
         })
     })
     .catch(error => console.error('Error:', error));
