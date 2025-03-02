@@ -4,7 +4,7 @@
 
 @section('content')
 
-
+<div class="hidden text-green-500 text-yellow-400 transition-all duration-300 ease-in-out transform hover:scale-105"></div>
 <div class="flex pl-20 pr-20 pt-6 pb-6 bg-beig h-screen justify-center">
     <div class="w-2/4 flex flex-col items-center">
         <p class="font-semibold text-marron mb-3 text-xl">Pedidos</p>
@@ -20,7 +20,7 @@
         </div>
 
         <div id="pedidosLista" class="mt-2 w-full flex justify-center">
-            <table id="tablaPedidosLista" class="w-full mx-auto h-auto">
+            <table id="tablaPedidosLista" class="w-full mx-auto h-auto border-separate border-spacing-y-2">
                 <thead>
                     <tr class="h-auto">
                         <th class="text-marron font-semibold text-left px-4 py-8 w-1/3 text-center">Fecha de compra</th>
@@ -28,7 +28,7 @@
                         <th class="text-marron font-semibold text-left px-4 py-8 w-1/3 text-center">Estado</th>
                     </tr>
                 </thead>
-                <tbody id="tablaPedidos" class="h-auto border-separate border-spacing-0">
+                <tbody id="tablaPedidos" class="h-auto ">
                     <!-- Los pedidos se insertarán aquí -->
                 </tbody>
             </table>

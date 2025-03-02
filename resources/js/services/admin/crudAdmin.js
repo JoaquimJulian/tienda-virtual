@@ -209,65 +209,146 @@ function mostrarProductos(busqueda = ""){
     .then(data => {
         data.forEach(producto => {
             if(busqueda == ""){
-                tablaProductos.innerHTML += `
-                    <tr class="bg-white rounded-xl overflow-hidden" id="producto_${producto.codigo}">
-                        <td class="px-4 py-4 h-auto rounded-l-xl">
-                            <img src="${producto.imagen}" alt="${producto.nombre}" class="w-16 h-16 object-cover rounded-lg">
-                        </td>
-                        <td class="px-4 py-4 text-marron h-auto text-center">
-                            ${producto.nombre}
-                        </td>
-                        <td class="px-4 py-4 text-marron h-auto text-center">
-                            ${producto.categoria.nombre}
-                        </td>
-                        <td class="px-4 py-4 text-marron h-auto text-center">
-                            ${producto.precio_unidad}$
-                        </td>
-                        <td class="px-4 py-4 h-auto rounded-r-xl">
-                            <div class="flex items-center justify-center gap-4 roundex-xl">
-                                <button id="editar_${producto.codigo}" class="bg-marron text-white px-4 py-2 rounded-lg">Ver</button>
-                                <img id="eliminar_${producto.codigo}" class="hover:cursor-pointer" src="/images/papelera.png">
-                            </div>
-                        </td>
-                    </tr>
-                `;
+                if (!document.getElementById(`producto_${producto.codigo}`)) {
+                    // Crear la fila del producto
+                    const fila = document.createElement("tr");
+                    fila.className = "bg-white rounded-xl overflow-hidden";
+                    fila.id = `producto_${producto.codigo}`;
 
-                let btnEditar = document.getElementById(`editar_${producto.codigo}`)
-                btnEditar.onclick = () => editarProducto(producto.codigo)
+                    // Celda de imagen
+                    const celdaImagen = document.createElement("td");
+                    celdaImagen.className = "px-4 py-4 h-auto rounded-l-xl";
+                    const imagen = document.createElement("img");
+                    imagen.src = producto.imagen;
+                    imagen.alt = producto.nombre;
+                    imagen.className = "w-16 h-16 object-cover rounded-lg";
+                    celdaImagen.appendChild(imagen);
+                    fila.appendChild(celdaImagen);
 
-                let btnEliminar = document.getElementById(`eliminar_${producto.codigo}`)
-                btnEliminar.onclick = () => eliminarProducto(producto.codigo)
-            } else {
-                if (producto.nombre.toLowerCase().includes(busqueda) || producto.categoria.nombre.toLowerCase().includes(busqueda)) {
-                    console.log('entra')
-                    tablaProductos.innerHTML += `
-                        <tr class="bg-white rounded-xl overflow-hidden" id="producto_${producto.codigo}">
-                            <td class="px-4 py-4 h-auto rounded-l-xl">
-                                <img src="${producto.imagen}" alt="${producto.nombre}" class="w-16 h-16 object-cover rounded-lg">
-                            </td>
-                            <td class="px-4 py-4 text-marron h-auto text-center">
-                                ${producto.nombre}
-                            </td>
-                            <td class="px-4 py-4 text-marron h-auto text-center">
-                                ${producto.categoria.nombre}
-                            </td>
-                            <td class="px-4 py-4 text-marron h-auto text-center">
-                                ${producto.precio_unidad}$
-                            </td>
-                            <td class="px-4 py-4 h-auto rounded-r-xl">
-                                <div class="flex items-center justify-center gap-4 roundex-xl">
-                                    <button id="editar_${producto.codigo}" class="bg-marron text-white px-4 py-2 rounded-lg">Ver</button>
-                                    <img id="eliminar_${producto.codigo}" class="hover:cursor-pointer" src="/images/papelera.png">
-                                </div>
-                            </td>
-                        </tr>
-                    `;
+                    // Celda de nombre del producto
+                    const celdaNombre = document.createElement("td");
+                    celdaNombre.className = "px-4 py-4 text-marron h-auto text-center";
+                    celdaNombre.textContent = producto.nombre;
+                    fila.appendChild(celdaNombre);
+
+                    // Celda de categoría
+                    const celdaCategoria = document.createElement("td");
+                    celdaCategoria.className = "px-4 py-4 text-marron h-auto text-center";
+                    celdaCategoria.textContent = producto.categoria.nombre;
+                    fila.appendChild(celdaCategoria);
+
+                    // Celda de precio
+                    const celdaPrecio = document.createElement("td");
+                    celdaPrecio.className = "px-4 py-4 text-marron h-auto text-center";
+                    celdaPrecio.textContent = `${producto.precio_unidad}$`;
+                    fila.appendChild(celdaPrecio);
+
+                    // Celda de acciones
+                    const celdaAcciones = document.createElement("td");
+                    celdaAcciones.className = "px-4 py-4 h-auto rounded-r-xl";
+
+                    // Contenedor de botones
+                    const contenedorBotones = document.createElement("div");
+                    contenedorBotones.className = "flex items-center justify-center gap-4";
+
+                    // Botón "Ver"
+                    const botonVer = document.createElement("button");
+                    botonVer.id = `editar_${producto.codigo}`;
+                    botonVer.className = "bg-marron text-white px-4 py-2 rounded-lg";
+                    botonVer.textContent = "Ver";
+                    contenedorBotones.appendChild(botonVer);
+
+                    // Imagen "Eliminar"
+                    const imagenEliminar = document.createElement("img");
+                    imagenEliminar.id = `eliminar_${producto.codigo}`;
+                    imagenEliminar.src = "/images/papelera.png";
+                    imagenEliminar.className = "hover:cursor-pointer";
+                    contenedorBotones.appendChild(imagenEliminar);
+
+                    // Agregar contenedor de botones a la celda
+                    celdaAcciones.appendChild(contenedorBotones);
+                    fila.appendChild(celdaAcciones);
+
+                    // Agregar la fila a la tabla
+                    tablaProductos.appendChild(fila);
 
                     let btnEditar = document.getElementById(`editar_${producto.codigo}`)
                     btnEditar.onclick = () => editarProducto(producto.codigo)
 
                     let btnEliminar = document.getElementById(`eliminar_${producto.codigo}`)
                     btnEliminar.onclick = () => eliminarProducto(producto.codigo)
+                }
+            } else {
+                if (producto.nombre.toLowerCase().includes(busqueda) || producto.categoria.nombre.toLowerCase().includes(busqueda)) {
+                    if (!document.getElementById(`producto_${producto.codigo}`)) {
+                        // Crear la fila del producto
+                        const fila = document.createElement("tr");
+                        fila.className = "bg-white rounded-xl overflow-hidden";
+                        fila.id = `producto_${producto.codigo}`;
+
+                        // Celda de imagen
+                        const celdaImagen = document.createElement("td");
+                        celdaImagen.className = "px-4 py-4 h-auto rounded-l-xl";
+                        const imagen = document.createElement("img");
+                        imagen.src = producto.imagen;
+                        imagen.alt = producto.nombre;
+                        imagen.className = "w-16 h-16 object-cover rounded-lg";
+                        celdaImagen.appendChild(imagen);
+                        fila.appendChild(celdaImagen);
+
+                        // Celda de nombre del producto
+                        const celdaNombre = document.createElement("td");
+                        celdaNombre.className = "px-4 py-4 text-marron h-auto text-center";
+                        celdaNombre.textContent = producto.nombre;
+                        fila.appendChild(celdaNombre);
+
+                        // Celda de categoría
+                        const celdaCategoria = document.createElement("td");
+                        celdaCategoria.className = "px-4 py-4 text-marron h-auto text-center";
+                        celdaCategoria.textContent = producto.categoria.nombre;
+                        fila.appendChild(celdaCategoria);
+
+                        // Celda de precio
+                        const celdaPrecio = document.createElement("td");
+                        celdaPrecio.className = "px-4 py-4 text-marron h-auto text-center";
+                        celdaPrecio.textContent = `${producto.precio_unidad}$`;
+                        fila.appendChild(celdaPrecio);
+
+                        // Celda de acciones
+                        const celdaAcciones = document.createElement("td");
+                        celdaAcciones.className = "px-4 py-4 h-auto rounded-r-xl";
+
+                        // Contenedor de botones
+                        const contenedorBotones = document.createElement("div");
+                        contenedorBotones.className = "flex items-center justify-center gap-4";
+
+                        // Botón "Ver"
+                        const botonVer = document.createElement("button");
+                        botonVer.id = `editar_${producto.codigo}`;
+                        botonVer.className = "bg-marron text-white px-4 py-2 rounded-lg";
+                        botonVer.textContent = "Ver";
+                        contenedorBotones.appendChild(botonVer);
+
+                        // Imagen "Eliminar"
+                        const imagenEliminar = document.createElement("img");
+                        imagenEliminar.id = `eliminar_${producto.codigo}`;
+                        imagenEliminar.src = "/images/papelera.png";
+                        imagenEliminar.className = "hover:cursor-pointer";
+                        contenedorBotones.appendChild(imagenEliminar);
+
+                        // Agregar contenedor de botones a la celda
+                        celdaAcciones.appendChild(contenedorBotones);
+                        fila.appendChild(celdaAcciones);
+
+                        // Agregar la fila a la tabla
+                        tablaProductos.appendChild(fila);
+
+                        let btnEditar = document.getElementById(`editar_${producto.codigo}`)
+                        btnEditar.onclick = () => editarProducto(producto.codigo)
+
+                        let btnEliminar = document.getElementById(`eliminar_${producto.codigo}`)
+                        btnEliminar.onclick = () => eliminarProducto(producto.codigo)
+                    }
                 }
             }
         })
