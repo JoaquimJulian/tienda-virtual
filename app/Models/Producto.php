@@ -15,7 +15,7 @@ class Producto extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = ['codigo', 'nombre', 'descripcion', 'categoria_id', 'precio_unidad', 'stock', 'destacado'];
+    protected $fillable = ['codigo', 'nombre', 'descripcion', 'categoria_id', 'precio_unidad', 'stock', 'destacado', 'imagen_principal'];
 
     public function fotografias(): HasMany{
         return $this->hasMany(Fotografia::class);

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Log;
+
 
 class ProductoController extends Controller
 {
@@ -30,6 +32,7 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {   
+        Log::info('datos recibidos: ', $request->all());
         $request->validate([
             'codigo' => 'required|string|max:255|unique:productos,codigo',
             'nombre' => 'required|string|max:255',
@@ -37,8 +40,18 @@ class ProductoController extends Controller
             'categoria_id' => 'required|exists:categorias,id',
             'precio_unidad' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
-            'destacado' => 'sometimes|in:on,off'
+            'destacado' => 'sometimes|in:on,off',
+            'fotografia_principal' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        $rutaImagenPrincipal = "";
+    
+        if ($request->hasFile('fotografia_principal')) {
+            Log::info('Subiendo imagen principal');
+
+            $imagenPrincipal = $request->file('fotografia_principal');
+            $rutaImagenPrincipal = $imagenPrincipal->store('imgProductos', 'public'); 
+        }
 
         $producto = Producto::create([
             'codigo' => $request->codigo,
@@ -48,7 +61,10 @@ class ProductoController extends Controller
             'precio_unidad' => $request->precio_unidad,
             'stock' => $request->stock,
             'destacado' => $request->has('destacado') ? 1 : 0,
+            'imagen_principal' => $rutaImagenPrincipal,
         ]);
+
+        Log::info('Producto creado exitosamente: ' . $producto->id);
 
         return redirect()->route('categoria.create');
         
@@ -79,6 +95,7 @@ class ProductoController extends Controller
      */
     public function update(Request $request, string $codigo)
     {
+        Log::info($request->all());
         $request->validate([
             'codigo' => 'required|string|max:255|unique:productos,codigo,' . $codigo . ',codigo',
             'nombre' => 'required|string|max:255',
@@ -87,7 +104,17 @@ class ProductoController extends Controller
             'precio_unidad' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'destacado' => 'sometimes|boolean',
+            'fotografia_principal' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        $rutaImagenPrincipal = "";
+    
+        if ($request->hasFile('fotografia_principal')) {
+            Log::info('Actulizando imagen principal');
+
+            $imagenPrincipal = $request->file('fotografia_principal');
+            $rutaImagenPrincipal = $imagenPrincipal->store('imgProductos', 'public'); 
+        }
 
         $producto = Producto::findOrFail($codigo);
         $producto->update([
@@ -98,6 +125,7 @@ class ProductoController extends Controller
             'precio_unidad' => $request->precio_unidad,
             'stock' => $request->stock,
             'destacado' => $request->has('destacado') ? 1 : 0,
+            'imagen_principal' => $rutaImagenPrincipal ?: $producto->imagen_principal, // Si no se carga imagen, mantiene la actual
         ]);
 
         return redirect()->route('categoria.create')->with('success', 'Producto actualizado exitosamente');

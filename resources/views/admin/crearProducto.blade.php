@@ -5,7 +5,7 @@
 @section('content')
 <div class="flex pl-20 pr-20 pt-6 pb-6 bg-beig h-screen justify-center gap-24">
     <div class="flex">
-        <form action="{{ route('producto.store') }}" method="POST" class="flex flex-col space-y-4">
+        <form action="{{ route('producto.store') }}" method="POST" class="flex flex-col space-y-4" enctype="multipart/form-data">
             @csrf
             <div class="flex flex-col">
                 <label for="codigo" class="text-marron font-semibold mb-1">Código</label>
@@ -44,15 +44,16 @@
                 <label for="destacado" class="text-marron font-semibold mb-1">Destacado</label>
                 <input type="checkbox" name="destacado" id="destacado" class="h-6 w-6 bg-beig border-marron border-2 rounded">
             </div>
+
+            <div class="flex gap-4">
+                <label for="fotografia_principal" class="text-marron font-semibold mb-1">Fotografia principal:</label>
+                <input type="file" name="fotografia_principal" id="fotografia_principal" class="h-6 w-6 bg-beig border-marron border-2 rounded">
+            </div>
             
             <input type="submit" class="bg-marron text-white py-2 rounded hover:bg-marron-dark cursor-pointer mt-4">
         </form>
     </div>
-    <div>
-        <form action="">
-            <input type="text" placeholder="fotografias">
-        </form>
-    </div>
+    
 </div>
 @endsection
 

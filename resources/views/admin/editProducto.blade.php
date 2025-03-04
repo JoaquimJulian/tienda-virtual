@@ -62,13 +62,12 @@
                     {{ old('destacado', $producto->destacado) == 1 ? 'checked' : '' }}>
             </div>
 
+            <div class="flex gap-4">
+                <label for="fotografia_principal" class="text-marron font-semibold mb-1">Fotografia principal:</label>
+                <input type="file" name="fotografia_principal" id="fotografia_principal" class="h-6 w-6 bg-beig border-marron border-2 rounded">
+            </div>
             
             <input type="submit" value="Guardar Cambios" class="bg-marron text-white py-2 rounded hover:bg-marron-dark cursor-pointer mt-4">
-        </form>
-    </div>
-    <div>
-        <form action="">
-            <input type="text" placeholder="fotografias">
         </form>
     </div>
 </div>
