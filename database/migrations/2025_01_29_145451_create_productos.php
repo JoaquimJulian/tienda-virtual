@@ -19,6 +19,7 @@ return new class extends Migration
             $table->double('precio_unidad');
             $table->bigInteger('stock');
             $table->boolean('destacado');
+            $table->string('imagen_principal');
             $table->timestamps();
 
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');

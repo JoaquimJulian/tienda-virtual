@@ -289,11 +289,11 @@ function mostrarProductos(busqueda = ""){
 
                         // Celda de imagen
                         const celdaImagen = document.createElement("td");
-                        celdaImagen.className = "px-4 py-4 h-auto rounded-l-xl";
+                        celdaImagen.className = "p-4";
                         const imagen = document.createElement("img");
-                        imagen.src = producto.imagen;
+                        imagen.src = `storage/${producto.imagen}`;
                         imagen.alt = producto.nombre;
-                        imagen.className = "w-16 h-16 object-cover rounded-lg";
+                        imagen.className = "object-contain h-2 w-auto";
                         celdaImagen.appendChild(imagen);
                         fila.appendChild(celdaImagen);
 
