@@ -22,7 +22,8 @@ class CompraController extends Controller
      */
     public function create()
     {
-        return view("admin.gestionPedidos");
+        $compradores = Comprador::all();
+        return view("admin.gestionPedidos", compact('compradores'));
     }
 
     /**

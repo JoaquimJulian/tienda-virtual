@@ -4,6 +4,6 @@
 
 @section('content')
     <div class="bg-beig">
-        <p>La pagina principal</p>
+        <h3>La pagina principal</h3>
     </div>
 @endsection

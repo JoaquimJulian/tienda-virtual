@@ -17,6 +17,23 @@
                     </svg>
                 </button>
             </div>
+            <div>
+                <select name="estado" id="filtroEstado" class="border-none rounded">
+                    <option value="" disabled selected hidden class="text-green-400">Estado</option>
+                    <option value="no-estado">Todos</option>
+                    <option value="enviado">Enviado</option>
+                    <option value="pendiente">Pendiente</option>
+                </select>
+                <select name="cliente" id="filtroCliente" class="border-none rounded">
+                    <option value="" disabled selected hidden>Cliente</option>
+                    <option value="no-cliente">Todos</option>
+                    @foreach($compradores as $comprador)
+                        <option value="{{ $comprador->id }}">
+                            {{ $comprador->nombre }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <div id="pedidosLista" class="mt-2 w-full flex justify-center">

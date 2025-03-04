@@ -16,11 +16,29 @@ class CompradorSeeder extends Seeder
     {
         DB::table('compradores')->insert([
             [
-                'nombre' => 'juan',
-                'apellidos' => 'moreno',
+                'nombre' => 'Juan',
+                'apellidos' => 'Moreno',
                 'direccion' => 'Calle Mayor',
                 'telefono' => '606606606',
                 'email' => 'juanMoreno@gmail.com',
+                'password' => '123',
+                'password' => Hash::make('password')
+            ],
+            [
+                'nombre' => 'Antonio',
+                'apellidos' => 'Moreno',
+                'direccion' => 'Calle Mayor',
+                'telefono' => '606606606',
+                'email' => 'antonioMoreno@gmail.com',
+                'password' => '123',
+                'password' => Hash::make('password')
+            ],
+            [
+                'nombre' => 'Maria',
+                'apellidos' => 'Moreno',
+                'direccion' => 'Calle Mayor',
+                'telefono' => '606606606',
+                'email' => 'mariaMoreno@gmail.com',
                 'password' => '123',
                 'password' => Hash::make('password')
             ],

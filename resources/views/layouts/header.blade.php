@@ -35,7 +35,7 @@
       @if(session('user_type') === 'trabajador')
         <a href="{{ route('categoria.create') }}" class="text-gray-700 hover:text-[#8B2E00]">Gestionar productos y categorias</a>
         <a href="{{ route('compra.create') }}" class="text-gray-700 hover:text-[#8B2E00]">Gestionar pedidos</a>
-        <form action="{{ route('logout') }}" method="POST">
+        <form action="{{ route('logout') }}" method="POST" class="mb-0">
           @csrf
           <button type="submit" class="text-gray-700 hover:text-[#8B2E00]">Cerrar sesión</button>
         </form>

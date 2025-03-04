@@ -17,7 +17,7 @@
                     </svg>
                 </button>
             </div>
-            <a class="bg-marron text-white py-2 px-4 rounded-full absolute right-8" href="{{ route('producto.create') }}">Nuevo producto</a>
+            <a class="bg-marron text-white py-2 px-4 rounded-full absolute right-0" href="{{ route('producto.create') }}">Nuevo producto</a>
         </div>
 
         <div id="productosLista" class="mt-2 w-full flex justify-center">

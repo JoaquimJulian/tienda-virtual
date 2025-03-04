@@ -140,6 +140,7 @@ function eliminarCategoria(id) {
     .then(data => {
         if (data.success) {
             document.getElementById(`categoria_${id}`).remove();
+            mostrarProductos()
         } else {
             console.error(data.message); 
         }
