@@ -32,7 +32,6 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {   
-        Log::info('datos recibidos: ', $request->all());
         $request->validate([
             'codigo' => 'required|string|max:255|unique:productos,codigo',
             'nombre' => 'required|string|max:255',
@@ -47,10 +46,12 @@ class ProductoController extends Controller
         $rutaImagenPrincipal = "";
     
         if ($request->hasFile('fotografia_principal')) {
-            Log::info('Subiendo imagen principal');
-
             $imagenPrincipal = $request->file('fotografia_principal');
             $rutaImagenPrincipal = $imagenPrincipal->store('imgProductos', 'public'); 
+        }
+
+        if ($request->hasFile('fotografias_secundarias')) {
+            
         }
 
         $producto = Producto::create([
@@ -63,8 +64,6 @@ class ProductoController extends Controller
             'destacado' => $request->has('destacado') ? 1 : 0,
             'imagen_principal' => $rutaImagenPrincipal,
         ]);
-
-        Log::info('Producto creado exitosamente: ' . $producto->id);
 
         return redirect()->route('categoria.create');
         

@@ -49,6 +49,12 @@
                 <label for="fotografia_principal" class="text-marron font-semibold mb-1">Fotografia principal:</label>
                 <input type="file" name="fotografia_principal" id="fotografia_principal" class="h-6 w-6 bg-beig border-marron border-2 rounded">
             </div>
+
+            <div class="flex gap-4"> 
+                <label for="fotografias_secundarias" class="h-6 w-6 bg-beig border-marron border-2 rounded">Fotografias secundarias:</label>
+                <input type="file" name="fotografias_secundarias" id="fotografias_secundarias" multiple>
+            </div>
+            
             
             <input type="submit" class="bg-marron text-white py-2 rounded hover:bg-marron-dark cursor-pointer mt-4">
         </form>
