@@ -12,10 +12,11 @@ mostrarCategorias()
 btnDropdownCategoria.addEventListener('click', function(event){
     event.stopPropagation();
     dropdownMenuCategoria.classList.toggle('hidden');
+    let menuWidth = dropdownMenuCategoria.offsetWidth;
 
     let rect = btnDropdownCategoria.getBoundingClientRect();
     dropdownMenuCategoria.style.top = `${rect.bottom + window.scrollY}px`;
-    dropdownMenuCategoria.style.right = `${window.innerWidth - rect.right - 10}px`; 
+    dropdownMenuCategoria.style.left = `${rect.left + rect.width / 2 - menuWidth / 2}px`;
     
 })
 
@@ -62,7 +63,7 @@ function mostrarCategorias(nombreNuevaCategoria){
             hayCategorias = true
         } 
         const listaCategorias = document.getElementById('categoriasLista');
-    
+        console.log(nombreNuevaCategoria)
         if (!nombreNuevaCategoria) {
             // Si no hay una nueva categoría, mostrar todas las categorías
             listaCategorias.innerHTML = ''; // Limpiar solo cuando se cargan todas las categorías
@@ -96,7 +97,9 @@ function mostrarCategorias(nombreNuevaCategoria){
         } else {
             let contador = 1
             data.forEach(categoria => {
+                console.log(listaCategorias)
                 if (categoria.nombre == nombreNuevaCategoria && contador === 1) {
+                    console.log('entra')
                     const categoriaElement = document.createElement('div');
                     categoriaElement.setAttribute('id', `categoria_${categoria.id}`);
                     categoriaElement.className = 'w-full flex items-center justify-between bg-white p-4 rounded-lg shadow-md mb-4';
@@ -120,8 +123,8 @@ function mostrarCategorias(nombreNuevaCategoria){
                     botonEditar.addEventListener('click', () => {
                         editarCategoria(categoria.id)
                     });
+                    contador ++;
                 }
-                contador ++;
             })
         }
     })
@@ -218,7 +221,7 @@ function mostrarProductos(busqueda = ""){
 
                     // Celda de imagen
                     const celdaImagen = document.createElement("td");
-                    celdaImagen.className = "h-auto w-auto";
+                    celdaImagen.className = "h-auto w-auto rounded-l-xl";
                     const imagen = document.createElement("img");
                     imagen.src = `/storage/${producto.imagen_principal}`;
                     imagen.alt = producto.nombre;
@@ -284,7 +287,7 @@ function mostrarProductos(busqueda = ""){
                     if (!document.getElementById(`producto_${producto.codigo}`)) {
                         // Crear la fila del producto
                         const fila = document.createElement("tr");
-                        fila.className = "bg-white rounded-xl overflow-hidden";
+                        fila.className = "bg-white rounded-xl overflow-hidden mb-2";
                         fila.id = `producto_${producto.codigo}`;
 
                         // Celda de imagen
