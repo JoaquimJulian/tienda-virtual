@@ -1,13 +1,13 @@
-<footer class="w-full bg-[#8B2E00] text-white py-16">
+<footer class="w-full bg-[#8B2E00] text-white py-16 md:relative bottom-0 left-0 right-0">
   <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
     <!-- Company Info -->
-    <div>
+    <div class="break-words">
       <h2 class="text-2xl font-semibold mb-4">Tempo & Tono</h2>
       <p class="text-[#E6B088]">Tu tienda online premium para instrumentos y equipos musicales.</p>
     </div>
 
     <!-- Quick Links -->
-    <div>
+    <div class="break-words">
       <h3 class="text-lg font-semibold mb-4">Más enlaces</h3>
       <ul class="space-y-2">
         <li><a href="#" class="text-[#E6B088] hover:text-white">Sobre nosotros</a></li>
@@ -18,9 +18,9 @@
     </div>
 
     <!-- Follow Us -->
-    <div>
+    <div class="break-words">
       <h3 class="text-lg font-semibold mb-4">Nuestras redes</h3>
-      <div class="flex space-x-4">
+      <div class="flex flex-wrap space-x-4">
         <a href="#" class="text-[#E6B088] hover:text-white">
           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
             <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
@@ -45,19 +45,19 @@
     </div>
 
     <!-- Contact Us -->
-    <div>
+    <div class="break-words">
       <h3 class="text-lg font-semibold mb-4">Contactanos</h3>
       <address class="text-[#E6B088] not-italic">
         Tempo&Tono<br>
         Badalona, Nº2<br>
-        contact@tempo&tono.com<br>
+        <span class="break-all">contact@tempo&tono.com</span><br>
         666 678 673
       </address>
     </div>
   </div>
 
   <!-- Copyright -->
-  <div class="mt-16 text-center text-[#E6B088]">
+  <div class="mt-16 text-center text-[#E6B088] break-words">
     © 2025 Tempo&Tono. Todos los derechos reservados.
   </div>
 </footer>

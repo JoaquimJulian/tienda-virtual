@@ -22,7 +22,7 @@ class CompradorSeeder extends Seeder
                 'telefono' => '606606606',
                 'email' => 'juanMoreno@gmail.com',
                 'password' => '123',
-                'password' => Hash::make('password')
+                'password' => Hash::make('123')
             ],
             [
                 'nombre' => 'Antonio',
@@ -31,7 +31,7 @@ class CompradorSeeder extends Seeder
                 'telefono' => '606606606',
                 'email' => 'antonioMoreno@gmail.com',
                 'password' => '123',
-                'password' => Hash::make('password')
+                'password' => Hash::make('123')
             ],
             [
                 'nombre' => 'Maria',
@@ -40,7 +40,7 @@ class CompradorSeeder extends Seeder
                 'telefono' => '606606606',
                 'email' => 'mariaMoreno@gmail.com',
                 'password' => '123',
-                'password' => Hash::make('password')
+                'password' => Hash::make('123')
             ],
         ]);
     }

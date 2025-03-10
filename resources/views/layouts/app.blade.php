@@ -12,15 +12,15 @@
 
 </head>
 <body class="flex flex-col min-h-screen relative">
-    <header>
+    <header class="w-screen">
         @include ('layouts.header')
     </header>
 
-    <div class="flex flex-col flex-grow">
+    <div class="flex-grow min-h-screen">
         @yield('content')
     </div>
     
-    <footer>
+    <footer class="w-full">
         @include ('layouts.footer')
     </footer>
 
