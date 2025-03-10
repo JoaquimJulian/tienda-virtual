@@ -21,7 +21,7 @@
         </div>
 
         <div id="productosLista" class="mt-2 w-full flex justify-center">
-            <table id="tablaProductosLista" class="w-3/4 mx-auto border-collapse h-auto">
+            <table id="tablaProductosLista" class="w-3/4 mx-auto h-auto border-separate border-spacing-y-2">
                 <thead>
                     <tr class="h-auto">
                         <th class="text-marron font-semibold px-4 py-8 h-auto w-32"></th> <!-- Columna para imagen -->
