@@ -36,6 +36,9 @@
                 </tbody>
             </table>
         </div>
+        <div id="paginacion" class="flex justify-center mt-4">
+            <!-- Los botones de paginación se agregarán aquí -->
+        </div>
         
     </div>
 

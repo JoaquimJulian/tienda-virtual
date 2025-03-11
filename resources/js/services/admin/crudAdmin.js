@@ -200,9 +200,9 @@ busquedaProductos.addEventListener('input', function() {
     }, 300); 
 });
 
-function mostrarProductos(busqueda = ""){
+function mostrarProductos(busqueda = "", pagina = 1){
     tablaProductos.innerHTML = '';
-    fetch("/producto", {
+    fetch(`/producto?per_page=10&page=${pagina}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -211,7 +211,8 @@ function mostrarProductos(busqueda = ""){
     })
     .then(response => response.json())
     .then(data => {
-        data.forEach(producto => {
+        console.log(data)
+        data.data.forEach(producto => {
             if(busqueda == ""){
                 if (!document.getElementById(`producto_${producto.codigo}`)) {
                     // Crear la fila del producto
@@ -356,9 +357,32 @@ function mostrarProductos(busqueda = ""){
                 }
             }
         })
+
+        mostrarPaginacion(data)
     })
     .catch(error => console.error('Error:', error));
 
+}
+
+function mostrarPaginacion(data) {
+    const paginacion = document.getElementById("paginacion");
+    paginacion.innerHTML = '';
+
+    // Generar los botones de paginación basados en el total de páginas
+    for (let i = 1; i <= data.last_page; i++) {
+        const botonPagina = document.createElement("button");
+        botonPagina.className = "px-4 py-2 ml-2 bg-marron text-white rounded";
+        botonPagina.textContent = i;
+
+        // Al hacer clic en el botón de la página, recargar los productos con esa página
+        botonPagina.onclick = () => mostrarProductos(busquedaProductos.value, i);
+
+        if (i === data.current_page) {
+            botonPagina.className = "px-4 py-2 ml-2 bg-white text-black rounded";
+        }
+
+        paginacion.appendChild(botonPagina);
+    }
 }
 
 function editarProducto(codigo){

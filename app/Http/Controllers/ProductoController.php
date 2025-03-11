@@ -15,9 +15,11 @@ class ProductoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::with('categoria')->get();
+        $perPage = $request->get('per_page', 10);
+
+        $productos = Producto::with('categoria')->paginate($perPage);
         return response()->json($productos);
     }
 
