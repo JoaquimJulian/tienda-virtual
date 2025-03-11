@@ -37,12 +37,12 @@
     @endif
 
     <!-- User Actions -->
-    <div id="user-actions" class="hidden md:flex items-center space-x-4">
+    <div id="user-actions" class="hidden md:flex flex-col justify-center items-center sm:flex-row items-center sm:space-x-4 space-y-8 sm:space-y-0 text-center mt-8 sm:mt-0">
 
       @if(session('user_type') === 'trabajador')
-        <a href="{{ route('categoria.create') }}" class="text-gray-700 hover:text-[#8B2E00]">Gestionar productos y categorias</a>
-        <a href="{{ route('compra.create') }}" class="text-gray-700 hover:text-[#8B2E00]">Gestionar pedidos</a>
-        <form action="{{ route('logout') }}" method="POST" class="mb-0 mt-8 sm:mt-0">
+        <a href="{{ route('categoria.create') }}" class="w-full sm:w-auto block text-gray-700 hover:text-[#8B2E00]">Gestionar productos y categorias</a>
+        <a href="{{ route('compra.create') }}" class="w-full sm:w-auto block text-gray-700 hover:text-[#8B2E00]">Gestionar pedidos</a>
+        <form action="{{ route('logout') }}" method="POST" class="mb-0 sm:mt-0 flex justify-center">
           @csrf
           <button type="submit" class="text-gray-700 hover:text-[#8B2E00]">Cerrar sesión</button>
         </form>
@@ -67,10 +67,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
             </svg>
         </button>
-
-        <button onclick="abrirPopup('loginPopup')" type="submit" class="text-gray-700 hover:text-[#8B2E00] mt-8 sm:mt-0 sm:hidden">Iniciar sesión</button>
-      
-        <a href="#" class="relative text-gray-700 hover:text-[#8B2E00] mt-8 sm:mt-0 flex justify-center">
+        
+        <button onclick="abrirPopup('loginPopup')" type="submit" class="text-gray-700 hover:text-[#8B2E00] sm:hidden">Iniciar sesión</button>
+          
+        <a href="#" class="relative text-gray-700 hover:text-[#8B2E00] flex justify-center">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
           </svg>
