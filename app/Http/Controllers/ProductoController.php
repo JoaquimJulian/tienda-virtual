@@ -85,9 +85,11 @@ class ProductoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $codigo)
     {
-        //
+        $producto = Producto::where('codigo', $codigo)->first();
+
+        return view('public.producto', compact('producto'));
     }
 
     /**

@@ -1,4 +1,4 @@
-<div id="header" class="w-screen sm:h-auto px-4 py-4 border-b border-gray-200">
+<div id="header" class="w-screen sm:h-auto px-4 py-4 border-b border-gray-200 relative">
   <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between">
     <!-- Logo -->
     <a href="{{ route('app') }}" class="text-2xl font-bold text-[#8B2E00]">
@@ -22,17 +22,25 @@
 
     @if(session('user_type') !== 'trabajador')
       <!-- Search Bar -->
-      <div class="hidden md:flex items-center bg-beig rounded-lg px-4 py-1 w-72">
-        <input 
-          type="text" 
-          placeholder="Buscar productos..." 
-          class="bg-transparent w-full outline-none border-none focus:outline-none focus:ring-0 text-gray-700 placeholder-gray-400"
-          >
-        <button class="text-gray-400 hover:text-[#8B2E00]">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-          </svg>
-        </button>
+      <div class="relative">
+        <div class="hidden md:flex items-center bg-beig rounded-lg px-4 py-1 w-72 relative">
+          <input 
+            id="inputBusqueda"
+            type="text"
+            autocomplete="off"
+            placeholder="Buscar productos..." 
+            class="bg-transparent w-full outline-none border-none focus:outline-none focus:ring-0 text-gray-700 placeholder-gray-400"
+            >
+          <button class="text-gray-400 hover:text-[#8B2E00]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="hidden hover:bg-marron hover:text-white"></div>
+        <div id="resultadosBusquedaContainer">
+
+        </div>
       </div>
     @endif
 
