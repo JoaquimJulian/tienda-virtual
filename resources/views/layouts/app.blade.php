@@ -11,23 +11,21 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
-<body class="flex flex-col min-h-screen relative">
-    <header class="w-screen">
+<body class="flex flex-col min-h-screen">
+    <header>
         @include ('layouts.header')
     </header>
 
-    <div class="flex-grow min-h-screen">
+    <main class="flex-grow">
         @yield('content')
-    </div>
+    </main>
     
-    <footer class="w-full">
+    <footer>
         @include ('layouts.footer')
     </footer>
 
     <!-- POPUPS -->
-
     <x-popup-login />
     <x-popup-registro />
-
 </body>
 </html>

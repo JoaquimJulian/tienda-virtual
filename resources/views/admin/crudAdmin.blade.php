@@ -5,7 +5,7 @@
 @section('content')
 
 
-<div class="flex pl-20 pr-20 pt-6 pb-6 bg-beig h-screen">
+<div class="flex pl-20 pr-20 pt-6 pb-6 bg-beig">
     <div class="w-2/4 flex flex-col items-center">
         <p class="font-semibold text-marron mb-3 text-xl">Productos</p>
         <div class="w-full flex items-center relative">
