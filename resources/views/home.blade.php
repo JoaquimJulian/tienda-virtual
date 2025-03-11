@@ -11,13 +11,15 @@
         <button class="mt-6 ml-8 bg-marron hover:bg-beigoscuro text-white  hover:text-white py-2 px-8 rounded-full">Shop Now</button>
         <!-- SECCIÓN: CATEGORÍAS -->
         <h2 class="ml-8 mt-8 text-3xl font-bold mb-6">Browse Categories</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-4 mb-12 ml-8 mr-8">
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-6 mt-4 mb-12 ml-8 mr-8">
                 @foreach ([
-                    ['name' => 'Guitars', 'desc' => 'Acoustic & Electric', 'img' => '../../images/icono_guitarra.png'],
-                    ['name' => 'Drums', 'desc' => 'Acoustic & Electronic', 'img' => '../../images/icono_bateria.png'],
-                    ['name' => 'Recording', 'desc' => 'Studio Equipment', 'img' => '../../images/icono_microfono.png'],
-                    ['name' => 'Accessories', 'desc' => 'Gear & Parts', 'img' => '../../images/icono_notamusical.png']
-                ] as $category)
+                    ['name' => 'Guitarras Electricas', 'desc' => 'Acoustic & Electric', 'img' => '../../images/icono_guitarra_electrica.png'],
+                    ['name' => 'Guitarras Españolas', 'desc' => 'Acoustic & Electronic', 'img' => '../../images/icono_guitarra_espanola.png'],
+                    ['name' => 'Baterias', 'desc' => 'Studio Equipment', 'img' => '../../images/icono_bateria.png'],
+                    ['name' => 'Pianos', 'desc' => 'Gear & Parts', 'img' => '../../images/icono_piano.png'],
+                    ['name' => 'Mesas de mezcla', 'desc' => 'Gear & Parts', 'img' => '../../images/icono_mesa_mezclas.png'],
+                    ['name' => 'Teclados musicales', 'desc' => 'Gear & Parts', 'img' => '../../images/icono_teclado_musical.png']
+                    ] as $category)
                 <div class="rounded-lg bg-white p-4 shadow-md">
                     <a href="#" class="block">
                         <img src="{{ $category['img'] }}" alt="{{ $category['name'] }}" class="w-12 h-12">
