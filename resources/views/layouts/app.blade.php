@@ -16,7 +16,7 @@
         @include ('layouts.header')
     </header>
 
-    <main class="flex-grow">
+    <div class="flex-grow">
         @yield('content')
     </main>
     

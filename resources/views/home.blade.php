@@ -11,7 +11,7 @@
         <button class="mt-6 ml-8 bg-marron hover:bg-beigoscuro text-white  hover:text-white py-2 px-8 rounded-full">Shop Now</button>
         <!-- SECCIÓN: CATEGORÍAS -->
         <h2 class="ml-8 mt-8 text-3xl font-bold mb-6">Browse Categories</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-4 mb-12 ml-8 mr-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-4 mb-12 ml-8 mr-8">
                 @foreach ([
                     ['name' => 'Guitars', 'desc' => 'Acoustic & Electric', 'img' => '../../images/icono_guitarra.png'],
                     ['name' => 'Drums', 'desc' => 'Acoustic & Electronic', 'img' => '../../images/icono_bateria.png'],
@@ -53,15 +53,22 @@
 
     <!-- SECCIÓN: SUSCRIPCIÓN -->
     <section class="bg-beigclaro text-center py-10 mt-8">
-        <div class="bg-beig m-20 rounded-2xl">
-            <h2 class="text-4xl font-bold pt-8 mb-8">Stay in Tune</h2>
-            <p class="text-lg text-gray-600 mb-8">Subscribe to our newsletter for exclusive deals, new arrivals, and musical inspiration.</p>
-            <form action="#" method="POST" class="mt-4 pb-8">
-                <div class="w-96 m-auto">
-                    <input type="email" id="email" placeholder="Enter your email" class="border-none rounded-l-full mr-0 focus:ring-2 focus:ring-blue-500 w-2/3">
-                    <button type="submit" class="bg-marron hover:bg-naranja text-white font-bold py-2 rounded-r-full w-1/4">Subscribe</button>
+        <div class="bg-beig m-20 w-3/4 rounded-2xl m-auto p-8">
+            <h2 class="text-4xl font-bold mb-6">Stay in Tune</h2>
+            <p class="text-lg text-gray-600 mb-6 mx-2">
+                Subscribe to our newsletter for exclusive deals, new arrivals, and musical inspiration.
+            </p>
+            <form action="#" method="POST" class="flex justify-center items-center w-full">
+                <div class="flex w-4/5 bg-white rounded-full overflow-hidden shadow-lg">
+                    <input type="email" id="email" placeholder="Enter your email"
+                        class="border-none px-4 py-2 w-full outline-none">
+                    <button type="submit"
+                        class="bg-marron hover:bg-naranja text-white font-bold px-6 py-2 rounded-r-full">
+                        Subscribe
+                    </button>
                 </div>
             </form>
         </div>
     </section>
+
 @endsection
