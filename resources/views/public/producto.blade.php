@@ -5,8 +5,8 @@
 @section('content')
     <div class="bg-beig p-16 flex flex-col justify-center sm:items-center gap-4">
         <h1 class="text-marron font-bold text-xl text-center">{{ $producto->nombre }}</h1>
-        <div class="p-4 bg-white rounded-xl sm:flex sm:max-w-fit">
-            <div style="max-width: calc(30rem + 3rem);">
+        <div class="sm:flex sm:max-w-fit">
+            <div style="max-width: calc(30rem + 3rem);" class="bg-white rounded-xl p-4">
                 <div>
                     <img class="rounded-xl w-full" src="{{ Storage::url($producto->imagen_principal) }}" alt="">
                 </div>
