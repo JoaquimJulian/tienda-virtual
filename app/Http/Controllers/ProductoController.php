@@ -92,7 +92,11 @@ class ProductoController extends Controller
         // Obtener las fotografías asociadas al producto
         $fotografias = $producto ? $producto->fotografias : [];
 
-        return view('public.producto', compact('producto', 'fotografias'));
+        $productosRelacionados = Producto::where('categoria_id', $producto->categoria_id)
+                                    ->where('codigo', '!=', $producto->codigo)
+                                    ->get();
+
+        return view('public.producto', compact('producto', 'fotografias', 'productosRelacionados'));
     }
 
     /**
