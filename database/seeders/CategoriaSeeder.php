@@ -16,22 +16,34 @@ class CategoriaSeeder extends Seeder
     {
         DB::table('categorias')->insert([
             [
-                'nombre' => 'guitarra_electrica',
+                'nombre' => 'Guitarras Electricas',
+                'descripcion' => 'Eléctrico',
+                'imagen' => 'icono_guitarra_electrica.png',
             ],
             [
-                'nombre' => 'guitarra_española',
+                'nombre' => 'Guitarras Españolas',
+                'descripcion' => 'Acústico',
+                'imagen' => 'icono_guitarra_espanola.png',
             ],
             [
-                'nombre' => 'bateria',
+                'nombre' => 'Baterias',
+                'descripcion' => 'Acústico y Eléctrico',
+                'imagen' => 'icono_bateria.png',
             ],
             [
-                'nombre' => 'teclado_musical',
+                'nombre' => 'Teclados Musicales',
+                'descripcion' => 'Eléctrico',
+                'imagen' => 'icono_teclado_musical.png',
             ],
             [
-                'nombre' => 'piano',
+                'nombre' => 'Pianos',
+                'descripcion' => 'Acústico y Eléctrico',
+                'imagen' => 'icono_piano.png',
             ],
             [
-                'nombre' => 'mesa_mezcla',
+                'nombre' => 'Mesas de Mezcla',
+                'descripcion' => 'Eléctrico',
+                'imagen' => 'icono_mesa_mezclas.png',
             ],
         ]);
     }

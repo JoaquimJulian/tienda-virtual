@@ -1,20 +1,9 @@
 <footer class="w-full bg-[#8B2E00] text-white py-16 md:relative bottom-0 left-0 right-0">
-  <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+  <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
     <!-- Company Info -->
     <div class="break-words">
       <h2 class="text-2xl font-semibold mb-4">Tempo & Tono</h2>
       <p class="text-[#E6B088]">Tu tienda online premium para instrumentos y equipos musicales.</p>
-    </div>
-
-    <!-- Quick Links -->
-    <div class="break-words">
-      <h3 class="text-lg font-semibold mb-4">Más enlaces</h3>
-      <ul class="space-y-2">
-        <li><a href="#" class="text-[#E6B088] hover:text-white">Sobre nosotros</a></li>
-        <li><a href="#" class="text-[#E6B088] hover:text-white">Contacto</a></li>
-        <li><a href="#" class="text-[#E6B088] hover:text-white">Comprar</a></li>
-        <li><a href="#" class="text-[#E6B088] hover:text-white">Preguntas frequentes</a></li>
-      </ul>
     </div>
 
     <!-- Follow Us -->
@@ -44,6 +33,17 @@
       </div>
     </div>
 
+    <!-- Quick Links -->
+    <div class="break-words">
+      <h3 class="text-lg font-semibold mb-4">Más enlaces</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="text-[#E6B088] hover:text-white">Sobre nosotros</a></li>
+        <li><a href="#" class="text-[#E6B088] hover:text-white">Contacto</a></li>
+        <li><a href="#" class="text-[#E6B088] hover:text-white">Comprar</a></li>
+        <li><a href="#" class="text-[#E6B088] hover:text-white">Preguntas frequentes</a></li>
+      </ul>
+    </div>
+    
     <!-- Contact Us -->
     <div class="break-words">
       <h3 class="text-lg font-semibold mb-4">Contactanos</h3>
