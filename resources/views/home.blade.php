@@ -1,4 +1,3 @@
-
 @extends('layouts.app') <!-- Extiende el layout principal -->
 
 @section('title', 'Página de Inicio')
@@ -9,28 +8,22 @@
         <h1 class="ml-8 text-4xl text-marron font-bold mt-8 w-1/2">Discover Your Perfect Sound</h1>
         <p class="ml-8 mt-4 text-xl text-naranja w-1/2">Explore our curated collection of premium instruments and audio equipment.</p>
         <button class="mt-6 ml-8 bg-marron hover:bg-beigoscuro text-white  hover:text-white py-2 px-8 rounded-full">Shop Now</button>
+
         <!-- SECCIÓN: CATEGORÍAS -->
         <h2 class="ml-8 mt-8 text-3xl font-bold mb-6">Browse Categories</h2>
         <div class="grid grid-cols-2 md:grid-cols-6 gap-6 mt-4 mb-12 ml-8 mr-8">
-                @foreach ([
-                    ['name' => 'Guitarras Electricas', 'desc' => 'Acoustic & Electric', 'img' => '../../images/icono_guitarra_electrica.png'],
-                    ['name' => 'Guitarras Españolas', 'desc' => 'Acoustic & Electronic', 'img' => '../../images/icono_guitarra_espanola.png'],
-                    ['name' => 'Baterias', 'desc' => 'Studio Equipment', 'img' => '../../images/icono_bateria.png'],
-                    ['name' => 'Pianos', 'desc' => 'Gear & Parts', 'img' => '../../images/icono_piano.png'],
-                    ['name' => 'Mesas de mezcla', 'desc' => 'Gear & Parts', 'img' => '../../images/icono_mesa_mezclas.png'],
-                    ['name' => 'Teclados musicales', 'desc' => 'Gear & Parts', 'img' => '../../images/icono_teclado_musical.png']
-                    ] as $category)
+            @foreach ($categorias as $category)
                 <div class="rounded-lg bg-white p-4 shadow-md">
                     <a href="#" class="block">
-                        <img src="{{ $category['img'] }}" alt="{{ $category['name'] }}" class="w-12 h-12">
-                        <h3 class="text-xl font-semibold mt-2">{{ $category['name'] }}</h3>
-                        <p class="text-gray-500">{{ $category['desc'] }}</p>
+                        <img src="{{ asset('images/' . $category->imagen) }}" alt="{{ $category->nombre }}" class="w-12 h-12">
+                        <h3 class="text-xl font-semibold mt-2">{{ $category->nombre }}</h3>
+                        <p class="text-gray-500">{{ $category->descripcion }}</p>
                     </a>
                 </div>
             @endforeach
         </div>
     </section>
-
+    
     <!-- SECCIÓN: PRODUCTOS DESTACADOS -->
     <section class="py-10 mt-8">
         <p class="text-4xl font-bold mb-6 ml-8">Featured Products</p>

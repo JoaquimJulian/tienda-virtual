@@ -1,5 +1,6 @@
 <footer class="w-full bg-[#8B2E00] text-white py-16 md:relative bottom-0 left-0 right-0">
   <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
+  <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
     <!-- Company Info -->
     <div class="break-words">
       <h2 class="text-2xl font-semibold mb-4">Tempo & Tono</h2>
