@@ -12,7 +12,11 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return response()->json(Categoria::all());
+        // Obtener todas las categorías desde la base de datos
+        $categorias = Categoria::all();
+
+        // Pasar las categorías a la vista 'home'
+        return view('home', compact('categorias'));
     }
 
 

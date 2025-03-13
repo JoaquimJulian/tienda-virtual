@@ -56,4 +56,4 @@ Route::prefix('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-
+Route::get('/', [CategoriaController::class, 'index'])->name('app');

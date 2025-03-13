@@ -45,6 +45,11 @@ class CategoriaSeeder extends Seeder
                 'descripcion' => 'Eléctrico',
                 'imagen' => 'icono_mesa_mezclas.png',
             ],
+            [
+                'nombre' => 'Prueba',
+                'descripcion' => 'Eléctrico',
+                'imagen' => 'icono_mesa_mezclas.png',
+            ],
         ]);
     }
 }
