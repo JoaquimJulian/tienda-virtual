@@ -89,7 +89,10 @@ class ProductoController extends Controller
     {
         $producto = Producto::where('codigo', $codigo)->first();
 
-        return view('public.producto', compact('producto'));
+        // Obtener las fotografías asociadas al producto
+        $fotografias = $producto ? $producto->fotografias : [];
+
+        return view('public.producto', compact('producto', 'fotografias'));
     }
 
     /**
