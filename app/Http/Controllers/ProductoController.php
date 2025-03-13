@@ -109,6 +109,12 @@ class ProductoController extends Controller
      */
     public function update(Request $request, string $codigo)
     {
+
+        Log::info('Datos recibidos en update:', [
+            'inputs' => $request->all(),
+            'files' => $request->file(),
+            'content_length' => $request->header('Content-Length'),
+        ]);
         $request->validate([
             'codigo' => 'required|string|max:255|unique:productos,codigo,' . $codigo . ',codigo',
             'nombre' => 'required|string|max:255',
@@ -139,29 +145,34 @@ class ProductoController extends Controller
             'imagen_principal' => $rutaImagenPrincipal ?: $producto->imagen_principal, // Si no se carga imagen, mantiene la actual
         ]);
 
-        if ($request->has('fotografias_secundarias')) {
-            DB::table('fotografias')->where('producto_codigo', $request->codigo)->get()->each(function($foto) {
-                // Obtener la ruta del archivo
-                $path = public_path('storage/imgProductos/' . $foto->nombre); // Ruta del archivo en el storage
-                if (Storage::exists($path)) {
-                    Storage::delete($path); // Eliminar archivo de la ruta especificada
-                }
-            });
-            DB::table('fotografias')->where('producto_codigo', $request->codigo)->delete();
-
-
-            foreach ($request->file('fotografias_secundarias') as $foto) {
-                $rutaFoto = $foto->store('imgProductos', 'public');
-
-                DB::table('fotografias')->insert([
-                    'producto_codigo' => $request->codigo,
-                    'nombre' => basename($rutaFoto),
-                ]);
-            }
-        }
-
-        return redirect()->route('categoria.create')->with('success', 'Producto actualizado exitosamente');
+        return response()->json([
+            'success' => true,
+            'message' => 'Producto actualizado exitosamente',
+        ], 200);
     }
+
+    public function eliminiarImagenesSecundarias(Request $request) {
+        DB::table('fotografias')
+            ->where('producto_codigo', $request->producto_codigo)
+            ->delete();
+        return response()->json(['success' => true]);
+    }
+
+    public function subirImagenSecundaria(Request $request) {
+        if ($request->hasFile('fotografia_secundaria')) {
+            $path = $request->file('fotografia_secundaria')->store('imgProductos', 'public');
+            Log::info($path);
+
+            DB::table('fotografias')->insert([
+                'producto_codigo' => $request->producto_codigo,  
+                'nombre' => $path, 
+            ]);
+
+            return response()->json(['path' => $path, 'success' => true]);
+        }
+        return response()->json(['error' => 'No se subió la imagen'], 400);
+    }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -5,7 +5,7 @@
 @section('content')
 <div class="flex pl-20 pr-20 pt-6 pb-6 bg-beig h-screen justify-center gap-24">
     <div class="flex">
-        <form action="{{ route('producto.update', $producto->codigo) }}" method="POST" class="flex flex-col space-y-4" enctype="multipart/form-data">
+        <form id="editarProductoForm" action="{{ route('producto.update', $producto->codigo) }}" method="POST" class="flex flex-col space-y-4" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="flex space-x-12">

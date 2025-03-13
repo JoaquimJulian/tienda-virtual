@@ -29,6 +29,10 @@ Route::middleware([ComprobarUsuario::class])->group(function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::post('/producto/subirImagenSecundaria', [ProductoController::class, 'subirImagenSecundaria'])->name('producto.subirImagenSecundaria');
+
+Route::post('/producto/eliminiarImagenesSecundarias', [ProductoController::class, 'eliminiarImagenesSecundarias'])->name('producto.eliminiarImagenesSecundarias');
+
 
 Route::get('/nosotros', function () {
     return view('nosotros.nosotros');
