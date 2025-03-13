@@ -15,7 +15,7 @@
     <!-- Navigation -->
     <nav id="nav-general" class="hidden sm:block flex flex-col sm:flex-row items-center gap-8 sm:space-x-8 mt-4 sm:mt-0">
       <a href="{{ route('app') }}" class="text-gray-700 hover:text-[#8B2E00]">Comprar</a>
-      <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Categorias</a>
+      <a href="{{ route('productoscategoria') }}" class="text-gray-700 hover:text-[#8B2E00]">Categorias</a>
       <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Ofertas</a>
       <a href="{{ route('sobrenosotros') }}" class="text-gray-700 hover:text-[#8B2E00]">Sobre nosotros</a>
     </nav>

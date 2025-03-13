@@ -38,6 +38,12 @@ Route::get('/nosotros', function () {
     return view('nosotros.nosotros');
 })->name('sobrenosotros');
 
+Route::get('/categorias/productoscategoria', function () {
+    return view('categorias.productoscategoria');
+})->name('productoscategoria');
+Route::get('/categorias/producto', function () {
+    return view('categorias.producto');
+})->name('producto');
 
 Route::prefix('auth')->group(function () {
     // Mostrar el formulario de login (GET)
