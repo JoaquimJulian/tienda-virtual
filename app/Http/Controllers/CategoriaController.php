@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use App\Models\Producto; 
 
 class CategoriaController extends Controller
 {
@@ -22,7 +23,6 @@ class CategoriaController extends Controller
     public function indexJson() {
         return response()->json(Categoria::all());
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -109,4 +109,25 @@ class CategoriaController extends Controller
             'message' => 'Categoría no encontrada.'
         ], 404);
     }
+
+    public function productoscategoria($id)
+    {
+        // Obtener la categoría por id
+        $categoria = Categoria::find($id);
+
+        // Obtener los productos relacionados con la categoría
+        $productos = Producto::where('categoria_id', $id)->get();
+
+
+        // Pasar la categoría y los productos a la vista
+        return view('categorias.productoscategoria', compact('categoria', 'productos'));
+    }
+
+    public function showHeader()
+    {
+        $categorias = Categoria::all();  // Obtener todas las categorías
+        return view('layouts.header', compact('categorias'));  // Pasar la variable a la vista
+    }
+
+
 }

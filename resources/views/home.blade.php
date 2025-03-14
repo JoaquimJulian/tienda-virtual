@@ -14,7 +14,7 @@
         <div class="grid grid-cols-2 md:grid-cols-6 gap-6 mt-4 mb-12 ml-8 mr-8">
             @foreach ($categorias as $category)
                 <div class="rounded-lg bg-white p-4 shadow-md">
-                    <a href="#" class="block">
+                    <a href="{{ route('categorias.productoscategoria', ['id' => $category->id]) }}" class="block">
                         <img src="{{ asset('images/' . $category->imagen) }}" alt="{{ $category->nombre }}" class="w-12 h-12">
                         <h3 class="text-xl font-semibold mt-2">{{ $category->nombre }}</h3>
                         <p class="text-gray-500">{{ $category->descripcion }}</p>

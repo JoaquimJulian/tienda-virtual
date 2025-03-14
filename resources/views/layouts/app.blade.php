@@ -9,18 +9,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 </head>
 <body class="flex flex-col min-h-screen">
-    <header>
+
+    <header class="absolute sticky top-0 z-1000 bg-white">
         @include ('layouts.header')
     </header>
 
-    <div class="flex-grow">
+    <!-- Contenedor principal del contenido -->
+    <main class="flex-grow">
         @yield('content')
     </main>
     
-    <footer>
+    <!-- Footer al final de la página -->
+    <footer class="bg-white">
         @include ('layouts.footer')
     </footer>
 
