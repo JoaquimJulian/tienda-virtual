@@ -8,7 +8,6 @@
     <p class="ml-8 mt-4 text-xl text-naranja w-1/2">{{ $categoria->descripcion }}</p>
     
     <!-- Mostrar productos -->
-    <h2 class="ml-8 mt-8 text-3xl font-bold mb-6">Productos en esta Categoría</h2>
     @if ($productos->count() > 0)
         <div class="grid grid-cols-2 md:grid-cols-6 gap-6 mt-4 mb-12 ml-8 mr-8">
             @foreach ($productos as $producto)

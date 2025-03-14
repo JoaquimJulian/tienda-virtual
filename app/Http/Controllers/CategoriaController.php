@@ -115,18 +115,9 @@ class CategoriaController extends Controller
         // Obtener la categoría por id
         $categoria = Categoria::find($id);
 
-        // Verificar si la categoría existe
-        if (!$categoria) {
-            return redirect()->route('home')->with('error', 'Categoría no encontrada');
-        }
-
         // Obtener los productos relacionados con la categoría
         $productos = Producto::where('categoria_id', $id)->get();
 
-        // Verificar si hay productos
-        if ($productos->isEmpty()) {
-            return redirect()->route('home')->with('error', 'No hay productos en esta categoría');
-        }
 
         // Pasar la categoría y los productos a la vista
         return view('categorias.productoscategoria', compact('categoria', 'productos'));

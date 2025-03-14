@@ -27,7 +27,7 @@
       <ul class="absolute left-0 mt-2 w-48 bg-white shadow-lg border border-gray-200 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
       @foreach ($categorias as $category)
           <li>
-            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{ $category->nombre }}</a>
+            <a href="{{ route('categorias.productoscategoria', ['id' => $category->id]) }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{ $category->nombre }}</a>
           </li>
         @endforeach
       </ul>
