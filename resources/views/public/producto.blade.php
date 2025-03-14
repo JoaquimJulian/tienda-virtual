@@ -42,7 +42,7 @@
                                 <p class="text-naranja font-bold" id="total" data-precio="{{ $producto->precio_unidad }}">{{ $producto->precio_unidad }}$</p>
                             </div>
                             <div class="absolute bottom-0 right-0">
-                                <button class="bg-marron hover:bg-marron-dark text-white font-bold py-2 px-2 rounded-lg" id="btnAnadirProducto">
+                                <button value="{{ $producto }}" class="bg-marron hover:bg-marron-dark text-white font-bold py-2 px-2 rounded-lg" id="btnAnadirProducto">
                                     Añadir al carrito
                                 </button>
                             </div>

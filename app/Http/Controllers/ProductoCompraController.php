@@ -11,7 +11,7 @@ class ProductoCompraController extends Controller
      */
     public function index()
     {
-        //
+        return view("public.carrito");
     }
 
     /**
