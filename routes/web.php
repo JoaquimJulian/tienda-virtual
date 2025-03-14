@@ -10,6 +10,7 @@ use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\ProductoCompraController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\ComprobarUsuario;
+use Illuminate\Support\Facades\Log;
 
 Route::resources([
     'categoria' => CategoriaController::class,
@@ -21,11 +22,6 @@ Route::resources([
     'productoCompra' => ProductoCompraController::class
 ]);
 
-Route::middleware([ComprobarUsuario::class])->group(function () {
-    Route::get('/', function () {
-        return view('home');
-    })->name('app');
-});
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -41,9 +37,12 @@ Route::get('/nosotros', function () {
 Route::get('/categorias/productoscategoria', function () {
     return view('categorias.productoscategoria');
 })->name('productoscategoria');
+
 Route::get('/categorias/producto', function () {
     return view('categorias.producto');
 })->name('producto');
+
+Route::get('/categorias/json', [CategoriaController::class, 'indexJson'])->name('categorias.json');
 
 Route::prefix('auth')->group(function () {
     // Mostrar el formulario de login (GET)
@@ -56,4 +55,5 @@ Route::prefix('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::get('/', [CategoriaController::class, 'index'])->name('app');
+Route::middleware([ComprobarUsuario::class])->get('/', [CategoriaController::class, 'index'])->name('app');
+

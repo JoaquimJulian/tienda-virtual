@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class ComprobarUsuario
 {
@@ -17,6 +18,7 @@ class ComprobarUsuario
      */
     public function handle(Request $request, Closure $next)
     {
+        Log::info('entra');
         // Verifica si el usuario está autenticado como 'trabajador'
         if (Auth::guard('trabajador')->check()) {
             session(['user_type' => 'trabajador']);
@@ -33,7 +35,7 @@ class ComprobarUsuario
 
             Log::info('No autenticado');
         }
-
+       
         return $next($request);
     }
 }

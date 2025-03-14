@@ -50,11 +50,10 @@ btnCrearCategoria.addEventListener('click', function(event) {
 });
 
 function mostrarCategorias(nombreNuevaCategoria){
-    fetch("/categoria", {
+    fetch("/categorias/json", {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
     })
     .then(response => response.json())

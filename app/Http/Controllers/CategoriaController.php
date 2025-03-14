@@ -19,6 +19,10 @@ class CategoriaController extends Controller
         return view('home', compact('categorias'));
     }
 
+    public function indexJson() {
+        return response()->json(Categoria::all());
+    }
+
 
     /**
      * Show the form for creating a new resource.

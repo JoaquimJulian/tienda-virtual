@@ -72,7 +72,7 @@ document.getElementById('editarProductoForm').addEventListener('submit', async f
         });
 
         let result = await response.json();
-        
+        window.location.href = rutaCrud;
     } catch (error) {
         console.error('Error al actualizar el producto:', error);
     }

@@ -103,4 +103,8 @@
 </div>
 @endsection
 
+<script>
+    var rutaCrud = "{{ route('categoria.create') }}";
+</script>
+
 @vite(['resources/js/services/admin/editarProducto.js'])

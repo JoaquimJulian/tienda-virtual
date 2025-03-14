@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Trabajador;
 use App\Models\Comprador;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 
 class AuthController extends Controller
