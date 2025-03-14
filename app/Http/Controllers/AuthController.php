@@ -34,6 +34,7 @@ class AuthController extends Controller
                 Auth::guard('trabajador')->login($usuario);  // Usamos el guard de trabajador
             } elseif ($usuario instanceof \App\Models\Comprador) {
                 Auth::guard('comprador')->login($usuario);  // Usamos el guard de comprador
+                session(['comprador_id' => $usuario->id]);
             }
 
             $request->session()->regenerate(); // Regenera la sesión

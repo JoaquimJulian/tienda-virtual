@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Carrito;
+use Illuminate\Support\Facades\Log;
 
-class ProductoCompraController extends Controller
+class CarritoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
+        return view("public.carrito");
     }
 
     /**
@@ -19,7 +21,7 @@ class ProductoCompraController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -27,7 +29,21 @@ class ProductoCompraController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // Validar los datos enviados
+        $request->validate([
+            'comprador_id' => 'required|exists:compradores,id',  // Validamos que el id del comprador exista
+            'producto_codigo' => 'required|exists:productos,codigo',  // Validamos que el código del producto exista
+            'cantidad' => 'required|integer|min:1',  // Validamos que la cantidad sea un entero mayor que 0
+        ]);
+      
+
+        Carrito::create([
+            'comprador_id' => $request->comprador_id,
+            'producto_codigo' => $request->producto_codigo,
+            'cantidad' => $request->cantidad,
+        ]);
+
+        return response()->json(['message' => 'Producto añadido al carrito correctamente']);
     }
 
     /**

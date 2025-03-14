@@ -27,11 +27,13 @@ class ComprobarUsuario
         // Verifica si el usuario está autenticado como 'comprador'
         elseif (Auth::guard('comprador')->check()) {
             session(['user_type' => 'comprador']);
+            session(['comprador_id' => Auth::guard('comprador')->user()->id]); 
         }
 
         // Si el usuario no está autenticado en ninguno de los guards
         else {
             request()->session()->forget('user_type');
+            request()->session()->forget('comprador_id');  
 
             Log::info('No autenticado');
         }

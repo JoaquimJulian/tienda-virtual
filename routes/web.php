@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\ProductoCompraController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarritoController;
 use App\Http\Middleware\ComprobarUsuario;
 use Illuminate\Support\Facades\Log;
 
@@ -19,7 +20,8 @@ Route::resources([
     'comprador' => CompradorController::class,
     'producto' => ProductoController::class,
     'trabajador' => TrabajadorController::class,
-    'productoCompra' => ProductoCompraController::class
+    'productoCompra' => ProductoCompraController::class,
+    'carrito' => CarritoController::class
 ]);
 
 

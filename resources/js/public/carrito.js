@@ -2,7 +2,7 @@ let divProductos = document.getElementById('productos');
 
 for (let i = 0; i < localStorage.length; i++) {
     let clave = localStorage.key(i); // Obtener la clave (producto)
-
+    
     let producto = JSON.parse(localStorage.getItem(clave)); // Obtener el producto y convertirlo a objeto
 
     // Verificamos si la clave empieza con 'producto_' para evitar incluir otras claves

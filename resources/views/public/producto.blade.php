@@ -65,4 +65,10 @@
     </div>        
 @endsection
 
+<script>
+    var userType = "{{ session('user_type') }}"; // Accedes al valor de la sesión en Laravel
+    var userId = "{{ session('comprador_id') }}"
+</script>
+
+
 @vite(['resources/js/public/producto.js'])
