@@ -28,19 +28,20 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/producto/subirImagenSecundaria', [ProductoController::class, 'subirImagenSecundaria'])->name('producto.subirImagenSecundaria');
 
 Route::post('/producto/eliminiarImagenesSecundarias', [ProductoController::class, 'eliminiarImagenesSecundarias'])->name('producto.eliminiarImagenesSecundarias');
+Route::get('/producto/{codigo}', [ProductoController::class, 'show'])->name('producto.show');
 
 
 Route::get('/nosotros', function () {
     return view('nosotros.nosotros');
 })->name('sobrenosotros');
 
-Route::get('/categorias/productoscategoria', function () {
-    return view('categorias.productoscategoria');
-})->name('productoscategoria');
 
 Route::get('/categorias/producto', function () {
     return view('categorias.producto');
 })->name('producto');
+
+Route::get('/categorias/{id}', [CategoriaController::class, 'productoscategoria'])->name('categorias.productoscategoria');
+
 
 Route::get('/categorias/json', [CategoriaController::class, 'indexJson'])->name('categorias.json');
 

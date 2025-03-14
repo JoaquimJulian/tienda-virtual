@@ -1,41 +1,29 @@
-@extends('layouts.app')
+@extends('layouts.app') <!-- Extiende el layout principal -->
 
-@section('title', 'Sobre nosotros')
+@section('title', 'Página de Inicio')
 
 @section('content')
-<div class="bg-beigclaro min-h-auto">
-    <p class="text-center text-3xl font-bold py-6">AAA</p>
+    <section class="bg-beigclaro py-10">
+    <h1 class="ml-8 text-4xl text-marron font-bold mt-8">{{ $categoria->nombre }}</h1>
+    <p class="ml-8 mt-4 text-xl text-naranja w-1/2">{{ $categoria->descripcion }}</p>
     
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-4 pb-12 ml-8 mr-8">
-        @foreach ([
-            ['name' => 'Premium Electric Guitar', 'desc' => 'Professional Series', 'price' => '$1,299.99', 'img' => '../../images/productos/guitarra_1.jpg'],
-            ['name' => 'Studio Microphone', 'desc' => 'Professional Series', 'price' => '$599.99', 'img' => '../../images/productos/microfono_1.jpg'],
-            ['name' => 'Electric Drum Kit', 'desc' => 'Professional Series', 'price' => '$899.99', 'img' => '../../images/productos/bateria_1.jpg'],
-            ['name' => 'Electric Drum Kit', 'desc' => 'Professional Series', 'price' => '$899.99', 'img' => '../../images/productos/bateria_1.jpg']
-        ] as $product)
-        <div class="rounded-2xl bg-white p-4 shadow-md h-full flex flex-col">
-            <a href="{{ route('producto') }}" class="block">
-                <div class="w-full aspect-[4/4] overflow-hidden rounded-lg">
-                    <img src="{{ $product['img'] }}" alt="{{ $product['name'] }}" class="w-full h-full object-cover">
-                </div>
-            </a>
-            
-            <!-- Contenedor flexible para la info -->
-            <div class="flex-grow flex flex-col justify-between">
-                <div>
-                    <p class="text-marron text-2xl font-semibold mt-2">{{ $product['name'] }}</p>
-                    <p class="text-naranja">{{ $product['desc'] }}</p>
-                </div>
+    <!-- Mostrar productos -->
+    <h2 class="ml-8 mt-8 text-3xl font-bold mb-6">Productos en esta Categoría</h2>
+    @if ($productos->count() > 0)
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-6 mt-4 mb-12 ml-8 mr-8">
+            @foreach ($productos as $producto)
+                <div class="rounded-lg bg-white p-4 shadow-md">
+                <a href="{{ route('producto.show', ['codigo' => $producto->codigo]) }}" class="block">
 
-                <div class="flex items-center justify-between mt-4">
-                    <h4 class="text-marron text-2xl font-bold">{{ $product['price'] }}</h4>
-                    <a href="#">
-                        <img src="../../images/icono_carro.png" alt="Añadir al carrito" class="size-6">
+                        <img src="{{ Storage::url($producto->imagen_principal) }}" alt="{{ $producto->nombre }}" class="w-12 h-12">
+                        <h3 class="text-xl font-semibold mt-2">{{ $producto->nombre }}</h3>
+                        <p class="text-gray-500">{{ $producto->descripcion }}</p>
                     </a>
                 </div>
-            </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
-</div>
+    @else
+        <p class="ml-8 mt-4 text-xl">No hay productos en esta categoría.</p>
+    @endif
+</section>
 @endsection
