@@ -12,13 +12,35 @@
       </svg>
     </button>
 
-    <!-- Navigation -->
-    <nav id="nav-general" class="hidden sm:block flex flex-col sm:flex-row items-center gap-8 sm:space-x-8 mt-4 sm:mt-0">
+    <nav id="nav-general" class="hidden sm:block">
+  <ul class="flex flex-col sm:flex-row items-center gap-4 sm:space-x-6">
+    <li>
       <a href="{{ route('app') }}" class="text-gray-700 hover:text-[#8B2E00]">Comprar</a>
-      <a href="{{ route('productoscategoria') }}" class="text-gray-700 hover:text-[#8B2E00]">Categorias</a>
+    </li>
+    <li class="relative group">
+      <a href="#" class="text-gray-700 hover:text-[#8B2E00] flex items-center">
+        Categorías
+        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      <!-- Submenú -->
+      <ul class="absolute left-0 mt-2 w-48 bg-white shadow-lg border border-gray-200 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
+      @foreach ($categorias as $category)
+          <li>
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{ $category->nombre }}</a>
+          </li>
+        @endforeach
+      </ul>
+    </li>
+    <li>
       <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Ofertas</a>
+    </li>
+    <li>
       <a href="{{ route('sobrenosotros') }}" class="text-gray-700 hover:text-[#8B2E00]">Sobre nosotros</a>
-    </nav>
+    </li>
+  </ul>
+</nav>
+
 
     @if(session('user_type') !== 'trabajador')
       <!-- Search Bar -->
