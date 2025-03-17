@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carrito', function (Blueprint $table) {
+        Schema::create('carritos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('comprador_id')->constrained('compradores')->onDelete('cascade'); // Relaciona el carrito con un usuario (suponiendo que tienes una tabla de usuarios)
             $table->string('producto_codigo'); // Columna para almacenar el código del producto

@@ -10,4 +10,8 @@
     </div>
 @endsection
 
+<script>
+    var userType = "{{ session('user_type') }}";
+</script>
+
 @vite(['resources/js/public/carrito.js'])

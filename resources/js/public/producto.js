@@ -29,8 +29,7 @@ let producto = JSON.parse(document.getElementById('btnAnadirProducto').value)
 
 btnAnadirProducto.addEventListener('click', function() {
     if (userType === 'comprador') {
-        anadirBbdd()
-        console.log('entra')
+        comprobarExistencia();
     } else {
         anadirLocalStorage()
     }
@@ -54,15 +53,62 @@ function anadirLocalStorage() {
     }
 }
 
+function comprobarExistencia() {
+    //comprobacion en bd
+    fetch(`/carrito/${producto.codigo}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            actualizarBbdd()
+        } else if (data.error) {
+            anadirBbdd()
+        }
+    })
+    .catch(error => console.error("Error en la solicitud:", error));
+}
+
 function anadirBbdd() {
+    let cantidad = parseInt(document.getElementById('cantidad').value, 10);
+    const data = {
+        comprador_id: userId,  // Asumimos que 'userId' contiene el id del comprador desde la sesión
+        producto_codigo: producto.codigo,  // El código del producto
+        cantidad: cantidad // La cantidad seleccionada
+    };
+    fetch('/carrito', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',   // Definir el tipo de contenido como JSON
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Token CSRF
+        },
+        body: JSON.stringify(data) // Convertir el objeto a una cadena JSON
+    })
+    .then(response => response.json())  // Parsear la respuesta como JSON
+    .then(data => {
+        if (data.message) {
+            console.log(data.message);  // Mostrar mensaje de éxito
+        } else {
+            console.error('Error al añadir el producto al carrito');
+        }
+    })
+    .catch(error => {
+        console.error('Error en la solicitud fetch:', error);
+    });
+}
+
+function actualizarBbdd() {
     let cantidad = parseInt(document.getElementById('cantidad').value, 10);
     const data = {
         comprador_id: userId,  // Asumimos que 'userId' contiene el id del comprador desde la sesión
         producto_codigo: producto.codigo,  // El código del producto
         cantidad: cantidad  // La cantidad seleccionada
     };
-    fetch('/carrito', {
-        method: 'POST',
+    fetch(`/carrito/${producto.codigo}`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',   // Definir el tipo de contenido como JSON
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Token CSRF

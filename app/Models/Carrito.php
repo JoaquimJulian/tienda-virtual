@@ -13,8 +13,8 @@ class Carrito extends Model
         return $this->belongsTo(Comprador::class);
     }
 
-    public function productos()
+    public function producto()
     {
-        return $this->hasMany(Producto::class);
+        return $this->belongsTo(Producto::class);
     }
 }
