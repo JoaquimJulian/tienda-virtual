@@ -12,6 +12,7 @@
 
 <script>
     var userType = "{{ session('user_type') }}";
+    var userId = "{{ session('comprador_id') }}";
 </script>
 
 @vite(['resources/js/public/carrito.js'])

@@ -13,6 +13,12 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Middleware\ComprobarUsuario;
 use Illuminate\Support\Facades\Log;
 
+Route::get('/carrito/checkProducto', [CarritoController::class, 'checkProducto']);
+Route::get('/carrito/productos', [CarritoController::class, 'getProductosCarrito']);
+Route::get('/carrito/existe', [CarritoController::class, 'existe']);
+Route::post('/carrito/actualizar', [CarritoController::class, 'actualizar']);
+
+
 Route::resources([
     'categoria' => CategoriaController::class,
     'fotografia' => FotografiaController::class,
@@ -23,7 +29,6 @@ Route::resources([
     'productoCompra' => ProductoCompraController::class,
     'carrito' => CarritoController::class
 ]);
-
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

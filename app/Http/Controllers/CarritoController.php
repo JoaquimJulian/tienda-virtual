@@ -12,17 +12,24 @@ class CarritoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $carritos = Carrito::where('comprador_id', session('comprador_id'))
-        ->with('producto')
-        ->get();
+        
+    }
 
-        if ($request->wantsJson()) {
-            return response()->json($carritos);
-        }
+    public function getProductosCarrito(Request $request) {
+        $productos = Carrito::where('comprador_id', $request->comprador_id)
+                            ->with('producto')
+                            ->get()
+                            ->map(function ($carrito) {
+                                if ($carrito->producto) {
+                                    // Agregar el campo "cantidad" al producto
+                                    $carrito->producto->cantidad = $carrito->cantidad;
+                                }
+                                return $carrito->producto;
+                            });
 
-        return view("public.carrito");
+        return response()->json($productos);
     }
 
     /**
@@ -30,7 +37,20 @@ class CarritoController extends Controller
      */
     public function create()
     {
-        
+        return view("public.carrito");
+    }
+
+    /**
+     * Verificar si el producto ya existe en el carrito.
+     */
+    public function checkProducto(Request $request)
+    {
+        // Verificar si el producto ya está en el carrito de este comprador
+        $carrito = Carrito::where('comprador_id', $request->comprador_id)
+                         ->where('producto_codigo', $request->producto_codigo)
+                         ->get();
+
+        return response()->json($carrito);
     }
 
     /**
@@ -58,26 +78,19 @@ class CarritoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $codigo)
+    public function show($id)
     {
-        // Buscar el producto por su código
-        $producto = Producto::where('codigo', $codigo)->first();
+        // Buscar el carrito con el id proporcionado
+        $carrito = Carrito::find($id);
 
-        // Si el producto no existe, devolver error
-        if (!$producto) {
-            return response()->json(['error' => 'Producto no encontrado']);
-        }
-
-        // Buscar el carrito asociado a ese producto
-        $carrito = Carrito::where('producto_codigo', $producto->codigo)->first();
-
-        // Si no hay carrito con ese producto, devolver error
         if (!$carrito) {
-            return response()->json(['error' => 'No hay carritos con este producto']);
+            return response()->json(['error' => 'Producto no encontrado en el carrito'], 404);
         }
 
-        // Devolver el carrito en JSON
-        return response()->json(['success' => 'Existe en el carrito', 'cantidad' => $carrito->cantidad]);
+        return response()->json([
+            'success' => true,
+            'carrito' => $carrito
+        ]);
     }
 
     /**
@@ -91,39 +104,68 @@ class CarritoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $codigo)
+    public function update(Request $request, string $id)
     {
-        // Buscar el producto por su código
-        $producto = Producto::where('codigo', $codigo)->first();
+        Log::info('entra');
 
-        if (!$producto) {
-            return response()->json(['error' => 'Producto no encontrado']);
-        }
+        // Validar los datos recibidos
+        $request->validate([
+            'cantidad' => 'required|integer|min:1',  // Aseguramos que la cantidad sea válida
+        ]);
 
-        // Buscar el carrito del comprador con ese producto
-        $carrito = Carrito::where('producto_codigo', $producto->codigo)
-                        ->where('comprador_id', $request->comprador_id)
-                        ->first();
+        // Encontrar el carrito por ID
+        $carrito = Carrito::find($id);
 
         if (!$carrito) {
-            return response()->json(['error' => 'El producto no está en el carrito']);
+            return response()->json(['error' => 'Producto no encontrado en el carrito'], 404);
         }
 
-        // Sumar la cantidad nueva a la cantidad actual
-        $carrito->cantidad += $request->cantidad;
+        // Actualizar la cantidad del producto en el carrito
+        $carrito->cantidad = $request->cantidad;
         $carrito->save();
 
         return response()->json([
-            'success' => 'Cantidad actualizada en el carrito',
-            'cantidad' => $carrito->cantidad
+            'success' => true,
+            'carrito' => $carrito
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $comprador_id)
     {
-        //
+        // Eliminar todos los productos del carrito con el comprador_id específico
+        Carrito::where('comprador_id', $comprador_id)->delete();
+
+        return response()->json(['message' => 'Productos eliminados del carrito correctamente']);
     }
+
+    public function existe(Request $request)
+    {
+        $producto = Carrito::where('comprador_id', $request->comprador_id)
+                        ->where('producto_codigo', $request->producto_codigo)
+                        ->first();
+
+        return response()->json(['existe' => $producto ? true : false]);
+    }
+
+    public function actualizar(Request $request)
+    {
+        $carrito = Carrito::where('comprador_id', $request->comprador_id)
+                        ->where('producto_codigo', $request->producto_codigo)
+                        ->first();
+
+        if ($carrito) {
+            // Si el producto existe, actualizar la cantidad
+            $carrito->cantidad += $request->cantidad;
+            $carrito->save();
+
+            return response()->json(['message' => 'Cantidad actualizada correctamente']);
+        } else {
+            // Si no existe, puedes manejarlo aquí si lo deseas
+            return response()->json(['message' => 'Producto no encontrado']);
+        }
+    }
+
 }
