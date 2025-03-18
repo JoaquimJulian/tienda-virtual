@@ -44,6 +44,9 @@ Route::get('/nosotros', function () {
     return view('nosotros.nosotros');
 })->name('sobrenosotros');
 
+Route::get('/personalizar', function () {
+    return view('personalizar.personalizar');
+})->name('personalizar');
 
 Route::get('/categorias/producto', function () {
     return view('categorias.producto');

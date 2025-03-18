@@ -22,6 +22,7 @@
                 </div>
             @endforeach
         </div>
+        <p class="text-2xl ml-8">Personaliza tu bateria clicando <a href="{{ route('personalizar') }}" class="text-naranja underline">aquí</a>.</p>
     </section>
     
     <!-- SECCIÓN: PRODUCTOS DESTACADOS -->
