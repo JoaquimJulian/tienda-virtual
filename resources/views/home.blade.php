@@ -5,12 +5,12 @@
 @section('content')
     <!-- SECCIÓN: INICIO -->
     <section class="bg-beigclaro py-10">
-        <h1 class="ml-8 text-4xl text-marron font-bold mt-8 w-1/2">Discover Your Perfect Sound</h1>
-        <p class="ml-8 mt-4 text-xl text-naranja w-1/2">Explore our curated collection of premium instruments and audio equipment.</p>
-        <button class="mt-6 ml-8 bg-marron hover:bg-beigoscuro text-white  hover:text-white py-2 px-8 rounded-full">Shop Now</button>
+        <h1 class="ml-8 text-4xl text-marron font-bold mt-8 w-1/2">DESCUBRE TU SONIDO PERFECTO</h1>
+        <p class="ml-8 mt-4 text-xl text-naranja w-1/2">Explore nuestra colección seleccionada de instrumentos y equipos de audio de primera calidad.</p>
+        <button class="mt-6 ml-8 bg-marron hover:bg-beigoscuro text-white  hover:text-white py-2 px-8 rounded-full">Comprar ahora</button>
 
         <!-- SECCIÓN: CATEGORÍAS -->
-        <h2 class="ml-8 mt-8 text-3xl font-bold mb-6">Browse Categories</h2>
+        <h2 class="ml-8 mt-8 text-3xl font-bold mb-6">CATEGORIAS</h2>
         <div class="grid grid-cols-2 md:grid-cols-6 gap-6 mt-4 mb-12 ml-8 mr-8">
             @foreach ($categorias as $categoria)
                 <div class="rounded-lg bg-white p-4 shadow-md">
@@ -26,7 +26,7 @@
     
     <!-- SECCIÓN: PRODUCTOS DESTACADOS -->
 <section class="py-10 mt-8">
-    <p class="text-4xl font-bold mb-6 ml-8">Featured Products</p>
+    <p class="text-4xl font-bold mb-6 ml-8">PRODUCTOS DESTACADOS</p>
     
     <!-- Contenedor Swiper -->
     <div class="swiper mySwiper px-8">
@@ -34,17 +34,17 @@
             @foreach ($destacados as $destacado)
                 <div class="swiper-slide bg-white shadow-lg rounded-2xl p-6">
                     <div class="flex flex-col">
-                        <a href="#">
+                        <a href="{{ route('producto.show', ['codigo' => $destacado->codigo]) }}">
                             <img src="{{ Storage::url($destacado->imagen_principal) }}" 
                                  alt="{{ $destacado->nombre }}" 
-                                 class="object-cover rounded-2xl w-64 h-64 m-auto">
+                                 class="object-cover rounded-2xl w-auto h-64 m-auto">
                         </a>
                         <h3 class="text-marron text-2xl font-semibold mt-4 ml-6 w-full">{{ $destacado->nombre }}</h3>
                         <p class="text-gray-600 mt-2 text-sm px-4 ml-2">{{ $destacado->descripcion }}</p>
                         <div class="mt-4 flex items-center justify-between w-full px-6">
                             <h4 class="text-marron text-2xl font-bold">{{ $destacado->precio_unidad }}€</h4>
                             <button class="bg-beig hover:bg-beigoscuro text-marron hover:text-white py-2 px-4 rounded-full">
-                                Add to Cart
+                                Añadir al carrito
                             </button>
                         </div>
                     </div>
@@ -65,17 +65,17 @@
     <!-- SECCIÓN: SUSCRIPCIÓN -->
     <section class="bg-beigclaro text-center py-10 mt-8">
         <div class="bg-beig m-20 w-3/4 rounded-2xl m-auto p-8">
-            <h2 class="text-4xl font-bold mb-6">Stay in Tune</h2>
+            <h2 class="text-4xl font-bold mb-6">Mantente en Sintonia</h2>
             <p class="text-lg text-gray-600 mb-6 mx-2">
-                Subscribe to our newsletter for exclusive deals, new arrivals, and musical inspiration.
+            Suscríbete a nuestro boletín para recibir ofertas exclusivas, novedades e inspiración musical.
             </p>
             <form action="#" method="POST" class="flex justify-center items-center w-full">
                 <div class="flex w-4/5 bg-white rounded-full overflow-hidden shadow-lg">
-                    <input type="email" id="email" placeholder="Enter your email"
+                    <input type="email" id="email" placeholder="Introduce tu e-mail..."
                         class="border-none px-4 py-2 w-full outline-none">
                     <button type="submit"
                         class="bg-marron hover:bg-naranja text-white font-bold px-6 py-2 rounded-r-full">
-                        Subscribe
+                        Suscribirme
                     </button>
                 </div>
             </form>
