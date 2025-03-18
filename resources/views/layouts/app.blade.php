@@ -15,12 +15,12 @@
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <header class="absolute sticky top-0 z-1000 bg-white">
+    <header class="sticky top-0 z-50 bg-white">
         @include ('layouts.header')
     </header>
 
     <!-- Contenedor principal del contenido -->
-    <main class="flex-grow">
+    <main class="flex-grow bg-beigclaro">
         @yield('content')
     </main>
     

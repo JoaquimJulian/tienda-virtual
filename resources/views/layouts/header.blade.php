@@ -13,33 +13,57 @@
     </button>
 
     <nav id="nav-general" class="hidden sm:block">
-  <ul class="flex flex-col sm:flex-row items-center gap-4 sm:space-x-6">
-    <li>
-      <a href="{{ route('app') }}" class="text-gray-700 hover:text-[#8B2E00]">Comprar</a>
-    </li>
-    <li class="relative group">
-      <a href="#" class="text-gray-700 hover:text-[#8B2E00] flex items-center">
-        Categorías
-        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      <!-- Submenú -->
-      <ul class="absolute left-0 mt-2 w-48 bg-white shadow-lg border border-gray-200 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
-      @foreach ($categorias as $category)
-          <li>
-            <a href="{{ route('categorias.productoscategoria', ['id' => $category->id]) }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{ $category->nombre }}</a>
-          </li>
-        @endforeach
+      <ul class="flex flex-col sm:flex-row items-center gap-4 sm:space-x-6">
+        <li>
+          <a href="{{ route('app') }}" class="text-gray-700 hover:text-[#8B2E00]">Comprar</a>
+        </li>
+        <li class="relative group hidden sm:block">
+          <a href="#" class="text-gray-700 hover:text-[#8B2E00] flex items-center">
+            Categorías
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          <!-- Submenú -->
+          <ul class="absolute left-0 mt-2 w-48 bg-white shadow-lg border border-gray-200 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
+          @foreach ($categorias as $category)
+              <li>
+                <a href="{{ route('categorias.productoscategoria', ['id' => $category->id]) }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{ $category->nombre }}</a>
+              </li>
+            @endforeach
+          </ul>
+        </li>
+        <!-- Botón de categorias en movil oculto -->
+        <button id="categorias-movil-oculto" class="block md:hidden text-gray-700 hover:text-[#8B2E00] focus:outline-none">
+            Categorías
+            <svg class="w-4 h-4 ml-1 mt-1 float-right" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+        </button>
+
+        <!-- Botón de categorias en movil visible -->
+        <button id="categorias-movil-visible" class="hidden md:hidden text-gray-700 hover:text-[#8B2E00] focus:outline-none">
+            Categorías
+            <svg class="w-4 h-4 ml-1 mt-1 float-right" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 15l-7-7-7 7"/>
+            </svg>
+        </button>
+
+        <ul id="categorias-movil-opciones" class="hidden md:hidden text-center">
+            @foreach ($categorias as $category)
+              <li>
+                <a href="{{ route('categorias.productoscategoria', ['id' => $category->id]) }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{ $category->nombre }}</a>
+              </li>
+            @endforeach
+        </ul>
+
+        <li>
+          <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Ofertas</a>
+        </li>
+        <li>
+          <a href="{{ route('sobrenosotros') }}" class="text-gray-700 hover:text-[#8B2E00]">Sobre nosotros</a>
+        </li>
       </ul>
-    </li>
-    <li>
-      <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Ofertas</a>
-    </li>
-    <li>
-      <a href="{{ route('sobrenosotros') }}" class="text-gray-700 hover:text-[#8B2E00]">Sobre nosotros</a>
-    </li>
-  </ul>
-</nav>
+    </nav>
 
 
     @if(session('user_type') !== 'trabajador')

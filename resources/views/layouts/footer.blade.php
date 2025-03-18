@@ -1,4 +1,4 @@
-<footer class="w-full bg-[#8B2E00] text-white py-16 md:relative bottom-0 left-0 right-0">
+<footer class="w-full bg-[#8B2E00] text-white py-16 md:relative bottom-0 left-0 right-0 px-8">
   <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 sm:flex gap-8">
     <!-- Company Info -->
     <div class="break-words">

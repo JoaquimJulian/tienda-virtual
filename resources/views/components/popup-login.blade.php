@@ -1,5 +1,5 @@
 <!-- resources/views/components/modal-login.blade.php -->
-<div id="loginPopup" class="popup fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+<div id="loginPopup" class="popup fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden z-50">
     <div class="bg-white p-6 rounded-lg w-full max-w-sm">
         <!-- Botón para cerrar el modal -->
         <span class="close float-right text-gray-600 cursor-pointer" onclick="cerrarPopup('loginPopup')">&times;</span>

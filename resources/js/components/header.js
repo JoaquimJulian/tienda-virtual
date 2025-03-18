@@ -63,3 +63,22 @@ inputBusqueda.addEventListener('input', function(){
 })
 
 
+document.addEventListener('DOMContentLoaded', function() {
+
+  const categoriasMovilOculto = document.getElementById('categorias-movil-oculto');
+  const categoriasMovilVisible = document.getElementById('categorias-movil-visible');
+  const categoriasMovilOpciones = document.getElementById('categorias-movil-opciones');
+  
+  // Mostrar/Ocultar opciones de categorías en móvil
+  categoriasMovilOculto.addEventListener('click', () => {
+    categoriasMovilOpciones.classList.toggle('hidden');
+    categoriasMovilOculto.classList.toggle('hidden');
+    categoriasMovilVisible.classList.toggle('hidden');
+  });
+
+  categoriasMovilVisible.addEventListener('click', () => {
+    categoriasMovilOpciones.classList.toggle('hidden');
+    categoriasMovilVisible.classList.toggle('hidden');
+    categoriasMovilOculto.classList.toggle('hidden');
+  });
+});  

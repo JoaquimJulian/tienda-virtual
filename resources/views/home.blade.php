@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- SECCIÓN: INICIO -->
-    <section class="bg-beigclaro py-10">
+    <section class="py-10">
         <h1 class="ml-8 text-4xl text-marron font-bold mt-8 w-1/2">DESCUBRE TU SONIDO PERFECTO</h1>
         <p class="ml-8 mt-4 text-xl text-naranja w-1/2">Explore nuestra colección seleccionada de instrumentos y equipos de audio de primera calidad.</p>
         <button class="mt-6 ml-8 bg-marron hover:bg-beigoscuro text-white  hover:text-white py-2 px-8 rounded-full">Comprar ahora</button>
@@ -25,45 +25,43 @@
     </section>
     
     <!-- SECCIÓN: PRODUCTOS DESTACADOS -->
-<section class="py-10 mt-8">
-    <p class="text-4xl font-bold mb-6 ml-8">PRODUCTOS DESTACADOS</p>
-    
-    <!-- Contenedor Swiper -->
-    <div class="swiper mySwiper px-8">
-        <div class="swiper-wrapper mb-16">
-            @foreach ($destacados as $destacado)
-                <div class="swiper-slide bg-white shadow-lg rounded-2xl p-6">
-                    <div class="flex flex-col">
-                        <a href="{{ route('producto.show', ['codigo' => $destacado->codigo]) }}">
-                            <img src="{{ Storage::url($destacado->imagen_principal) }}" 
-                                 alt="{{ $destacado->nombre }}" 
-                                 class="object-cover rounded-2xl w-auto h-64 m-auto">
-                        </a>
-                        <h3 class="text-marron text-2xl font-semibold mt-4 ml-6 w-full">{{ $destacado->nombre }}</h3>
-                        <p class="text-gray-600 mt-2 text-sm px-4 ml-2">{{ $destacado->descripcion }}</p>
-                        <div class="mt-4 flex items-center justify-between w-full px-6">
-                            <h4 class="text-marron text-2xl font-bold">{{ $destacado->precio_unidad }}€</h4>
-                            <button class="bg-beig hover:bg-beigoscuro text-marron hover:text-white py-2 px-4 rounded-full">
-                                Añadir al carrito
-                            </button>
+    <section class="py-10 mt-8 bg-white">
+        <p class="text-4xl font-bold mb-6 ml-8">PRODUCTOS DESTACADOS</p>
+        
+        <!-- Contenedor Swiper -->
+        <div class="swiper mySwiper px-8">
+            <div class="swiper-wrapper mb-16">
+                @foreach ($destacados as $destacado)
+                    <div class="swiper-slide bg-white shadow-lg rounded-2xl p-6">
+                        <div class="flex flex-col">
+                            <a href="{{ route('producto.show', ['codigo' => $destacado->codigo]) }}">
+                                <img src="{{ Storage::url($destacado->imagen_principal) }}" 
+                                    alt="{{ $destacado->nombre }}" 
+                                    class="object-cover rounded-2xl w-auto h-64 m-auto">
+                            </a>
+                            <h3 class="text-marron text-2xl font-semibold mt-4 ml-6 w-full">{{ $destacado->nombre }}</h3>
+                            <p class="text-gray-600 mt-2 text-sm px-4 ml-2">{{ $destacado->descripcion }}</p>
+                            <div class="mt-4 flex items-center justify-between w-full px-6">
+                                <h4 class="text-marron text-2xl font-bold">{{ $destacado->precio_unidad }}€</h4>
+                                <button class="bg-beig hover:bg-beigoscuro text-marron hover:text-white py-2 px-4 rounded-full">
+                                    Añadir al carrito
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
+
+            <!-- Flechas de navegación -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <!-- Paginación -->
+            <div class="swiper-pagination"></div>
         </div>
-
-        <!-- Flechas de navegación -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-        <!-- Paginación -->
-        <div class="swiper-pagination"></div>
-    </div>
-</section>
-
-
+    </section>
 
     <!-- SECCIÓN: SUSCRIPCIÓN -->
-    <section class="bg-beigclaro text-center py-10 mt-8">
+    <section class="text-center py-10 mt-8">
         <div class="bg-beig m-20 w-3/4 rounded-2xl m-auto p-8">
             <h2 class="text-4xl font-bold mb-6">Mantente en Sintonia</h2>
             <p class="text-lg text-gray-600 mb-6 mx-2">
@@ -81,33 +79,34 @@
             </form>
         </div>
     </section>
-<!-- Swiper.js JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 1,  // 1 producto en móvil
-        spaceBetween: 20,  // Más espacio entre productos
-        loop: true,        
-        autoplay: {
-            delay: 3000,   // Se mueve cada 3 segundos
-            disableOnInteraction: false, // Sigue moviéndose después de interacción
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        breakpoints: {
-            768: { slidesPerView: 2 }, // 2 productos en tabletas
-            1024: { slidesPerView: 3 } // 3 productos en pantallas grandes
-        }
+    <!-- SWIPER JS-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1, 
+            spaceBetween: 20,  
+            loop: true,        
+            autoplay: {
+                delay: 5000, 
+                disableOnInteraction: false, 
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                768: { slidesPerView: 2 }, 
+                1024: { slidesPerView: 3 }
+            }
+        });
     });
-});
-</script>
+    </script>
 
 @endsection
