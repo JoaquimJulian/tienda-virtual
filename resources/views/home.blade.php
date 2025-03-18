@@ -88,8 +88,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     var swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,  // 1 producto en móvil
-        spaceBetween: 10,  // Espaciado entre productos
-        loop: true,        // Hacer que el carrusel sea infinito
+        spaceBetween: 20,  // Más espacio entre productos
+        loop: true,        
+        autoplay: {
+            delay: 3000,   // Se mueve cada 3 segundos
+            disableOnInteraction: false, // Sigue moviéndose después de interacción
+        },
         pagination: {
             el: ".swiper-pagination",
             clickable: true,
@@ -99,7 +103,8 @@ document.addEventListener("DOMContentLoaded", function() {
             prevEl: ".swiper-button-prev",
         },
         breakpoints: {
-            768: { slidesPerView: 3 } // 3 productos en pantallas grandes
+            768: { slidesPerView: 2 }, // 2 productos en tabletas
+            1024: { slidesPerView: 3 } // 3 productos en pantallas grandes
         }
     });
 });
