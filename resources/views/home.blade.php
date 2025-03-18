@@ -25,37 +25,42 @@
     </section>
     
     <!-- SECCIÓN: PRODUCTOS DESTACADOS -->
-    <section class="py-10 mt-8">
-        <p class="text-4xl font-bold mb-6 ml-8">Featured Products</p>
-        
-        <!-- Contenedor Swiper -->
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                @foreach ($destacados as $destacado)
-                    <div class="swiper-slide bg-naranja">
-                        <div class="w m-auto">
-                            <a href="#"><img src="{{ Storage::url($destacado->imagen_principal) }}" alt="{{ $destacado->nombre }}" class="size-96 rounded-2xl"></a>
-                            <h3 class="text-marron text-2xl font-semibold mt-2 w-full">{{ $destacado->nombre }}</h3>
-                            <p class="text-naranja">{{ $destacado->descripcion }}</p>
-                            <div>
-                                <h4 class="mt-4 text-marron text-2xl font-bold mt-2 float-left">{{ $destacado->precio_unidad }}€</h4>
-                                <button class="mt-2 bg-beig hover:bg-beigoscuro text-marron hover:text-white py-2 px-4 rounded-full float-right">Add to Cart</button>
-                            </div>
+<section class="py-10 mt-8">
+    <p class="text-4xl font-bold mb-6 ml-8">Featured Products</p>
+    
+    <!-- Contenedor Swiper -->
+    <div class="swiper mySwiper px-8">
+        <div class="swiper-wrapper mb-16">
+            @foreach ($destacados as $destacado)
+                <div class="swiper-slide bg-white shadow-lg rounded-2xl p-6">
+                    <div class="flex flex-col">
+                        <a href="#">
+                            <img src="{{ Storage::url($destacado->imagen_principal) }}" 
+                                 alt="{{ $destacado->nombre }}" 
+                                 class="object-cover rounded-2xl w-64 h-64 m-auto">
+                        </a>
+                        <h3 class="text-marron text-2xl font-semibold mt-4 ml-6 w-full">{{ $destacado->nombre }}</h3>
+                        <p class="text-gray-600 mt-2 text-sm px-4 ml-2">{{ $destacado->descripcion }}</p>
+                        <div class="mt-4 flex items-center justify-between w-full px-6">
+                            <h4 class="text-marron text-2xl font-bold">{{ $destacado->precio_unidad }}€</h4>
+                            <button class="bg-beig hover:bg-beigoscuro text-marron hover:text-white py-2 px-4 rounded-full">
+                                Add to Cart
+                            </button>
                         </div>
                     </div>
-                @endforeach
-            </div>
-            
-            <!-- Flechas de navegación -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-
-            <!-- Paginación -->
-            <div class="swiper-pagination"></div>
+                </div>
+            @endforeach
         </div>
-    </section>
 
-    </section>
+        <!-- Flechas de navegación -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <!-- Paginación -->
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+
 
     <!-- SECCIÓN: SUSCRIPCIÓN -->
     <section class="bg-beigclaro text-center py-10 mt-8">
