@@ -12,13 +12,17 @@ class CategoriaController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        // Obtener todas las categorías desde la base de datos
-        $categorias = Categoria::all();
+{
+    // Obtener todas las categorías
+    $categorias = Categoria::all();
 
-        // Pasar las categorías a la vista 'home'
-        return view('home', compact('categorias'));
-    }
+    // Obtener los productos destacados
+    $destacados = Producto::where('destacado', 1)->get();
+
+    // Pasar ambas variables a la vista 'home'
+    return view('home', compact('categorias', 'destacados'));
+}
+
 
     public function indexJson() {
         return response()->json(Categoria::all());

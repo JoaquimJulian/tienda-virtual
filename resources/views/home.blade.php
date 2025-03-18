@@ -12,12 +12,12 @@
         <!-- SECCIÓN: CATEGORÍAS -->
         <h2 class="ml-8 mt-8 text-3xl font-bold mb-6">Browse Categories</h2>
         <div class="grid grid-cols-2 md:grid-cols-6 gap-6 mt-4 mb-12 ml-8 mr-8">
-            @foreach ($categorias as $category)
+            @foreach ($categorias as $categoria)
                 <div class="rounded-lg bg-white p-4 shadow-md">
-                    <a href="{{ route('categorias.productoscategoria', ['id' => $category->id]) }}" class="block">
-                        <img src="{{ asset('images/' . $category->imagen) }}" alt="{{ $category->nombre }}" class="w-12 h-12">
-                        <h3 class="text-xl font-semibold mt-2">{{ $category->nombre }}</h3>
-                        <p class="text-gray-500">{{ $category->descripcion }}</p>
+                    <a href="{{ route('categorias.productoscategoria', ['id' => $categoria->id]) }}" class="block">
+                        <img src="{{ asset('images/' . $categoria->imagen) }}" alt="{{ $categoria->nombre }}" class="w-12 h-12">
+                        <h3 class="text-xl font-semibold mt-2">{{ $categoria->nombre }}</h3>
+                        <p class="text-gray-500">{{ $categoria->descripcion }}</p>
                     </a>
                 </div>
             @endforeach
@@ -27,23 +27,34 @@
     <!-- SECCIÓN: PRODUCTOS DESTACADOS -->
     <section class="py-10 mt-8">
         <p class="text-4xl font-bold mb-6 ml-8">Featured Products</p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 w-full">
-            @foreach ([
-                ['name' => 'Premium Electric Guitar', 'desc' => 'Professional Series', 'price' => '$1,299.99', 'img' => '../../images/productos/guitarra_1.jpg'],
-                ['name' => 'Studio Microphone', 'desc' => 'Professional Series', 'price' => '$599.99', 'img' => '../../images/productos/microfono_1.jpg'],
-                ['name' => 'Electric Drum Kit', 'desc' => 'Professional Series', 'price' => '$899.99', 'img' => '../../images/productos/bateria_1.jpg']
-            ] as $product)
-                <div class="w m-auto">
-                    <a href="#"><img src="{{ $product['img'] }}" alt="{{ $product['name'] }}" class="size-96 rounded-2xl"></a>
-                    <h3 class="text-marron text-2xl font-semibold mt-2 w-full">{{ $product['name'] }}</h3>
-                    <p class="text-naranja">{{ $product['desc'] }}</p>
-                    <div>
-                        <h4 class="mt-4 text-marron text-2xl font-bold mt-2 float-left">{{ $product['price'] }}</h4>
-                        <button class="mt-2 bg-beig hover:bg-beigoscuro text-marron hover:text-white py-2 px-4 rounded-full float-right">Add to Cart</button>
+        
+        <!-- Contenedor Swiper -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                @foreach ($destacados as $destacado)
+                    <div class="swiper-slide bg-naranja">
+                        <div class="w m-auto">
+                            <a href="#"><img src="{{ Storage::url($destacado->imagen_principal) }}" alt="{{ $destacado->nombre }}" class="size-96 rounded-2xl"></a>
+                            <h3 class="text-marron text-2xl font-semibold mt-2 w-full">{{ $destacado->nombre }}</h3>
+                            <p class="text-naranja">{{ $destacado->descripcion }}</p>
+                            <div>
+                                <h4 class="mt-4 text-marron text-2xl font-bold mt-2 float-left">{{ $destacado->precio_unidad }}€</h4>
+                                <button class="mt-2 bg-beig hover:bg-beigoscuro text-marron hover:text-white py-2 px-4 rounded-full float-right">Add to Cart</button>
+                            </div>
+                        </div>
                     </div>
-               </div>
-            @endforeach
+                @endforeach
+            </div>
+            
+            <!-- Flechas de navegación -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+
+            <!-- Paginación -->
+            <div class="swiper-pagination"></div>
         </div>
+    </section>
+
     </section>
 
     <!-- SECCIÓN: SUSCRIPCIÓN -->
@@ -65,5 +76,28 @@
             </form>
         </div>
     </section>
+<!-- Swiper.js JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,  // 1 producto en móvil
+        spaceBetween: 10,  // Espaciado entre productos
+        loop: true,        // Hacer que el carrusel sea infinito
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+            768: { slidesPerView: 3 } // 3 productos en pantallas grandes
+        }
+    });
+});
+</script>
 
 @endsection
