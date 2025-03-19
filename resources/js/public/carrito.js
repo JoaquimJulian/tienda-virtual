@@ -151,9 +151,9 @@ if (userType == 'comprador') { // SI ESTAS LOGUEADO
         
         productosCarrito.forEach(producto => {
             const productoElement = document.createElement('div');
-            productoElement.className = 'flex bg-white p-3 rounded-md shadow-sm relative p-2';
+            productoElement.className = 'flex bg-white p-3 rounded-md shadow-sm relative p-2 gap-2';
             productoElement.innerHTML = `
-                <div class="flex-shrink-0 w-1/3 h-auto mr-3">
+                <div class="flex-shrink-0 w-1/3 h-auto">
                     <img src="/storage/${producto.imagen_principal}" alt="${producto.nombre}" class="h-auto object-cover rounded-md w-full">
                 </div>
                 <div class="flex flex-col flex-grow">
@@ -168,7 +168,7 @@ if (userType == 'comprador') { // SI ESTAS LOGUEADO
                     <p class="text-xs text-gray-500">${producto.descripcion}</p>
                     <div>
                         <p class="text-xs text-gray-500 mt-4">Cantidad: </p>
-                        <div class="flex items-center border border-gray-300 rounded-md w-24">
+                        <div class="flex w-fit items-center">
                             <button class="decrement-btn px-2 py-1 text-gray-600 hover:bg-gray-100" data-id="${producto.codigo}">-</button>
                             <span class="quantity-display px-3">${producto.cantidad}</span>
                             <button class="increment-btn px-2 py-1 text-gray-600 hover:bg-gray-100" data-id="${producto.codigo}">+</button>
@@ -350,7 +350,7 @@ if (userType == 'comprador') { // SI ESTAS LOGUEADO
         
         carritoLocal.forEach(producto => {
             const productoElement = document.createElement('div');
-            productoElement.className = 'flex bg-white p-3 rounded-md shadow-sm relative p-2';
+            productoElement.className = 'flex bg-white p-3 rounded-md shadow-sm relative p-2 gap-4';
             productoElement.innerHTML = `
                 <div class="flex-shrink-0 w-1/3 h-auto mr-3">
                     <img src="/storage/${producto.imagen_principal}" alt="${producto.nombre}" class="h-auto object-cover rounded-md w-full">
@@ -367,7 +367,7 @@ if (userType == 'comprador') { // SI ESTAS LOGUEADO
                     <p class="text-xs text-gray-500">${producto.descripcion}</p>
                     <div>
                         <p class="text-xs text-gray-500 mt-4">Cantidad: </p>
-                        <div class="flex items-center border border-gray-300 rounded-md w-24">
+                        <div class="flex w-fit items-center">
                             <button class="decrement-btn px-2 py-1 text-gray-600 hover:bg-gray-100" data-id="${producto.codigo}">-</button>
                             <span class="quantity-display px-3">${producto.cantidad}</span>
                             <button class="increment-btn px-2 py-1 text-gray-600 hover:bg-gray-100" data-id="${producto.codigo}">+</button>
