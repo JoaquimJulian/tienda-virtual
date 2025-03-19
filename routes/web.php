@@ -17,6 +17,8 @@ Route::get('/carrito/checkProducto', [CarritoController::class, 'checkProducto']
 Route::get('/carrito/productos', [CarritoController::class, 'getProductosCarrito']);
 Route::get('/carrito/existe', [CarritoController::class, 'existe']);
 Route::post('/carrito/actualizar', [CarritoController::class, 'actualizar']);
+Route::put('/carrito/{comprador_id}/{producto_codigo}', [CarritoController::class, 'update']);
+Route::post('/carrito/eliminar', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
 
 
 Route::resources([

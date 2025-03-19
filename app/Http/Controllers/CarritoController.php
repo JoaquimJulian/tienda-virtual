@@ -104,17 +104,19 @@ class CarritoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $comprador_id, $producto_codigo)
     {
-        Log::info('entra');
+        Log::info('Entra en la actualización');
 
         // Validar los datos recibidos
         $request->validate([
-            'cantidad' => 'required|integer|min:1',  // Aseguramos que la cantidad sea válida
+            'cantidad' => 'required|integer|min:1',  // La cantidad debe ser un número entero válido
         ]);
 
-        // Encontrar el carrito por ID
-        $carrito = Carrito::find($id);
+        // Buscar el producto en el carrito donde coincida el comprador_id y el código del producto
+        $carrito = Carrito::where('comprador_id', $comprador_id)
+                        ->where('producto_codigo', $producto_codigo)
+                        ->first();
 
         if (!$carrito) {
             return response()->json(['error' => 'Producto no encontrado en el carrito'], 404);
@@ -130,6 +132,7 @@ class CarritoController extends Controller
         ]);
     }
 
+
     /**
      * Remove the specified resource from storage.
      */
@@ -139,6 +142,33 @@ class CarritoController extends Controller
         Carrito::where('comprador_id', $comprador_id)->delete();
 
         return response()->json(['message' => 'Productos eliminados del carrito correctamente']);
+    }
+
+    public function eliminar(Request $request) 
+    {
+        // Validar los datos recibidos
+        $request->validate([
+            'comprador_id' => 'required|integer',
+            'producto_codigo' => 'required|string',
+        ]);
+
+        // Obtener el ID del comprador y el ID del producto
+        $compradorId = $request->input('comprador_id');
+        $productoCodigo = $request->input('producto_codigo');
+
+        $carrito = Carrito::where('comprador_id', $compradorId)
+                          ->where('producto_codigo', $productoCodigo)
+                          ->first();
+
+        if ($carrito) {
+            $carrito->delete();
+
+            // Retornar una respuesta JSON indicando éxito
+            return response()->json(['success' => true]);
+        }
+
+        // Si no se encontró el producto en el carrito, retornar un error
+        return response()->json(['success' => false, 'message' => 'Producto no encontrado en el carrito'], 404);
     }
 
     public function existe(Request $request)
