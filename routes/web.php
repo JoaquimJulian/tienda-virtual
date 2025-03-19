@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\FotografiaController;
@@ -11,6 +13,7 @@ use App\Http\Controllers\ProductoCompraController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Middleware\ComprobarUsuario;
+use App\Http\Controllers\ImagenController;
 use Illuminate\Support\Facades\Log;
 
 Route::get('/carrito/checkProducto', [CarritoController::class, 'checkProducto']);
@@ -70,3 +73,19 @@ Route::prefix('auth')->group(function () {
 
 Route::middleware([ComprobarUsuario::class])->get('/', [CategoriaController::class, 'index'])->name('app');
 
+Route::post('/guardar-imagen', function (Request $request) {
+    if ($request->has('image')) {
+        $image = $request->input('image'); // Base64
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageData = base64_decode($image);
+
+        $filename = 'personalizable_' . now()->format('YmdHis') . '.png';
+        Storage::disk('public')->put("images/personalizable/$filename", $imageData);
+
+        return response()->json(['filepath' => "/storage/images/personalizable/$filename"]);
+    }
+    return response()->json(['error' => 'No image received'], 400);
+});
+
+Route::get('/random-images', [ImagenController::class, 'getRandomImages']);
