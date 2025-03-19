@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
 use App\Models\Producto; 
+use Illuminate\Support\Facades\Log;
 
 class CategoriaController extends Controller
 {
@@ -12,19 +13,20 @@ class CategoriaController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    // Obtener todas las categorías
-    $categorias = Categoria::all();
+    {
+        // Obtener todas las categorías
+        $categorias = Categoria::all();
 
-    // Obtener los productos destacados
-    $destacados = Producto::where('destacado', 1)->get();
+        // Obtener los productos destacados
+        $destacados = Producto::where('destacado', 1)->get();
 
-    // Pasar ambas variables a la vista 'home'
-    return view('home', compact('categorias', 'destacados'));
-}
+        // Pasar ambas variables a la vista 'home'
+        return view('home', compact('categorias', 'destacados'));
+    }
 
 
     public function indexJson() {
+       
         return response()->json(Categoria::all());
     }
 
@@ -33,7 +35,9 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        return view("admin.crudAdmin");
+        if (session('user_type') == 'trabajador') {
+            return view("admin.crudAdmin");
+        }
     }
 
     /**
@@ -60,7 +64,7 @@ class CategoriaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**

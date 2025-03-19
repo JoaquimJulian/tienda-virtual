@@ -22,6 +22,7 @@ Route::get('/carrito/existe', [CarritoController::class, 'existe']);
 Route::post('/carrito/actualizar', [CarritoController::class, 'actualizar']);
 Route::put('/carrito/{comprador_id}/{producto_codigo}', [CarritoController::class, 'update']);
 Route::post('/carrito/eliminar', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
+Route::get('/categorias/json', [CategoriaController::class, 'indexJson'])->name('categorias.json');
 
 
 Route::resources([
@@ -56,9 +57,6 @@ Route::get('/categorias/producto', function () {
 })->name('producto');
 
 Route::get('/categorias/{id}', [CategoriaController::class, 'productoscategoria'])->name('categorias.productoscategoria');
-
-
-Route::get('/categorias/json', [CategoriaController::class, 'indexJson'])->name('categorias.json');
 
 Route::prefix('auth')->group(function () {
     // Mostrar el formulario de login (GET)

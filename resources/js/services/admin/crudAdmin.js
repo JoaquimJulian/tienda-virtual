@@ -67,6 +67,7 @@ function mostrarCategorias(nombreNuevaCategoria){
             // Si no hay una nueva categoría, mostrar todas las categorías
             listaCategorias.innerHTML = ''; // Limpiar solo cuando se cargan todas las categorías
             data.forEach(categoria => {
+                console.log(data)
                 const categoriaElement = document.createElement('div');
                 categoriaElement.setAttribute('id', `categoria_${categoria.id}`);
                 categoriaElement.className = 'w-full flex items-center justify-between bg-white p-4 rounded-lg shadow-md mb-4';
