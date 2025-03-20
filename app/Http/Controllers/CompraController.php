@@ -65,14 +65,13 @@ class CompraController extends Controller
             });
             
             if($stockInsuficiente) {
-                Log::info('no te redirije');
+                return redirect()->route('app'); // Redirige a home
             }else {
-                Log::info($productos);
                 return view('/public/pagar', ['productos' => $productos]);
             }
 
         } else {
-
+            return redirect()->route('app'); // Redirige a home
         }
     }
 
