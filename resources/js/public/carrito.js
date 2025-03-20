@@ -170,7 +170,7 @@ if (userType == 'comprador') { // SI ESTAS LOGUEADO
                         <p class="text-xs text-gray-500 mt-4">Cantidad: </p>
                         <div class="flex w-fit items-center">
                             <button class="decrement-btn px-2 py-1 text-gray-600 hover:bg-gray-100" data-id="${producto.codigo}">-</button>
-                            <span class="quantity-display px-3">${producto.cantidad}</span>
+                            <span class="quantity-display px-3 cantidad" id="${producto.codigo}">${producto.cantidad}</span>
                             <button class="increment-btn px-2 py-1 text-gray-600 hover:bg-gray-100" data-id="${producto.codigo}">+</button>
                         </div>
                     </div>
@@ -321,11 +321,6 @@ if (userType == 'comprador') { // SI ESTAS LOGUEADO
         });
 
     }
-    
-    // Continue button event listener
-    document.getElementById('btnContinuar').addEventListener('click', () => {
-        window.location.href = '/checkout';
-    });
 
 
     
@@ -369,7 +364,7 @@ if (userType == 'comprador') { // SI ESTAS LOGUEADO
                         <p class="text-xs text-gray-500 mt-4">Cantidad: </p>
                         <div class="flex w-fit items-center">
                             <button class="decrement-btn px-2 py-1 text-gray-600 hover:bg-gray-100" data-id="${producto.codigo}">-</button>
-                            <span class="quantity-display px-3">${producto.cantidad}</span>
+                            <span class="quantity-display px-3 cantidad" id="${producto.codigo}">${producto.cantidad}</span>
                             <button class="increment-btn px-2 py-1 text-gray-600 hover:bg-gray-100" data-id="${producto.codigo}">+</button>
                         </div>
                     </div>
@@ -487,12 +482,10 @@ if (userType == 'comprador') { // SI ESTAS LOGUEADO
         `;
     }
     
-    // Function to get total items for local cart
     function getTotalItemsLocal() {
         return carritoLocal.reduce((total, producto) => total + producto.cantidad, 0);
     }
     
-    // Function to format currency
     function formatCurrency(amount) {
         return `${amount.toFixed(2)}€`;
     }

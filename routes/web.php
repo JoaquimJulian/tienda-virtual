@@ -23,7 +23,8 @@ Route::post('/carrito/actualizar', [CarritoController::class, 'actualizar']);
 Route::put('/carrito/{comprador_id}/{producto_codigo}', [CarritoController::class, 'update']);
 Route::post('/carrito/eliminar', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
 Route::get('/categorias/json', [CategoriaController::class, 'indexJson'])->name('categorias.json');
-
+Route::get('/producto/stock', [ProductoController::class, 'comprobarStock'])->name('producto.stock');
+Route::get('/compra/createComprador', [CompraController::class, 'createComprador'])->name('compra.createComprador');
 
 Route::resources([
     'categoria' => CategoriaController::class,

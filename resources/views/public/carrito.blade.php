@@ -14,8 +14,8 @@
             <!-- Summary will be generated here -->
         </div>
         
-        <div class="mt-4 sm:w-2/4">
-            <button id="btnContinuar" class="bg-amber-900 text-white py-2 px-6 rounded-md text-center w-full">PROCEDER AL PAGO</button>
+        <div class="mt-4 sm:w-2/4 flex">
+            <a href="{{ route('compra.createComprador') }}" class="bg-amber-900 text-white py-2 px-6 rounded-md text-center w-full">PROCEDER AL PAGO</a>
         </div>
     </div>
 @endsection

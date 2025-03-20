@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Compra;
 use App\Models\Comprador;
+use App\Models\Producto;
+use App\Models\Carrito;
+use Illuminate\Support\Facades\Log;
+
 
 class CompraController extends Controller
 {
@@ -25,6 +29,50 @@ class CompraController extends Controller
         if (session('user_type' == 'trabajador')) {
             $compradores = Comprador::all();
             return view("admin.gestionPedidos", compact('compradores'));
+        }
+    }
+
+    public function createComprador()
+    {
+        if (session('user_type') == 'comprador') {
+            $carritos = Carrito::where('comprador_id', session('comprador_id'))->get();
+
+            // Obtener todos los códigos de producto en un array
+            $productosCodigos = $carritos->pluck('producto_codigo');
+
+            // Obtener los productos correspondientes a esos códigos
+            $productos = Producto::whereIn('codigo', $productosCodigos)->get();
+
+            // Asociar los productos con la cantidad del carrito y calcular el precio total
+            $productos = $productos->map(function ($producto) use ($carritos) {
+                // Buscar la cantidad correspondiente en el carrito
+                $cantidad = $carritos->firstWhere('producto_codigo', $producto->codigo)->cantidad;
+                
+                // Agregar el campo de precio total y el de cantidad
+                $producto->precio_total = $producto->precio_unidad * $cantidad * 1.21;
+                $producto->cantidad = $cantidad;
+
+                return $producto;
+            });
+
+            $stockInsuficiente = false;
+            $productos->each(function ($producto) use (&$stockInsuficiente) {
+                if ($producto->stock < $producto->cantidad) {
+                    // Si el stock es menor que la cantidad solicitada
+                    Log::warning("Stock insuficiente para el producto: {$producto->nombre}");
+                    $stockInsuficiente = true;
+                }
+            });
+            
+            if($stockInsuficiente) {
+                Log::info('no te redirije');
+            }else {
+                Log::info($productos);
+                return view('/public/pagar', ['productos' => $productos]);
+            }
+
+        } else {
+
         }
     }
 

@@ -23,6 +23,13 @@ class ProductoController extends Controller
         return response()->json($productos);
     }
 
+    public function comprobarStock(Request $request)
+    {
+        $producto = Producto::where('codigo', $request->codigo)->first();
+
+        return response()->json($producto);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

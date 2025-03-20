@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Carrito extends Model
 {
-    protected $fillable = ['comprador_id', 'producto_codigo', 'cantidad'];
+    protected $fillable = ['comprador_id', 'producto_codigo', 'cantidad', 'compra_id'];
 
     public function comprador()
     {

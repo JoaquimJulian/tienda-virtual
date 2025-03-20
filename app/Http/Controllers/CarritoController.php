@@ -53,6 +53,15 @@ class CarritoController extends Controller
         return response()->json($carrito);
     }
 
+    public function existe(Request $request)
+    {
+        $producto = Carrito::where('comprador_id', $request->comprador_id)
+                        ->where('producto_codigo', $request->producto_codigo)
+                        ->first();
+
+        return response()->json(['existe' => $producto ? true : false]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -171,14 +180,7 @@ class CarritoController extends Controller
         return response()->json(['success' => false, 'message' => 'Producto no encontrado en el carrito'], 404);
     }
 
-    public function existe(Request $request)
-    {
-        $producto = Carrito::where('comprador_id', $request->comprador_id)
-                        ->where('producto_codigo', $request->producto_codigo)
-                        ->first();
-
-        return response()->json(['existe' => $producto ? true : false]);
-    }
+    
 
     public function actualizar(Request $request)
     {

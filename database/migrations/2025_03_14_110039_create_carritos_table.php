@@ -20,6 +20,7 @@ return new class extends Migration
                 ->on('productos') // En la tabla productos
                 ->onDelete('cascade');
             $table->integer('cantidad')->default(1);
+            $table->foreignId('compra_id')->nullable()->constrained('compras')->onDelete('cascade');
             $table->timestamps();
         });
     }
