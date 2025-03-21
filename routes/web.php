@@ -28,7 +28,8 @@ Route::post('/carrito/eliminar', [CarritoController::class, 'eliminar'])->name('
 Route::get('/categorias/json', [CategoriaController::class, 'indexJson'])->name('categorias.json');
 Route::get('/producto/stock', [ProductoController::class, 'comprobarStock'])->name('producto.stock');
 Route::get('/compra/createComprador', [CompraController::class, 'createComprador'])->name('compra.createComprador');
-Route::post('/compra/guardarTarjeta', [CompraController::class, 'guardarTarjeta'])->name('compra.guardarTarjeta');
+Route::get('/personalizado/mostrarVista', [PersonalizadoController::class, 'mostrarVista'])->name('personalizado.mostrarVista');
+
 
 Route::resources([
     'categoria' => CategoriaController::class,
@@ -53,10 +54,6 @@ Route::get('/nosotros', function () {
     return view('nosotros.nosotros');
 })->name('sobrenosotros');
 
-Route::get('/personalizar', function () {
-    return view('personalizar.personalizar');
-})->name('personalizar');
-
 Route::get('/categorias/producto', function () {
     return view('categorias.producto');
 })->name('producto');
@@ -76,20 +73,7 @@ Route::prefix('auth')->group(function () {
 
 Route::middleware([ComprobarUsuario::class])->get('/', [CategoriaController::class, 'index'])->name('app');
 
-Route::post('/guardar-imagen', [PersonalizadoController::class, 'guardarImagen'])->middleware('auth');
+Route::post('/guardar-imagen', [PersonalizadoController::class, 'guardarImagen']);
 
 Route::get('/random-images', [PersonalizadoController::class, 'getRandomImages']);
-
-Route::get('/check-auth', function () {
-    $trabajadorAutenticado = Auth::guard('trabajador')->check();
-    $compradorAutenticado = Auth::guard('comprador')->check();
-    
-    return response()->json([
-        'authenticated_trabajador' => $trabajadorAutenticado,
-        'authenticated_comprador' => $compradorAutenticado,
-        'user' => Auth::user(), // Debería devolver el usuario autenticado o null
-    ]);
-});
-
-
 

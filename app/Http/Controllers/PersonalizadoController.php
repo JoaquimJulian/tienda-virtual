@@ -14,31 +14,55 @@ class PersonalizadoController extends Controller
 
     public function guardarImagen(Request $request)
     {
-        if (!auth()->check()) {
+        if (auth()->check()) {
             return response()->json(['error' => 'Usuario no autenticado'], 401);
         }
-    
+
         try {
             $imageData = $request->input('image');
             Log::info('Datos de la imagen recibidos: ', ['imageData' => $imageData]);
-    
+
             $imageName = uniqid('diseño_') . '.png';
-            $imagePath = public_path('images');
+            $imagePath = storage_path('app/public/images'); // Ruta correcta
             $imageFullPath = $imagePath . '/' . $imageName;
-    
+
+            // Limpiar la imagen base64 para eliminar los encabezados
             $image = str_replace('data:image/png;base64,', '', $imageData);
             $image = base64_decode($image);
-    
+
+            // Verificar si la carpeta existe, si no, crearla
             if (!file_exists($imagePath)) {
                 mkdir($imagePath, 0777, true);
             }
-    
+
+            // Guardar la imagen en el disco
             file_put_contents($imageFullPath, $image);
-    
-            return response()->json(['message' => 'Imagen guardada correctamente', 'filepath' => $imageFullPath], 200);
+
+            // Guardar la ruta de la imagen en la base de datos
+            $personalizado = new Personalizado();
+            $personalizado->comprador_id = session('comprador_id'); // El id del comprador autenticado
+            $personalizado->producto_codigo = "BA000-BP";
+            $personalizado->nombre_imagen = $imageName; // Guardamos el nombre de la imagen en la base de datos
+            $personalizado->save();
+
+            // Retornar respuesta de éxito
+            return response()->json([
+                'message' => 'Imagen guardada correctamente',
+                'filepath' => $imageFullPath,
+                'personalizado_id' => $personalizado->id
+            ], 200);
         } catch (\Exception $e) {
             Log::error('Error al guardar la imagen: ' . $e->getMessage());
             return response()->json(['error' => 'Error al guardar la imagen: ' . $e->getMessage()], 500);
+        }
+    }
+
+
+    public function mostrarVista() {
+        if (session('user_type') == 'comprador') {
+            return view('/personalizar/personalizar');
+        } else {
+            return view('/');
         }
     }
 

@@ -23,8 +23,7 @@
             @endforeach
         </div>
         <p class="text-2xl ml-8">Compra tu propio bombo personalizado clicando 
-            <a href="#" 
-            onclick="checkLoginAndRedirect()" 
+            <a href="{{ route('personalizado.mostrarVista') }}" 
             class="text-naranja underline">aquí</a>
         </p>  
     </section>
@@ -112,13 +111,7 @@
             }
         });
     });
-    function checkLoginAndRedirect() {
-        @if(session('comprador_id'))
-            window.location.href = "{{ route('personalizar') }}";
-        @else
-            abrirPopup('loginPopup');
-        @endif
-    }
+
     </script>
 
 @endsection

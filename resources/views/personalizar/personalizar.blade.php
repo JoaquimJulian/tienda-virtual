@@ -37,18 +37,6 @@
         const ctx = canvas.getContext("2d");
         let dibujando = false;
 
-        // comprobar login
-        fetch('/check-auth')
-        .then(response => response.json())
-        .then(data => {
-            if (!data.authenticated) {
-                alert('Debes iniciar sesión para continuar.');
-                // Redirigir al login
-                window.location.href = '/';
-            }
-        });
-
-
         // Controles de color y grosor
         const colorgrosor = document.getElementById("colorgrosor");
         colorgrosor.innerHTML = `<input type="color" id="colorPicker" value="#000000">
