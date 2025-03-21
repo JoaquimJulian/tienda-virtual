@@ -50,6 +50,11 @@ class CategoriaSeeder extends Seeder
                 'descripcion' => 'Eléctrico',
                 'imagen' => 'icono_mesa_mezclas.png',
             ],
+            [
+                'nombre' => 'Flautas',
+                'descripcion' => 'Viento',
+                'imagen' => 'icono_flauta.png',
+            ],
         ]);
     }
 }

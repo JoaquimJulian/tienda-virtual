@@ -19,6 +19,7 @@
             <button id="botonLimpiar" class="text-white font-bold bg-marron px-4 py-2 m-2 rounded-2xl">Limpiar</button>
             <button id="botonDescargar" class="text-white font-bold bg-marron px-4 py-2 m-2 rounded-2xl">Descargar</button>
             <button id="botonContinuar" class="text-white font-bold bg-marron px-4 py-2 m-2 rounded-2xl">Continuar</button>
+            
         </div>
         <p class="text-marron text-center m-2">Al hacer clic en 'Continuar', autorizas a Tempo & Tono a reutilizar el diseño con fines publicitarios.</p>
     </div>
@@ -138,6 +139,8 @@
             })
             .catch(error => console.error('Error al cargar imágenes:', error));
 });
+
+
 </script>
 
 @endsection
