@@ -36,15 +36,17 @@ return [
     */
 
     'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
         'trabajador' => [
             'driver' => 'session',
-            'provider' => 'trabajadores', // Usamos el provider de trabajadores
+            'provider' => 'trabajadores',
         ],
-
-        // Guard para compradores
         'comprador' => [
             'driver' => 'session',
-            'provider' => 'compradores', // Usamos el provider de compradores
+            'provider' => 'compradores',
         ],
     ],
 

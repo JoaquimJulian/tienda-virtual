@@ -170,6 +170,20 @@ class ProductoSeeder extends Seeder
             ]);
         }
         
+        DB::table('productos')->insert([
+            [
+                'codigo' => 'BA000-BP',
+                'nombre' => 'Bombo Personalizable',
+                'descripcion' => 'Bombo personalizable al gusto del cliente',
+                'categoria_id' => 3, 
+                'precio_unidad' => 499.99,
+                'stock' => 0,
+                'destacado' => 0,
+                'imagen_principal' => '',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
         
     }
 }
