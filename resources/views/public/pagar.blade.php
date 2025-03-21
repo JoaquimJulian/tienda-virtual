@@ -11,7 +11,7 @@
                     <!-- Tarjeta de crédito/débito -->
                     <div class="bg-white rounded-lg shadow-sm mb-6">
                         <div class="px-4 py-3 border-b flex justify-between items-center">
-                            <h2 class="font-medium text-gray-800">Tarjeta de crédito/débitoo</h2>
+                            <h2 class="font-medium text-gray-800">Tarjeta de crédito/débito</h2>
                             <button class="text-2xl">−</button>
                         </div>
                         <div class="p-4 bg-gray-50">
