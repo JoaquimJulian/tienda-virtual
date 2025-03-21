@@ -16,31 +16,18 @@
                         </div>
                         <div class="p-4 bg-gray-50">
                             <div class="space-y-3">
-                                <div class="flex items-center gap-2 bg-gray-100 p-3 rounded-md">
-                                    <input type="radio" id="visa" name="payment" checked class="w-4 h-4 accent-blue-600">
-                                    <label for="visa" class="flex-1 text-gray-700">Visa terminada en 4598</label>
-                                    <img src="{{ asset('images/visa.png') }}" alt="Visa" class="h-6">
+                                <div id="tarjetasGuardadas">
+
                                 </div>
+
                                 <div class="flex items-center gap-2 bg-gray-100 p-3 rounded-md">
-                                    <input type="radio" id="new_card" name="payment" class="w-4 h-4 accent-blue-600">
-                                    <label for="new_card" class="text-gray-700">Añadir nueva tarjeta</label>
+                                    <button onclick="abrirPopup('anadirTarjetaPopup')" class="text-gray-700">Añadir nueva tarjeta</button>
                                 </div>
-                                <div class="pt-3 pb-2 border-t mt-3">
-                                    <div class="flex items-center text-sm text-gray-600 mb-1">
-                                        <span class="mr-2">•••• 2345 5678 7890</span>
-                                        <img src="{{ asset('images/mastercard.png') }}" alt="Mastercard" class="h-5 mx-2">
-                                        <span class="mx-2">01/2027</span>
-                                        <span class="mx-2">•••</span>
-                                    </div>
-                                    <div class="text-sm text-gray-600 mb-3">
-                                        <span>José Antonio Pérez Domínguez</span>
-                                    </div>
-                                    <div>
-                                        <label class="flex items-center gap-2">
-                                            <input type="checkbox" class="w-4 h-4 accent-blue-600" checked>
-                                            <span class="text-sm text-gray-700">Guardar tarjeta para futuras compras</span>
-                                        </label>
-                                    </div>
+
+                                <div class="pt-3 pb-2 border-t mt-3" id="tarjetaActual">
+                                    <p><strong>Nombre del Titular:</strong> {{ session('tarjeta')['nombre'] }}</p>
+                                    <p><strong>Número de Tarjeta:</strong> **** **** **** {{ substr(session('tarjeta')['numero'], -4) }}</p>
+                                    <p><strong>Fecha de Expiración:</strong> {{ session('tarjeta')['fechaExpiracion'] }}</p>
                                 </div>
                             </div>
                         </div>
@@ -70,10 +57,6 @@
                                     <img src="{{ asset('images/paysafecard.png') }}" alt="Paysafecard" class="h-8 mb-2">
                                     <span class="text-xs text-gray-600">Paysafecard</span>
                                 </div>
-                            </div>
-                            <div class="space-y-2">
-                                <input type="email" placeholder="Correo electrónico vinculado al e-wallet" class="w-full p-2 border rounded-md text-sm">
-                                <input type="password" placeholder="Contraseña" class="w-full p-2 border rounded-md text-sm">
                             </div>
                         </div>
                     </div>

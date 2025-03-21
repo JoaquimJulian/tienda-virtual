@@ -25,6 +25,7 @@ Route::post('/carrito/eliminar', [CarritoController::class, 'eliminar'])->name('
 Route::get('/categorias/json', [CategoriaController::class, 'indexJson'])->name('categorias.json');
 Route::get('/producto/stock', [ProductoController::class, 'comprobarStock'])->name('producto.stock');
 Route::get('/compra/createComprador', [CompraController::class, 'createComprador'])->name('compra.createComprador');
+Route::post('/compra/guardarTarjeta', [CompraController::class, 'guardarTarjeta'])->name('compra.guardarTarjeta');
 
 Route::resources([
     'categoria' => CategoriaController::class,

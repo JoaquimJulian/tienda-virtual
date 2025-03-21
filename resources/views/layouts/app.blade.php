@@ -32,5 +32,6 @@
     <!-- POPUPS -->
     <x-popup-login />
     <x-popup-registro />
+    <x-popup-anadirTarjeta />
 </body>
 </html>
