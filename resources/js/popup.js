@@ -22,13 +22,6 @@ function cerrarPopup(popupId) {
     }
 }
 
-// Cerrar el popup si el usuario hace clic fuera de él
-window.onclick = function (event) {
-    if (event.target.classList.contains('popup')) {
-        event.target.classList.add('hidden');
-    }
-};
-
 // Cerrar el popup con el botón de cerrar
 document.addEventListener('click', (event) => {
     if (event.target.classList.contains('close')) {

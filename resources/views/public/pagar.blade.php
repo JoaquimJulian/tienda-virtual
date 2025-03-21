@@ -20,14 +20,16 @@
 
                                 </div>
 
-                                <div class="flex items-center gap-2 bg-gray-100 p-3 rounded-md">
-                                    <button onclick="abrirPopup('anadirTarjetaPopup')" class="text-gray-700">Añadir nueva tarjeta</button>
-                                </div>
+                                <button onclick="abrirPopup('anadirTarjetaPopup')" class="items-center gap-2 bg-gray-100 p-3 rounded-md inline-block">
+                                    <span class="text-gray-700">Añadir nueva tarjeta</span>
+                                </button>
 
                                 <div class="pt-3 pb-2 border-t mt-3" id="tarjetaActual">
-                                    <p><strong>Nombre del Titular:</strong> {{ session('tarjeta')['nombre'] }}</p>
-                                    <p><strong>Número de Tarjeta:</strong> **** **** **** {{ substr(session('tarjeta')['numero'], -4) }}</p>
-                                    <p><strong>Fecha de Expiración:</strong> {{ session('tarjeta')['fechaExpiracion'] }}</p>
+                                    @if (session('tarjeta'))
+                                        <p><strong>Nombre del Titular:</strong> {{ session('tarjeta')['nombre'] }}</p>
+                                        <p><strong>Número de Tarjeta:</strong> **** **** **** {{ substr(session('tarjeta')['numero'], -4) }}</p>
+                                        <p><strong>Fecha de Expiración:</strong> {{ session('tarjeta')['fechaExpiracion'] }}</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -41,22 +43,22 @@
                         </div>
                         <div class="p-4 bg-gray-50">
                             <div class="grid grid-cols-4 gap-4 mb-4">
-                                <div class="bg-white rounded-lg p-3 flex flex-col items-center justify-center">
-                                    <img src="{{ asset('images/paypal.png') }}" alt="PayPal" class="h-8 mb-2">
+                                <button class="bg-white rounded-lg p-3 flex flex-col items-center justify-center">
+                                    <img src="{{ asset('images/metodos_pago/paypal.png') }}" alt="PayPal" class="h-8 mb-2">
                                     <span class="text-xs text-gray-600">PayPal</span>
-                                </div>
-                                <div class="bg-white rounded-lg p-3 flex flex-col items-center justify-center">
-                                    <img src="{{ asset('images/applepay.png') }}" alt="Apple Pay" class="h-8 mb-2">
+                                </button>
+                                <button class="bg-white rounded-lg p-3 flex flex-col items-center justify-center">
+                                    <img src="{{ asset('images/metodos_pago/apple_pay.png') }}" alt="Apple Pay" class="h-8 mb-2">
                                     <span class="text-xs text-gray-600">Apple Pay</span>
-                                </div>
-                                <div class="bg-white rounded-lg p-3 flex flex-col items-center justify-center">
-                                    <img src="{{ asset('images/googlepay.png') }}" alt="Google Pay" class="h-8 mb-2">
+                                </button>
+                                <button class="bg-white rounded-lg p-3 flex flex-col items-center justify-center">
+                                    <img src="{{ asset('images/metodos_pago/google_pay.png') }}" alt="Google Pay" class="h-8 mb-2">
                                     <span class="text-xs text-gray-600">Google Pay</span>
-                                </div>
-                                <div class="bg-white rounded-lg p-3 flex flex-col items-center justify-center">
-                                    <img src="{{ asset('images/paysafecard.png') }}" alt="Paysafecard" class="h-8 mb-2">
+                                </button>
+                                <button class="bg-white rounded-lg p-3 flex flex-col items-center justify-center">
+                                    <img src="{{ asset('images/metodos_pago/paysafecard.png') }}" alt="Paysafecard" class="h-8 mb-2">
                                     <span class="text-xs text-gray-600">Paysafecard</span>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>

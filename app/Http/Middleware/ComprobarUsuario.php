@@ -33,7 +33,8 @@ class ComprobarUsuario
         // Si el usuario no está autenticado en ninguno de los guards
         else {
             request()->session()->forget('user_type');
-            request()->session()->forget('comprador_id');  
+            request()->session()->forget('comprador_id');
+            request()->session()->forget('tarjeta');
 
             Log::info('No autenticado');
         }

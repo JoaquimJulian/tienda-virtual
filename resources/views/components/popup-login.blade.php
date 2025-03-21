@@ -54,3 +54,5 @@
         </form>
     </div>
 </div>
+
+@vite(['resources/js/popup/popupRegistro.js'])

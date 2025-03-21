@@ -1,4 +1,4 @@
-<div id="registroPopup" class="popup fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+<div id="registroPopup" class="popup fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden z-50">
     <div class="bg-white p-6 rounded-lg w-full max-w-sm">
         <!-- Botón para cerrar el modal -->
         <span class="close float-right text-gray-600 cursor-pointer text-2xl pr-2 pt-1" onclick="cerrarPopup('registroPopup')">&times;</span>
@@ -7,7 +7,7 @@
         <h2 class="text-xl font-bold mb-4">Registrarse</h2>
 
         <!-- Formulario de registro -->
-        <form method="POST" action="" class="space-y-4">
+        <form method="POST" action="{{ route('comprador.store') }}" class="space-y-4">
             @csrf
 
             <!-- Campo de nombre -->
@@ -53,7 +53,23 @@
                     type="tel" 
                     id="telefono" 
                     name="telefono" 
+                    pattern="[0-9]{9}" 
+                    maxlength="9"
                     required 
+                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-gray-500"
+                >
+            </div>
+
+            <!-- Campo de email -->
+            <div>
+                <label for="email" class="block text-sm text-gray-800 mb-1">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$|^[a-zA-Z0-9._%+-]+@googlemail\.com$"
+                    title="Debe ser una dirección de Gmail (ejemplo@gmail.com)"
+                    required
                     class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-gray-500"
                 >
             </div>
@@ -65,18 +81,7 @@
                     type="password" 
                     id="password" 
                     name="password" 
-                    required
-                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-gray-500"
-                >
-            </div>
-
-            <!-- Campo de confirmación de contraseña -->
-            <div>
-                <label for="password_confirmation" class="block text-sm text-gray-800 mb-1">Confirmar Contraseña</label>
-                <input 
-                    type="password" 
-                    id="password_confirmation" 
-                    name="password_confirmation" 
+                    pattern="^(?=.*[0-9])(?=.*[\W_]).{6,}$"
                     required
                     class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-gray-500"
                 >

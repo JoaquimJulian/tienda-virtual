@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comprador;
+use Illuminate\Support\Facades\Hash;
+
 
 class CompradorController extends Controller
 {
@@ -27,7 +30,28 @@ class CompradorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar los datos
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
+            'direccion' => 'required|string|max:255',
+            'telefono' => ['required', 'regex:/^[0-9]{9}$/', 'unique:compradores,telefono'],
+            'email' => ['required', 'email', 'regex:/^[a-zA-Z0-9._%+-]+@(gmail\.com|googlemail\.com)$/', 'unique:compradores,email'],
+            'password' => ['required', 'min:6', 'regex:/^(?=.*[0-9])(?=.*[\W_]).+$/'],
+        ]);
+
+        // Crear el comprador
+        $comprador = Comprador::create([
+            'nombre' => $request->nombre,
+            'apellidos' => $request->apellidos,
+            'direccion' => $request->direccion,
+            'telefono' => $request->telefono,
+            'email' => $request->email,
+            'password' => Hash::make($request->password), 
+        ]);
+
+        // Redirigir con mensaje de éxito
+        return redirect()->route('app');
     }
 
     /**
