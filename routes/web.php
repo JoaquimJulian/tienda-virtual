@@ -15,6 +15,9 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Middleware\ComprobarUsuario;
 use App\Http\Controllers\ImagenController;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Personalizado;
+use App\Http\Controllers\PersonalizadoController;
 
 Route::get('/carrito/checkProducto', [CarritoController::class, 'checkProducto']);
 Route::get('/carrito/productos', [CarritoController::class, 'getProductosCarrito']);
@@ -72,19 +75,20 @@ Route::prefix('auth')->group(function () {
 
 Route::middleware([ComprobarUsuario::class])->get('/', [CategoriaController::class, 'index'])->name('app');
 
-Route::post('/guardar-imagen', function (Request $request) {
-    if ($request->has('image')) {
-        $image = $request->input('image'); // Base64
-        $image = str_replace('data:image/png;base64,', '', $image);
-        $image = str_replace(' ', '+', $image);
-        $imageData = base64_decode($image);
+Route::post('/guardar-imagen', [PersonalizadoController::class, 'guardarImagen'])->middleware('auth');
 
-        $filename = 'personalizable_' . now()->format('YmdHis') . '.png';
-        Storage::disk('public')->put("images/personalizable/$filename", $imageData);
+Route::get('/random-images', [PersonalizadoController::class, 'getRandomImages']);
 
-        return response()->json(['filepath' => "/storage/images/personalizable/$filename"]);
-    }
-    return response()->json(['error' => 'No image received'], 400);
+Route::get('/check-auth', function () {
+    $trabajadorAutenticado = Auth::guard('trabajador')->check();
+    $compradorAutenticado = Auth::guard('comprador')->check();
+    
+    return response()->json([
+        'authenticated_trabajador' => $trabajadorAutenticado,
+        'authenticated_comprador' => $compradorAutenticado,
+        'user' => Auth::user(), // Debería devolver el usuario autenticado o null
+    ]);
 });
 
-Route::get('/random-images', [ImagenController::class, 'getRandomImages']);
+
+

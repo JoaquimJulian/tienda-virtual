@@ -32,14 +32,19 @@ class AuthController extends Controller
             // Determina el guard correcto dependiendo del tipo de usuario
             if ($usuario instanceof \App\Models\Trabajador) {
                 Auth::guard('trabajador')->login($usuario);  // Usamos el guard de trabajador
+                Log::info('Usuario autenticado como Trabajador', ['usuario' => $usuario]);
             } elseif ($usuario instanceof \App\Models\Comprador) {
                 Auth::guard('comprador')->login($usuario);  // Usamos el guard de comprador
                 session(['comprador_id' => $usuario->id]);
+                Log::info('Usuario autenticado como Comprador', ['usuario' => $usuario]);
             }
-
+        
             $request->session()->regenerate(); // Regenera la sesión
             return redirect()->route('app'); // Redirige a home
+        } else {
+            Log::warning('Intento de login fallido', ['nombre' => $request->nombre]);
         }
+        
 
         return back()->withErrors(['nombre' => 'Credenciales incorrectas']);
     }

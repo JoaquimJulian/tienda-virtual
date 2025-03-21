@@ -113,7 +113,7 @@
         });
     });
     function checkLoginAndRedirect() {
-        @if(session('user_type'))
+        @if(session('comprador_id'))
             window.location.href = "{{ route('personalizar') }}";
         @else
             abrirPopup('loginPopup');
