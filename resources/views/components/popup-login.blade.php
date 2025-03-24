@@ -24,11 +24,11 @@
 
             <!-- Campo de contraseña -->
             <div>
-                <label for="password" class="block text-sm text-gray-800 mb-1">Contraseña</label>
+                <label for="passwordLogin" class="block text-sm text-gray-800 mb-1">Contraseña</label>
                 <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
+                    type="passwordLogin" 
+                    id="passwordLogin" 
+                    name="passwordLogin" 
                     required
                     class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-gray-500"
                 >
@@ -54,5 +54,3 @@
         </form>
     </div>
 </div>
-
-@vite(['resources/js/popup/popupRegistro.js'])

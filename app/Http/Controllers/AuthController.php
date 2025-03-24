@@ -17,7 +17,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string',
-            'password' => 'required|string',
+            'passwordLogin' => 'required|string',
         ]);
 
         // Buscar en trabajadores
@@ -28,7 +28,7 @@ class AuthController extends Controller
             $usuario = Comprador::where('nombre', $request->nombre)->first();
         }
 
-        if ($usuario && Hash::check($request->password, $usuario->password)) {
+        if ($usuario && Hash::check($request->passwordLogin, $usuario->password)) {
             // Determina el guard correcto dependiendo del tipo de usuario
             if ($usuario instanceof \App\Models\Trabajador) {
                 Auth::guard('trabajador')->login($usuario);  // Usamos el guard de trabajador

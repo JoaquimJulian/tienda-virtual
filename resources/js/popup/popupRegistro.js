@@ -1,3 +1,4 @@
+console.log()
 document.getElementById('telefono').addEventListener('input', function (e) {
     this.value = this.value.replace(/\D/g, '').slice(0, 9); // Permite solo números y corta a 9 dígitos
 });
