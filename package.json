@@ -17,6 +17,7 @@
         "vite": "^6.0.11"
     },
     "dependencies": {
+        "@paypal/paypal-js": "^8.2.0",
         "swiper": "^11.2.5"
     }
 }

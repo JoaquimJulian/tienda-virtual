@@ -12,8 +12,10 @@ use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\ProductoCompraController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\StripeController;
 use App\Http\Middleware\ComprobarUsuario;
 use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Personalizado;
@@ -28,7 +30,10 @@ Route::post('/carrito/eliminar', [CarritoController::class, 'eliminar'])->name('
 Route::get('/categorias/json', [CategoriaController::class, 'indexJson'])->name('categorias.json');
 Route::get('/producto/stock', [ProductoController::class, 'comprobarStock'])->name('producto.stock');
 Route::get('/compra/createComprador', [CompraController::class, 'createComprador'])->name('compra.createComprador');
+Route::post('/compra/guardarTarjeta', [CompraController::class, 'guardarTarjeta'])->name('compra.guardarTarjeta');
 Route::get('/personalizado/mostrarVista', [PersonalizadoController::class, 'mostrarVista'])->name('personalizado.mostrarVista');
+Route::get('/payment', [PaymentController::class, 'showPaymentForm']);
+Route::post('/stripe/payment', [PaymentController::class, 'processPayment'])->name('stripe.payment');
 
 
 Route::resources([

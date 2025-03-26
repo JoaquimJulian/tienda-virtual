@@ -26,7 +26,7 @@
             <div>
                 <label for="passwordLogin" class="block text-sm text-gray-800 mb-1">Contraseña</label>
                 <input 
-                    type="passwordLogin" 
+                    type="password" 
                     id="passwordLogin" 
                     name="passwordLogin" 
                     required

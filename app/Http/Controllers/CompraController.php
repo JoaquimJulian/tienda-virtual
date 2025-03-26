@@ -8,6 +8,8 @@ use App\Models\Comprador;
 use App\Models\Producto;
 use App\Models\Carrito;
 use Illuminate\Support\Facades\Log;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 
 
 class CompraController extends Controller
@@ -35,6 +37,7 @@ class CompraController extends Controller
     public function createComprador()
     {
         if (session('user_type') == 'comprador') {
+
             $carritos = Carrito::where('comprador_id', session('comprador_id'))->get();
 
             // Obtener todos los códigos de producto en un array
