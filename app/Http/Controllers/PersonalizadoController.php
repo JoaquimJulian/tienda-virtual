@@ -62,7 +62,7 @@ class PersonalizadoController extends Controller
         if (session('user_type') == 'comprador') {
             return view('/personalizar/personalizar');
         } else {
-            return view('/');
+            return redirect()->route('app');
         }
     }
 
