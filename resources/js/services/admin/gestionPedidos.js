@@ -30,7 +30,6 @@ busquedaPedidos.addEventListener('input', function() {
 })
 
 function mostrarPedidos(busqueda = '', estado = '', cliente = '') {
-    console.log("mostrarPedidos")
     tablaPedidos.innerHTML = ''
     fetch("/compra", {
         method: "GET",
@@ -47,6 +46,7 @@ function mostrarPedidos(busqueda = '', estado = '', cliente = '') {
                 // SI NO HAY FILTROS
                 if((estado == '' && cliente == '') || (cliente == 'no-cliente' && estado == 'no-estado') || (cliente == 'no-cliente' && estado == '') || (cliente == '' && estado == 'no-estado')) { // SI NO HAY FILTROS 
                     if (!document.getElementById(`pedido_${compra.id}`)) {
+                        console.log(compra)
                         const fila = document.createElement("tr");
                         fila.id = `pedido_${compra.id}`;
                         fila.className = "bg-white cursor-pointer mb-2 transition-all duration-300 ease-in-out transform hover:scale-105";
@@ -81,7 +81,7 @@ function mostrarPedidos(busqueda = '', estado = '', cliente = '') {
                         // Agregar la fila completa a la tabla
                         tablaPedidos.appendChild(fila);
 
-                        tablaPedidos.addEventListener('click', function() {
+                        fila.addEventListener('click', function() {
                             window.location.href = `/compra/${compra.id}/edit`
                         })
                     }

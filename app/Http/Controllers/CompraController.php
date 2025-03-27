@@ -101,6 +101,7 @@ class CompraController extends Controller
     {
         $compra = Compra::findOrFail($id);
         $comprador = Comprador::findOrFail($compra->comprador_id);
+        Log::info($compra);
 
         return view('admin.editCompra', compact('compra', 'comprador'));
     }
