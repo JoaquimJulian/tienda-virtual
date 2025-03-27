@@ -28,7 +28,7 @@ class CompraController extends Controller
      */
     public function create()
     {
-        if (session('user_type' == 'trabajador')) {
+        if (session('user_type') == 'trabajador') {
             $compradores = Comprador::all();
             return view("admin.gestionPedidos", compact('compradores'));
         }

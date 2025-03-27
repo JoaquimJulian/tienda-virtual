@@ -17,7 +17,7 @@ return new class extends Migration
             $table->double('precio_total');
             $table->string('estado');
             $table->date('fecha_compra');
-            $table->date('fecha_envio');
+            $table->date('fecha_envio')->nullable();
             $table->timestamps();
         });
     }
