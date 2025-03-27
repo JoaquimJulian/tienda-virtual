@@ -70,7 +70,7 @@ function mostrarCategorias(nombreNuevaCategoria){
                 console.log(data)
                 const categoriaElement = document.createElement('div');
                 categoriaElement.setAttribute('id', `categoria_${categoria.id}`);
-                categoriaElement.className = 'w-full flex items-center justify-between bg-white p-4 rounded-lg shadow-md mb-4';
+                categoriaElement.className = 'w-[90%] flex items-center bg-white p-4 rounded-lg shadow-md mb-4';
                 categoriaElement.innerHTML = `
                     <input id="${categoria.id}" class="text-marron border-none focus:outline-none focus:ring-0 w-full" value="${categoria.nombre}" readonly>
                 `;

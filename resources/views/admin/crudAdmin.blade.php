@@ -4,58 +4,56 @@
 
 @section('content')
 
+<div>
+    <div>
+        <p class="text-2xl font-bold text-center mt-4 mb-4 text-marron">Productos</p>
+        <div class="w-full flex justify-center items-center mb-6 space-x-4">
+    <div class="relative w-[50%]">
+        <input id="busquedaProductos" 
+               placeholder="Buscar producto..." 
+               class="w-full px-4 py-2 rounded-full bg-gray-100 text-gray-700 focus:outline-none focus:ring-0 border-none">
+        <button class="absolute right-3 top-2 text-marron hover:text-[#8B2E00]">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+        </button>
+    </div>
+    <a href="{{ route('producto.create') }}" 
+       class="bg-marron text-white px-4 py-2 rounded-full font-bold hover:bg-[#8B2E00] transition">
+       Nuevo producto
+    </a>
+</div>
 
-<div class="flex pl-20 pr-20 pt-6 pb-6 bg-beig">
-    <div class="w-2/4 flex flex-col items-center">
-        <p class="font-semibold text-marron mb-3 text-xl">Productos</p>
-        <div class="w-full flex items-center relative">
-            <div class="flex w-3/6 h-12 bg-white rounded-full pl-6 pr-8 justify-between mx-auto">
-                <input id="busquedaProductos" class="border-none focus:outline-none focus:ring-0 h-full w-full" placeholder="Buscar producto...">
-                <button class="text-gray-400 hover:text-[#8B2E00]">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                    </svg>
-                </button>
+
+        <div id="productosLista" class="w-[100%] flex justify-center overflow-x-auto">
+            <div class="overflow-y-auto">
+                <table id="tablaProductosLista" class="w-full">
+                    <tbody id="tablaProductos" class="block overflow-y-auto w-full">
+                        <!-- Los productos se insertarán aquí -->
+                    </tbody>
+                </table>
             </div>
-            <a class="bg-marron text-white py-2 px-4 rounded-full absolute right-0" href="{{ route('producto.create') }}">Nuevo producto</a>
         </div>
 
-        <div id="productosLista" class="mt-2 w-full flex justify-center">
-            <table id="tablaProductosLista" class="w-3/4 mx-auto h-auto border-separate border-spacing-y-2">
-                <thead>
-                    <tr class="h-auto">
-                        <th class="text-marron font-semibold px-4 py-8 h-auto w-32"></th> <!-- Columna para imagen -->
-                        <th class="text-marron font-semibold text-left px-4 py-8 h-auto">Nombre</th>
-                        <th class="text-marron font-semibold text-left px-4 py-8 h-auto">Categoría</th>
-                        <th class="text-marron font-semibold text-left px-4 py-8 h-auto">Precio</th>
-                        <th class="text-marron font-semibold px-4 py-8 h-auto w-32"></th> <!-- Columna para iconos -->
-                    </tr>
-                </thead>
-                <tbody id="tablaProductos" class="h-auto">
-                    <!-- Los productos se insertarán aquí -->
-                </tbody>
-            </table>
-        </div>
-        <div id="paginacion" class="flex justify-center mt-4">
+        <div id="paginacion" class="mt-4 flex justify-center">
             <!-- Los botones de paginación se agregarán aquí -->
         </div>
-        
     </div>
 
-    <div class="w-2/4 flex flex-col items-center">
-        <p class="font-semibold text-marron mb-3 text-xl">Categorias</p>
-        <div class="w-full flex items-center justify-center">
-            <button class="bg-marron text-white py-2 px-4 rounded-full" id="btnDropdownCategoria">Nueva categoria</button>
-            <div id="dropdownCrearCategoria" class="fixed right-8 mt-2 w-64 bg-white rounded-lg shadow-lg hidden p-6 flex gap-4">
-                <input type="text" id="inputNuevaCategoria" placeholder="Nombre" class="w-full p-1 border-t-0 border-l-0 border-r-0 border-b border-marron border-b-2 focus:outline-none focus:border-marron focus:ring-0">
-                <button class="rounded-full py-1 px-2 bg-marron text-white" id="btnCrearCategoria">Crear</button>
+    <div>
+        <p class="text-2xl font-bold text-center mt-4 mb-4 text-marron">Categorias</p>
+        <div>
+            <div class="flex justify-center mb-4">
+                <button id="btnDropdownCategoria" class="bg-marron text-white rounded-full p-2 text-center font-bold w-[200px]">Nueva categoria</button>
+            </div>
+            <div id="dropdownCrearCategoria" hidden>
+                <input type="text" id="inputNuevaCategoria" placeholder="Nombre">
+                <button id="btnCrearCategoria">Crear</button>
             </div>
         </div>
         
-        <div id="categoriasLista" class="mt-8 w-auto">
-        
+        <div id="categoriasLista" class="flex flex-wrap justify-center">
         </div>
-
     </div>
 </div>
 @endsection
