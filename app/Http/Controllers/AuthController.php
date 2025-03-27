@@ -29,19 +29,30 @@ class AuthController extends Controller
         }
 
         if ($usuario && Hash::check($request->passwordLogin, $usuario->password)) {
-            // Determina el guard correcto dependiendo del tipo de usuario
             if ($usuario instanceof \App\Models\Trabajador) {
-                Auth::guard('trabajador')->login($usuario);  // Usamos el guard de trabajador
+                Auth::guard('trabajador')->login($usuario);
                 Log::info('Usuario autenticado como Trabajador', ['usuario' => $usuario]);
             } elseif ($usuario instanceof \App\Models\Comprador) {
-                Auth::guard('comprador')->login($usuario);  // Usamos el guard de comprador
+                Auth::guard('comprador')->login($usuario);
                 session(['comprador_id' => $usuario->id]);
                 Log::info('Usuario autenticado como Comprador', ['usuario' => $usuario]);
             }
         
-            $request->session()->regenerate(); // Regenera la sesión
-            return redirect()->route('app'); // Redirige a home
-        } else {
+            $request->session()->regenerate();
+        
+            // Guardar la hora de login en una cookie
+            $minutesSinceLastPopup = request()->cookie('last_popup_time');
+            $showGamePopup = !$minutesSinceLastPopup || (now()->diffInMinutes(now()->parse($minutesSinceLastPopup)) >= 1);
+        
+            if ($showGamePopup) {
+                session(['show_game_popup' => true]);
+                // Guardar el tiempo actual en una cookie
+                cookie()->queue('last_popup_time', now(), 1); // La cookie dura 24 horas (1440 minutos)
+            }
+        
+            return redirect()->route('app');
+        }
+        else {
             Log::warning('Intento de login fallido', ['nombre' => $request->nombre]);
         }
         

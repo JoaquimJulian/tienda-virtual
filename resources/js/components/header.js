@@ -82,3 +82,5 @@ document.addEventListener('DOMContentLoaded', function() {
     categoriasMovilOculto.classList.toggle('hidden');
   });
 });  
+
+
