@@ -1,5 +1,5 @@
 <div id="header" class="w-screen sm:h-auto px-4 py-4 border-b border-gray-200 relative">
-  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between">
     <!-- Logo -->
     <a href="{{ route('app') }}" class="text-2xl font-bold text-[#8B2E00]">
       Tempo & Tono
@@ -96,6 +96,7 @@
       @if(session('user_type') === 'trabajador')
         <a href="{{ route('categoria.create') }}" class="w-full sm:w-auto block text-gray-700 hover:text-[#8B2E00]">Gestionar productos y categorias</a>
         <a href="{{ route('compra.create') }}" class="w-full sm:w-auto block text-gray-700 hover:text-[#8B2E00]">Gestionar pedidos</a>
+        <a href="{{ route('admin.graficos') }}" class="w-full sm:w-auto block text-gray-700 hover:text-[#8B2E00]">Gráficos</a>
         <form action="{{ route('logout') }}" method="POST" class="mb-0 sm:mt-0 flex justify-center">
           @csrf
           <button type="submit" class="text-gray-700 hover:text-[#8B2E00]">Cerrar sesión</button>

@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Personalizado;
 use App\Http\Controllers\PersonalizadoController;
+use App\Http\Controllers\GraficoController;
 
 Route::get('/carrito/checkProducto', [CarritoController::class, 'checkProducto']);
 Route::get('/carrito/productos', [CarritoController::class, 'getProductosCarrito']);
@@ -54,6 +55,7 @@ Route::post('/producto/subirImagenSecundaria', [ProductoController::class, 'subi
 Route::post('/producto/eliminiarImagenesSecundarias', [ProductoController::class, 'eliminiarImagenesSecundarias'])->name('producto.eliminiarImagenesSecundarias');
 Route::get('/producto/{codigo}', [ProductoController::class, 'show'])->name('producto.show');
 
+Route::get('/admin/mostrarGraficos', [GraficoController::class, 'mostrarGraficos'])->name('admin.graficos');
 
 Route::get('/nosotros', function () {
     return view('nosotros.nosotros');
