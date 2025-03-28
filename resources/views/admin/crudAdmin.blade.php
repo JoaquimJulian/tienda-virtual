@@ -18,11 +18,11 @@
             </svg>
         </button>
     </div>
-    <a href="{{ route('producto.create') }}" 
-       class="bg-marron text-white px-4 py-2 rounded-full font-bold hover:bg-[#8B2E00] transition">
-       Nuevo producto
-    </a>
-</div>
+        <a href="{{ route('producto.create') }}" 
+        class="bg-marron text-white px-4 py-2 rounded-full font-bold hover:bg-[#8B2E00] transition">
+        Nuevo producto
+        </a>
+    </div>
 
 
         <div id="productosLista" class="w-[100%] flex justify-center overflow-x-auto">

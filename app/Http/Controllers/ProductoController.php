@@ -113,7 +113,8 @@ class ProductoController extends Controller
     {
         $producto = Producto::findOrFail($id);
         $categorias = Categoria::all();  
-        
+        Log::info('Producto recibido en la vista:', ['producto' => $producto]);
+
         return view('admin.editProducto', compact('producto', 'categorias'));
     }
 

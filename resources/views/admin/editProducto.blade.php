@@ -5,8 +5,10 @@
 @section('content')
 <div class="flex flex-col items-center px-6 py-6 bg-beig min-h-screen">
     <div class="w-full max-w-2xl">
-        <form action="{{ route('producto.store') }}" method="POST" class="flex flex-col space-y-4" enctype="multipart/form-data">
+    
+        <form action="{{ route('producto.update', $producto->codigo) }}" method="POST" class="flex flex-col space-y-4" enctype="multipart/form-data" id="editarProductoForm">
             @csrf
+            @method('PUT')
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="flex flex-col space-y-4">
                     <div class="flex flex-col">
@@ -72,4 +74,4 @@
 </div>
 @endsection
 
-@vite(['resources/js/services/admin/crearProducto.js'])
+@vite(['resources/js/services/admin/editarProducto.js'])
