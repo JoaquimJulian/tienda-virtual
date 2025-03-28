@@ -10,6 +10,8 @@ use App\Models\ProductoCompra;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
@@ -45,10 +47,8 @@ class PaymentController extends Controller
                 'fecha_compra' => Carbon::today()
             ]);
             
-            Log::info($request->productos);
             $productosComprados = $request->productos;
             if (!empty($productosComprados)) {
-                Log::info($productosComprados);
             
                 $productosComprados = json_decode($request->productos, true); // true para obtener un array asociativo
 
@@ -74,9 +74,51 @@ class PaymentController extends Controller
                     Log::error('Error al actualizar el stock: ' . $e->getMessage());
                 }
             }
+
+            $empresa = [
+                'nombre' => 'Tempo y Tono',
+                'direccion' => 'Calle de la Música, 123',
+                'telefono' => '+34 123 456 789',
+                'email' => 'contacto@tempoytono.com',
+            ];
+
+            // Cálculos de la factura
+            $subtotal = array_sum(array_column($productosComprados, 'precio_total'));
+            $iva = $subtotal * 0.21;
+            $gastos_envio = 10.95;
+            $total = $subtotal + $iva + $gastos_envio;
+
+            // Crear el PDF
+            $pdf = Pdf::loadView('public.factura', [
+                'empresa' => $empresa,
+                'productos' => $productosComprados,
+                'subtotal' => $subtotal,
+                'iva' => $iva,
+                'gastos_envio' => $gastos_envio,
+                'total' => $total,
+            ]);
+
+            // Generar el nombre y la ruta del archivo
+            try {
+                // Generar el nombre del archivo
+                $fileName = 'factura_' . time() . '.pdf';
+                $path = storage_path('app/public/facturas/' . $fileName);
+                $pdf->save($path);
+
+                // Generar la URL pública del archivo
+                $url = asset('storage/facturas/' . $fileName);
+
+                // Retornar la vista directamente con el enlace para descargar el PDF
+                return redirect()->to($url);
+
+            } catch (\Exception $e) {
+                // Si ocurre un error, lo capturamos y lo registramos en los logs
+                Log::error('Error al guardar y generar la URL de descarga del PDF: ' . $e->getMessage());
+                
+                // Redirigir al usuario con un mensaje de error
+                return redirect()->route('app')->with('error', 'Hubo un error al generar la factura.');
+            }
             
-            // Redirigir con mensaje de éxito
-            return redirect()->route('app');
         } catch (\Exception $e) {
             return back()->with('error', 'Error en el pago: ' . $e->getMessage());
         }

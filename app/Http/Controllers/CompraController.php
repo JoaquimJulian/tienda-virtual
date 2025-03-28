@@ -69,8 +69,11 @@ class CompraController extends Controller
             
             if($stockInsuficiente) {
                 return redirect()->route('app'); // Redirige a home
-            }else {
+            }else if(!empty($carritos)){
                 return view('/public/pagar', ['productos' => $productos]);
+            }else {
+                Log::info($carritos);
+                return view('/public/carrito');
             }
 
         } else {
