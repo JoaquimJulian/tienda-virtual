@@ -107,8 +107,6 @@ dropdownMenu.addEventListener("mouseenter", function() {
 });
 
 dropdownMenu.addEventListener("mouseleave", function() {
-    timeout = setTimeout(() => {
     dropdownMenu.classList.add("hidden");
-    }, 300);
 });
 
