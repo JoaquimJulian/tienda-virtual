@@ -40,16 +40,6 @@ class AuthController extends Controller
         
             $request->session()->regenerate();
         
-            // Guardar la hora de login en una cookie
-            $minutesSinceLastPopup = request()->cookie('last_popup_time');
-            $showGamePopup = !$minutesSinceLastPopup || (now()->diffInMinutes(now()->parse($minutesSinceLastPopup)) >= 1);
-        
-            if ($showGamePopup) {
-                session(['show_game_popup' => true]);
-                // Guardar el tiempo actual en una cookie
-                cookie()->queue('last_popup_time', now(), 1); // La cookie dura 24 horas (1440 minutos)
-            }
-        
             return redirect()->route('app');
         }
         else {

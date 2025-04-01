@@ -114,25 +114,4 @@
 
     </script>
 
-@if(session('show_game_popup'))
-    <x-popup-dragAndDrop />
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            setTimeout(() => {
-                document.getElementById("gamePopup").classList.remove("hidden");
-            }, 3000);
-        });
-    </script>
-
-    @php
-        // Al mostrar el popup, eliminamos la variable para que no se vuelva a mostrar
-        session()->forget('show_game_popup');
-    @endphp
-@endif
-
-
-
-
-
 @endsection

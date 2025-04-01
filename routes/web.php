@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Personalizado;
 use App\Http\Controllers\PersonalizadoController;
 use App\Http\Controllers\GraficoController;
+use App\Http\Controllers\CuponController;
 
 Route::get('/carrito/checkProducto', [CarritoController::class, 'checkProducto']);
 Route::get('/carrito/productos', [CarritoController::class, 'getProductosCarrito']);
@@ -35,6 +36,8 @@ Route::post('/compra/guardarTarjeta', [CompraController::class, 'guardarTarjeta'
 Route::get('/personalizado/mostrarVista', [PersonalizadoController::class, 'mostrarVista'])->name('personalizado.mostrarVista');
 Route::get('/payment', [PaymentController::class, 'showPaymentForm']);
 Route::post('/stripe/payment', [PaymentController::class, 'processPayment'])->name('stripe.payment');
+
+Route::post('/generar-cupon', [CuponController::class, 'generarCupon']);
 
 
 Route::resources([

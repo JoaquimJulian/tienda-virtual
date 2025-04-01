@@ -37,6 +37,7 @@
     <x-popup-login />
     <x-popup-registro />
     <x-popup-anadirTarjeta />
+    <x-popup-dragAndDrop />
 
 
     <!--Start of Tawk.to Script-->
