@@ -11,7 +11,7 @@
 
         <!-- SECCIÓN: CATEGORÍAS -->
         <h2 class="ml-8 mt-8 text-3xl font-bold mb-6">CATEGORIAS</h2>
-        <div class="grid grid-cols-2 md:grid-cols-6 gap-6 mt-4 mb-12 ml-8 mr-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-4 mb-12 ml-8 mr-8">
             @foreach ($categorias as $categoria)
                 <div class="rounded-lg bg-white p-4 shadow-md">
                     <a href="{{ route('categorias.productoscategoria', ['id' => $categoria->id]) }}" class="block">

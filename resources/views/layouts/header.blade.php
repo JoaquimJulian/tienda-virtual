@@ -61,13 +61,13 @@
             @if(!session('comprador_id'))
             <button
                 onclick="abrirPopup('loginPopup')"
-                class="hidden sm:block text-gray-700 hover:text-[#8B2E00] focus:outline-none">
+                class="sm:block text-gray-700 hover:text-[#8B2E00] focus:outline-none">
                 Prueba suerte
             </button>
           @else
             <button
                 onclick="abrirPopup('gamePopup')"
-                class="hidden sm:block text-gray-700 hover:text-[#8B2E00] focus:outline-none">
+                class="sm:block text-gray-700 hover:text-[#8B2E00] focus:outline-none">
                 Prueba suerte
             </button>
           </li>
