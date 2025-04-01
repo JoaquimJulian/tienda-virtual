@@ -58,7 +58,20 @@
         </ul>
 
         <li>
-          <a href="#" class="text-gray-700 hover:text-[#8B2E00]">Ofertas</a>
+            @if(!session('comprador_id'))
+            <button
+                onclick="abrirPopup('loginPopup')"
+                class="hidden sm:block text-gray-700 hover:text-[#8B2E00] focus:outline-none">
+                Prueba suerte
+            </button>
+          @else
+            <button
+                onclick="abrirPopup('gamePopup')"
+                class="hidden sm:block text-gray-700 hover:text-[#8B2E00] focus:outline-none">
+                Prueba suerte
+            </button>
+          </li>
+          @endif
         </li>
         <li>
           <a href="{{ route('sobrenosotros') }}" class="text-gray-700 hover:text-[#8B2E00]">Sobre nosotros</a>
