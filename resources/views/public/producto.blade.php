@@ -43,13 +43,16 @@
                             </div>
                             <div class="absolute bottom-0 right-0">
                                 @if ($producto->codigo == 'BA000-BP')
-                                <button value="{{ $producto }}" class="bg-marron hover:bg-marron-dark text-white font-bold py-2 px-2 rounded-lg" id="btnAnadirProducto">
-                                <a href="{{ route('personalizado.mostrarVista') }}">Personalizar</a>
+                                    <button value="{{ $producto }}" class="bg-marron hover:bg-marron-dark text-white font-bold py-2 px-2 rounded-lg">
+                                        <a href="{{ route('personalizado.mostrarVista') }}">Personalizar</a>
                                     </button>
                                 @else
-                                    <button value="{{ $producto }}" class="bg-marron hover:bg-marron-dark text-white font-bold py-2 px-2 rounded-lg" id="btnAnadirProducto">
-                                        Añadir al carrito
-                                    </button>
+                                    <div class="flex flex-col justify-center relative">
+                                        <button value="{{ $producto }}" class="bg-marron hover:bg-marron-dark text-white font-bold py-2 px-2 rounded-lg" id="btnAnadirProducto">
+                                            Añadir al carrito
+                                        </button>
+                                        <span id="msjAnadido" class="hidden absolute top-full left-0 right-0 text-green-500 text-center mt-1">Producto añadido al carrito</span>
+                                    </div>
                                 @endif
                             </div>
                         </div>

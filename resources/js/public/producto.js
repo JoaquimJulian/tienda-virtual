@@ -63,7 +63,10 @@ btnAnadirProducto.addEventListener('click', function() {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Producto actualizado en el carrito');
+                    document.getElementById('msjAnadido').classList.remove('hidden');
+                    setTimeout(function() {
+                        document.getElementById('msjAnadido').classList.add('hidden');
+                    }, 2000);
                 })
                 .catch(error => console.error('Error actualizando el carrito:', error));
             } else {
@@ -78,7 +81,10 @@ btnAnadirProducto.addEventListener('click', function() {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Producto añadido al carrito');
+                    document.getElementById('msjAnadido').classList.remove('hidden');
+                    setTimeout(function() {
+                        document.getElementById('msjAnadido').classList.add('hidden');
+                    }, 2000);
                 })
                 .catch(error => console.error('Error añadiendo al carrito:', error));
             }
@@ -96,17 +102,23 @@ btnAnadirProducto.addEventListener('click', function() {
 
             // Guardamos el producto actualizado
             localStorage.setItem(key, JSON.stringify(productoExistente));
+            document.getElementById('msjAnadido').classList.remove('hidden');
+            setTimeout(function() {
+                document.getElementById('msjAnadido').classList.add('hidden');
+            }, 2000);
         } else {
             // Si el producto no existe, lo guardamos con la nueva cantidad
             let productoConCantidad = { ...producto, cantidad: cantidad };
             localStorage.setItem(key, JSON.stringify(productoConCantidad));
+            document.getElementById('msjAnadido').classList.remove('hidden');
+            setTimeout(function() {
+                document.getElementById('msjAnadido').classList.add('hidden');
+            }, 2000);
         }
         Object.keys(localStorage).forEach(clave => {
             if (clave.startsWith('carrito_fusionado')) {
                 localStorage.removeItem(clave);
             }
         });
-        console.log(localStorage)
     }
 })
-console.log(localStorage)
