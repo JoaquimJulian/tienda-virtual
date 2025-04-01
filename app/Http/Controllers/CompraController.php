@@ -102,9 +102,14 @@ class CompraController extends Controller
      */
     public function edit(string $id)
     {
-        $compra = Compra::findOrFail($id);
-        $comprador = Comprador::findOrFail($compra->comprador_id);
+        $compra = Compra::with(['productos' => function ($query) {
+            $query->select('productos.codigo', 'productos.nombre', 'productos.precio_unidad')
+                  ->withPivot('cantidad'); // Incluir la cantidad desde la tabla intermedia
+        }])
+        ->where('id', $id)
+        ->first();
         Log::info($compra);
+        $comprador = Comprador::findOrFail($compra->comprador_id);
 
         return view('admin.editCompra', compact('compra', 'comprador'));
     }
