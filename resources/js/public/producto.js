@@ -49,14 +49,16 @@ btnAnadirProducto.addEventListener('click', function() {
                 let carritoId = data[0].id;  // Suponiendo que el carrito tiene un ID único
 
                 // Actualizamos la cantidad del producto
-                fetch(`/carrito/${carritoId}`, {
-                    method: 'PUT',  // Usamos PUT para actualizar
+                fetch(`/carrito/actualizar`, {
+                    method: 'POST', 
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                     },
                     body: JSON.stringify({
-                        cantidad: parseInt(data[0].cantidad) + parseInt(cantidad)  // Sumar la cantidad existente con la nueva cantidad
+                        cantidad: cantidad, 
+                        comprador_id : userId,
+                        producto_codigo: producto.codigo
                     })
                 })
                 .then(response => response.json())

@@ -23,9 +23,10 @@
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
+          </a>
           <!-- Submenú -->
-          <ul class="absolute left-0 mt-2 w-48 bg-white shadow-lg border border-gray-200 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
-          @foreach ($categorias as $category)
+          <ul class="absolute left-0 top-full mt-0 w-48 bg-white shadow-lg border border-gray-200 rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200">
+            @foreach ($categorias as $category)
               <li>
                 <a href="{{ route('categorias.productoscategoria', ['id' => $category->id]) }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{ $category->nombre }}</a>
               </li>
@@ -103,27 +104,48 @@
         </form>
 
       @elseif(session('user_type') === 'comprador')
-        <form action="{{ route('logout') }}" method="POST" class="mb-0 mt-8 sm:mt-0">
-          @csrf
-          <button type="submit" class="text-gray-700 hover:text-[#8B2E00]">Cerrar sesión</button>
-        </form>
-
-        <a href="{{ route('carrito.create') }}" class="relative text-gray-700 hover:text-[#8B2E00] mt-8 sm:mt-0 flex justify-center">
+      <div class="relative">
+        <!-- Botón que activa el dropdown -->
+        <button id="dropdownBtn" class="hidden sm:block text-gray-700 hover:text-[#8B2E00] focus:outline-none">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
           </svg>
-        </a>
+        </button>
+
+        <!-- Dropdown -->
+        <div id="dropdownMenu" class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10 hidden">
+          
+          <form action="{{ route('comprador.edit', ['comprador' => session('comprador_id')]) }}">
+            @csrf
+            <button type="submit" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
+              Perfil
+            </button>
+          </form>
+
+          <form action="{{ route('comprador.mostrarPedidos', ['comprador_id' => session('comprador_id')]) }}" method="GET">
+            <button type="submit" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
+              Pedidos
+            </button>
+          </form>
+
+          <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
+              Cerrar sesión
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <a href="{{ route('carrito.create') }}" class="relative text-gray-700 hover:text-[#8B2E00] mt-8 sm:mt-0 flex justify-center">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+      </a>
 
       @else
-        <button 
-            onclick="abrirPopup('loginPopup')" 
-            class="hidden sm:block text-gray-700 hover:text-[#8B2E00] focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-            </svg>
-        </button>
-        
-        <button onclick="abrirPopup('loginPopup')" type="submit" class="text-gray-700 hover:text-[#8B2E00] sm:hidden">Iniciar sesión</button>
+        <button onclick="abrirPopup('loginPopup')" type="submit" class="text-gray-700 hover:text-[#8B2E00]">Iniciar sesión / Registrarse</button>
           
         <a href="{{ route('carrito.create') }}" class="relative text-gray-700 hover:text-[#8B2E00] flex justify-center">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

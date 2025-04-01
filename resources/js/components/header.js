@@ -83,4 +83,30 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });  
 
+// DROPBOX OPCIONES USUARIO
+
+const dropdownBtn = document.getElementById("dropdownBtn");
+const dropdownMenu = document.getElementById("dropdownMenu");
+let timeout;
+
+// Mostrar el dropdown al pasar el mouse
+dropdownBtn.addEventListener("mouseenter", function() {
+    clearTimeout(timeout); // Evitar que se cierre si el mouse entra rápidamente
+    dropdownMenu.classList.remove("hidden");
+});
+
+// Ocultar el dropdown al salir del botón o del menú
+dropdownBtn.addEventListener("mouseleave", function() {
+    timeout = setTimeout(() => {
+    dropdownMenu.classList.add("hidden");
+    }, 300); // Pequeño retraso para evitar cierres bruscos
+});
+
+dropdownMenu.addEventListener("mouseenter", function() {
+    clearTimeout(timeout); // Evitar que se cierre si el mouse entra en el dropdown
+});
+
+dropdownMenu.addEventListener("mouseleave", function() {
+    dropdownMenu.classList.add("hidden");
+});
 

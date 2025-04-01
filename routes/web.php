@@ -36,7 +36,7 @@ Route::post('/compra/guardarTarjeta', [CompraController::class, 'guardarTarjeta'
 Route::get('/personalizado/mostrarVista', [PersonalizadoController::class, 'mostrarVista'])->name('personalizado.mostrarVista');
 Route::get('/payment', [PaymentController::class, 'showPaymentForm']);
 Route::post('/stripe/payment', [PaymentController::class, 'processPayment'])->name('stripe.payment');
-
+Route::get('/comprador/{comprador_id}/mostrarPedidos', [CompradorController::class, 'mostrarPedidos'])->name('comprador.mostrarPedidos');
 Route::post('/generar-cupon', [CuponController::class, 'generarCupon']);
 
 

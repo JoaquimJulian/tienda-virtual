@@ -20,7 +20,7 @@
             </div>
             <div class="p-4 bg-gray-50">
                 <div class="space-y-3 flex flex-col p-3 pb-0 justify-center">
-                    <form action="{{ route('stripe.payment') }}" method="POST" id="payment-form">
+                    <form id="payment-form">
                         @csrf
                         <div>
                             <label for="card-element">Detalles de la tarjeta</label>
@@ -40,6 +40,8 @@
 
 <script>
     var stripe = Stripe('{{ config('services.stripe.key') }}');  // Asegúrate de usar la clave correcta aquí
+    var rutaApp = "{{ route('app') }}";
+    var rutaFuncionPagar = '{{ route("stripe.payment") }}';
 </script>
 
 @vite(['resources/js/public/compra.js'])

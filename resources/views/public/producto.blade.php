@@ -54,10 +54,10 @@
                 <h2 class="text-marron font-bold text-l mt-2 sm:mt-0 mb-2 text-center">Productos relaccionados</h2>
                 <div class="sm:h-auto sm:overflow-y-auto sm:scrollbar-thin sm:scrollbar-thumb-marron sm:scrollbar-track-marron pr-2">
                 @foreach($productosRelacionados as $productoRelaccionado)
-                    <div class="mt-2 sm:mt-0 flex flex-col items-center bg-white rounded-xl p-4 mb-4">
+                    <a href="{{ route('producto.show', ['codigo' => $productoRelaccionado->codigo]) }}" class="mt-2 sm:mt-0 flex flex-col items-center bg-white rounded-xl p-4 mb-4">
                         <img src="{{ Storage::url($productoRelaccionado->imagen_principal) }}" alt="">
                         <p class="text-marron font-semibold mt-2">{{ $productoRelaccionado->nombre }}</p>
-                    </div>
+                    </a>
                 @endforeach
             </div>
             </div>
