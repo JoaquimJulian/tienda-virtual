@@ -22,8 +22,8 @@ class PersonalizadoController extends Controller
             $imageData = $request->input('image');
             Log::info('Datos de la imagen recibidos: ', ['imageData' => $imageData]);
 
-            $imageName = uniqid('diseño_') . '.png';
-            $imagePath = storage_path('app/public/images'); // Ruta correcta
+            $imageName = uniqid('diseño') . '.png';
+            $imagePath = storage_path('app/public/images/personalizable'); // Ruta correcta
             $imageFullPath = $imagePath . '/' . $imageName;
 
             // Limpiar la imagen base64 para eliminar los encabezados
