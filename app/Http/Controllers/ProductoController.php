@@ -23,6 +23,11 @@ class ProductoController extends Controller
         return response()->json($productos);
     }
 
+    public function indexSinPaginar() {
+        $productos = Producto::all();
+        return view('public.productos', compact('productos'));  
+    }
+
     public function comprobarStock(Request $request)
     {
         $producto = Producto::where('codigo', $request->codigo)->first();

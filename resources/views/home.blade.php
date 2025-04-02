@@ -7,7 +7,9 @@
     <section class="py-10">
         <h1 class="ml-8 text-4xl text-marron font-bold mt-8 w-1/2">DESCUBRE TU SONIDO PERFECTO</h1>
         <p class="ml-8 mt-4 text-xl text-naranja w-1/2">Explore nuestra colección seleccionada de instrumentos y equipos de audio de primera calidad.</p>
-        <button class="mt-6 ml-8 bg-marron hover:bg-beigoscuro text-white  hover:text-white py-2 px-8 rounded-full">Comprar ahora</button>
+        <div class="mt-6">
+            <a href="{{ route('producto.indexSinPaginar') }}" class="mt-6 ml-8 bg-marron hover:bg-[#5A1D0E] text-white  hover:text-white py-2 px-8 rounded-full">Comprar ahora</a>
+        </div>
 
         <!-- SECCIÓN: CATEGORÍAS -->
         <h2 class="ml-8 mt-8 text-3xl font-bold mb-6">CATEGORIAS</h2>
@@ -47,7 +49,7 @@
                             <p class="text-gray-600 mt-2 text-sm px-4 ml-2">{{ $destacado->descripcion }}</p>
                             <div class="mt-4 flex items-center justify-between w-full px-6">
                                 <h4 class="text-marron text-2xl font-bold">{{ $destacado->precio_unidad }}€</h4>
-                                <a href="{{ route('producto.show', ['codigo' => $destacado->codigo]) }}" class="bg-beig hover:bg-beigoscuro text-marron hover:text-white py-2 px-4 rounded-full">
+                                <a href="{{ route('producto.show', ['codigo' => $destacado->codigo]) }}" class="bg-marron hover:bg-[#5A1D0E] text-white py-2 px-4 rounded-full">
                                     Ver detalles
                                 </a>
                             </div>
