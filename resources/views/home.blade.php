@@ -47,9 +47,9 @@
                             <p class="text-gray-600 mt-2 text-sm px-4 ml-2">{{ $destacado->descripcion }}</p>
                             <div class="mt-4 flex items-center justify-between w-full px-6">
                                 <h4 class="text-marron text-2xl font-bold">{{ $destacado->precio_unidad }}€</h4>
-                                <button class="bg-beig hover:bg-beigoscuro text-marron hover:text-white py-2 px-4 rounded-full">
-                                    Añadir al carrito
-                                </button>
+                                <a href="{{ route('producto.show', ['codigo' => $destacado->codigo]) }}" class="bg-beig hover:bg-beigoscuro text-marron hover:text-white py-2 px-4 rounded-full">
+                                    Ver detalles
+                                </a>
                             </div>
                         </div>
                     </div>
