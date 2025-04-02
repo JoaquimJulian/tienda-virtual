@@ -98,7 +98,7 @@ class PaymentController extends Controller
         ]);
         
         // Generar el nombre y la ruta del archivo PDF
-        $fileName = 'factura_' . time() . '.pdf';
+        $fileName = 'factura_' . $compra->id . '_' . Carbon::parse($compra->created_at)->format('Y-m-d_H-i-s') . '.pdf';
         $path = storage_path('app/public/facturas/' . $fileName);
         $pdf->save($path);
 

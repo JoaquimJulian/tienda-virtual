@@ -38,7 +38,7 @@ Route::get('/payment', [PaymentController::class, 'showPaymentForm']);
 Route::post('/stripe/payment', [PaymentController::class, 'processPayment'])->name('stripe.payment');
 Route::get('/comprador/{comprador_id}/mostrarPedidos', [CompradorController::class, 'mostrarPedidos'])->name('comprador.mostrarPedidos');
 Route::post('/generar-cupon', [CuponController::class, 'generarCupon']);
-
+Route::get('/compra/descargarFactura/{compraId}', [CompraController::class, 'descargarFactura'])->name('compra.descargarFactura');
 
 Route::resources([
     'categoria' => CategoriaController::class,

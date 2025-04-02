@@ -8,6 +8,8 @@ use App\Models\Comprador;
 use App\Models\Producto;
 use App\Models\Carrito;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 
@@ -141,30 +143,26 @@ class CompraController extends Controller
         //
     }
 
-    public function guardarTarjeta(Request $request) {
-        // Validación de los datos del formulario
-        $request->validate([
-            'numero' => 'required|digits:16',
-            'nombre' => 'required|string|max:255',
-            'fechaExpiracion' => 'required|regex:/^\d{2}\/\d{2}$/',
-            'cvv' => 'required|digits:3',
-        ]);
+    public function descargarFactura($compraId) {
+        $compra = Compra::findOrFail($compraId);
 
-        $datos = [
-            'numero' => $request->input('numero'),
-            'nombre' => $request->input('nombre'),
-            'fechaExpiracion' => $request->input('fechaExpiracion'),
-            'cvv' => $request->input('cvv'),
-        ];
-    
-        // Guardar los datos en la sesión
-        session(['tarjeta' => $datos]);
-        Log::info(session('tarjeta'));
+        $formattedDate = Carbon::parse($compra->created_at)->format('Y-m-d_H-i-s');  
 
-        // Puedes devolver una respuesta para confirmar que se guardaron los datos
-        return response()->json([
-            'success' => true,
-            'message' => 'Tarjeta guardada en sesión correctamente.',
-        ]);
+        $fileName = 'factura_' . $compra->id. '_' . $formattedDate . '.pdf';
+        
+        $filePath = 'facturas/' . $fileName;
+
+        if (Storage::disk('public')->exists($filePath)) {
+            $url = asset('storage/' . $filePath);
+
+            // Retornar la URL al frontend
+            return response()->json([
+                'url' => $url,
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'Factura no encontrada.',
+            ], 404);
+        }
     }
 }
