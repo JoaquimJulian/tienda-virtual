@@ -38,6 +38,7 @@
     <x-popup-registro />
     <x-popup-anadirTarjeta />
     <x-popup-dragAndDrop />
+    <x-popup-alertaStock />
 
 
     <!--Start of Tawk.to Script-->

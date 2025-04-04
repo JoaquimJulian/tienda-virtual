@@ -322,7 +322,38 @@ if (userType == 'comprador') { // SI ESTAS LOGUEADO
 
     }
 
+    // AVISO SI NO HAY STOCK
+    document.getElementById('procederAlPago').addEventListener('click', function() {
+        fetch('/producto/stock', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ productos: productosCarrito })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = '/compra/createComprador';
+            } else {
+                let mensaje = "<ul>";
+                data.productos_sin_stock.forEach(producto => {
+                    mensaje += `<li><strong>${producto.nombre}</strong>: Máximo disponible ${producto.stock_disponible}</li>`;
+                });
+                mensaje += "</ul>";
 
+                // Insertar el mensaje en el popup
+                document.getElementById('popupContenidoStock').innerHTML = mensaje;
+
+                // Mostrar el popup
+                abrirPopup("alertaStockPopup");
+            }
+        })
+        .catch(error => {
+            console.error('Error comprobando stock:', error);
+        });
+    })
     
 } else { // SI NO ESTAS LOGUEADO
     renderizarCarritoLocal()

@@ -30,10 +30,36 @@ class ProductoController extends Controller
 
     public function comprobarStock(Request $request)
     {
-        $producto = Producto::where('codigo', $request->codigo)->first();
+        $productosCarrito = $request->input('productos'); // Obtener el array de productos desde el request
+        $productosSinStock = [];
 
-        return response()->json($producto);
+        foreach ($productosCarrito as $producto) {
+            $productoDB = Producto::where('codigo', $producto['codigo'])->first();
+
+            if (!$productoDB || $productoDB->stock < $producto['cantidad']) {
+                $productosSinStock[] = [
+                    'codigo' => $producto['codigo'],
+                    'nombre' => $productoDB ? $productoDB->nombre : 'Producto no encontrado',
+                    'stock_disponible' => $productoDB ? $productoDB->stock : 0,
+                    'cantidad_solicitada' => $producto['cantidad']
+                ];
+            }
+        }
+
+        if (count($productosSinStock) > 0) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Algunos productos no tienen suficiente stock.',
+                'productos_sin_stock' => $productosSinStock
+            ], 400);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Todos los productos tienen stock suficiente.'
+        ], 200);
     }
+
 
     /**
      * Show the form for creating a new resource.

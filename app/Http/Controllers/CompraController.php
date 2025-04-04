@@ -60,21 +60,9 @@ class CompraController extends Controller
                 return $producto;
             });
 
-            $stockInsuficiente = false;
-            $productos->each(function ($producto) use (&$stockInsuficiente) {
-                if ($producto->stock < $producto->cantidad) {
-                    // Si el stock es menor que la cantidad solicitada
-                    Log::warning("Stock insuficiente para el producto: {$producto->nombre}");
-                    $stockInsuficiente = true;
-                }
-            });
-            
-            if($stockInsuficiente) {
-                return redirect()->route('app'); // Redirige a home
-            }else if(!empty($carritos)){
+            if(!empty($carritos)){
                 return view('/public/pagar', ['productos' => $productos]);
             }else {
-                Log::info($carritos);
                 return view('/public/carrito');
             }
 

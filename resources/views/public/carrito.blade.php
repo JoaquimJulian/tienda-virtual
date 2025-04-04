@@ -15,7 +15,7 @@
         </div>
         
         <div class="mt-4 sm:w-2/4 flex">
-            <a href="{{ route('compra.createComprador') }}" class="bg-marron hover:bg-red-950 transition-colors text-white py-2 px-6 rounded-md text-center w-full">PROCEDER AL PAGO</a>
+            <button href="{{ route('compra.createComprador') }}" id="procederAlPago" class="bg-marron hover:bg-red-950 transition-colors text-white py-2 px-6 rounded-md text-center w-full">PROCEDER AL PAGO</button>
         </div>
     </div>
 @endsection

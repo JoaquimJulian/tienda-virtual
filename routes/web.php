@@ -30,7 +30,7 @@ Route::post('/carrito/actualizar', [CarritoController::class, 'actualizar']);
 Route::put('/carrito/{comprador_id}/{producto_codigo}', [CarritoController::class, 'update']);
 Route::post('/carrito/eliminar', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
 Route::get('/categorias/json', [CategoriaController::class, 'indexJson'])->name('categorias.json');
-Route::get('/producto/stock', [ProductoController::class, 'comprobarStock'])->name('producto.stock');
+Route::post('/producto/stock', [ProductoController::class, 'comprobarStock'])->name('producto.stock');
 Route::get('/compra/createComprador', [CompraController::class, 'createComprador'])->name('compra.createComprador');
 Route::post('/compra/guardarTarjeta', [CompraController::class, 'guardarTarjeta'])->name('compra.guardarTarjeta');
 Route::get('/personalizado/mostrarVista', [PersonalizadoController::class, 'mostrarVista'])->name('personalizado.mostrarVista');
