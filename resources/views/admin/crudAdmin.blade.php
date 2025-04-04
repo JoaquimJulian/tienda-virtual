@@ -48,6 +48,17 @@
                     Nueva categoria
                 </button>
             </div>
+            <div class="flex justify-center my-4 px-4 sm:px-6 lg:px-8 w-full">
+                <div class="relative w-full max-w-md">
+                    <input type="text" id="busquedaCategorias" placeholder="Buscar categorías..." 
+                        class="w-full px-4 py-2 rounded-full bg-gray-100 text-gray-700 focus:outline-none focus:ring-0 border-none">
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-marron" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
             <div id="dropdownCrearCategoria" class="hidden absolute bg-white shadow-lg rounded-lg p-4 mt-2 w-[200px]">
                 <input type="text" id="inputNuevaCategoria" placeholder="Nombre" class="w-full border-b-2 border-marron focus:outline-none focus:ring-0 p-2 mb-2">
                 <input type="text" id="inputNuevaCategoriaDescripcion" placeholder="Descripcion" class="w-full border-b-2 border-marron focus:outline-none focus:ring-0 p-2 mb-2 mt-2">

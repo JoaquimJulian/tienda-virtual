@@ -6,6 +6,7 @@ const btnCrearCategoria = document.getElementById('btnCrearCategoria')
 const inputNuevaCategoria = document.getElementById('inputNuevaCategoria')
 const inputNuevaCategoriaDescripcion = document.getElementById('inputNuevaCategoriaDescripcion')
 const inputNuevaCategoriaImagen = document.getElementById('inputNuevaCategoriaImagen')
+const busquedaCategorias = document.getElementById('busquedaCategorias')
 
 const listaCategorias = document.getElementById('categoriasLista')
 let hayCategorias = false
@@ -52,7 +53,7 @@ document.getElementById('btnCrearCategoria').addEventListener('click', function(
     .then(data => {
         console.log('Categoría creada:', data);
         if (data.success) {
-            mostrarCategorias(nombreNuevaCategoria)
+            mostrarCategorias("", nombreNuevaCategoria)
         }
     })
     .catch(error => console.error('Error:', error));
@@ -60,7 +61,17 @@ document.getElementById('btnCrearCategoria').addEventListener('click', function(
     dropdownCrearCategoria.classList.add('hidden'); // Cerrar dropdown
 });
 
-function mostrarCategorias(nombreNuevaCategoria){
+
+busquedaCategorias.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+
+    debounceTimer = setTimeout(() => {
+        mostrarCategorias(busquedaCategorias.value);
+    }, 300); 
+});
+
+
+function mostrarCategorias(busqueda = "", nombreNuevaCategoria){
     fetch("/categorias/json", {
         method: "GET",
         headers: {
@@ -73,35 +84,67 @@ function mostrarCategorias(nombreNuevaCategoria){
             hayCategorias = true
         } 
         const listaCategorias = document.getElementById('categoriasLista');
-        if (!nombreNuevaCategoria) {
-            // Si no hay una nueva categoría, mostrar todas las categorías
-            listaCategorias.innerHTML = ''; // Limpiar solo cuando se cargan todas las categorías
-            data.forEach(categoria => {
-                const categoriaElement = document.createElement('div');
-                categoriaElement.setAttribute('id', `categoria_${categoria.id}`);
-                categoriaElement.className = 'w-[90%] flex items-center bg-white p-4 rounded-lg shadow-md mb-4';
-                categoriaElement.innerHTML = `
-                    <input id="${categoria.id}" class="text-marron border-none focus:outline-none focus:ring-0 w-full" value="${categoria.nombre}" readonly>
-                `;
-                categoriaElement.innerHTML += `
-                    <div class="flex gap-4 pr-2">
-                        <img src="/images/lapiz.png" class="hover:cursor-pointer" id="editarC_${categoria.id}"> 
-                        <img src="/images/papelera.png" class="hover:cursor-pointer" id="eliminarC_${categoria.id}">
-                    </div>
-                `                    
-                listaCategorias.appendChild(categoriaElement);
+        if (!nombreNuevaCategoria) { // Si no hay una nueva categoria
+            if (busqueda == "") {
+                listaCategorias.innerHTML = '';
+                data.forEach(categoria => {
+                    const categoriaElement = document.createElement('div');
+                    categoriaElement.setAttribute('id', `categoria_${categoria.id}`);
+                    categoriaElement.className = 'w-[90%] flex items-center bg-white p-4 rounded-lg shadow-md mb-4';
+                    categoriaElement.innerHTML = `
+                        <input id="${categoria.id}" class="text-marron border-none focus:outline-none focus:ring-0 w-full" value="${categoria.nombre}" readonly>
+                    `;
+                    categoriaElement.innerHTML += `
+                        <div class="flex gap-4 pr-2">
+                            <img src="/images/lapiz.png" class="hover:cursor-pointer" id="editarC_${categoria.id}"> 
+                            <img src="/images/papelera.png" class="hover:cursor-pointer" id="eliminarC_${categoria.id}">
+                        </div>
+                    `                    
+                    listaCategorias.appendChild(categoriaElement);
 
-                const botonEliminar = document.getElementById(`eliminarC_${categoria.id}`);
-                    botonEliminar.addEventListener('click', () => {
-                    eliminarCategoria(categoria.id)
+                    const botonEliminar = document.getElementById(`eliminarC_${categoria.id}`);
+                        botonEliminar.addEventListener('click', () => {
+                        eliminarCategoria(categoria.id)
+                    });
+                    const botonEditar = document.getElementById(`editarC_${categoria.id}`);
+                    botonEditar.addEventListener('click', () => {
+                        if (botonEditar.id == `editarC_${categoria.id}`) {
+                            editarCategoria(categoria.id)
+                        }
+                    });
                 });
-                const botonEditar = document.getElementById(`editarC_${categoria.id}`);
-                botonEditar.addEventListener('click', () => {
-                    if (botonEditar.id == `editarC_${categoria.id}`) {
-                        editarCategoria(categoria.id)
+            }else {
+                listaCategorias.innerHTML = '';
+                data.forEach(categoria => {
+                    if (categoria.nombre.toLowerCase().includes(busqueda)) {
+                        const categoriaElement = document.createElement('div');
+                        categoriaElement.setAttribute('id', `categoria_${categoria.id}`);
+                        categoriaElement.className = 'w-[90%] flex items-center bg-white p-4 rounded-lg shadow-md mb-4';
+                        categoriaElement.innerHTML = `
+                            <input id="${categoria.id}" class="text-marron border-none focus:outline-none focus:ring-0 w-full" value="${categoria.nombre}" readonly>
+                        `;
+                        categoriaElement.innerHTML += `
+                            <div class="flex gap-4 pr-2">
+                                <img src="/images/lapiz.png" class="hover:cursor-pointer" id="editarC_${categoria.id}"> 
+                                <img src="/images/papelera.png" class="hover:cursor-pointer" id="eliminarC_${categoria.id}">
+                            </div>
+                        `                    
+                        listaCategorias.appendChild(categoriaElement);
+
+                        const botonEliminar = document.getElementById(`eliminarC_${categoria.id}`);
+                            botonEliminar.addEventListener('click', () => {
+                            eliminarCategoria(categoria.id)
+                        });
+                        const botonEditar = document.getElementById(`editarC_${categoria.id}`);
+                        botonEditar.addEventListener('click', () => {
+                            if (botonEditar.id == `editarC_${categoria.id}`) {
+                                editarCategoria(categoria.id)
+                            }
+                        });
                     }
                 });
-            });
+            }
+            
         } else {
             let contador = 1
             data.forEach(categoria => {
