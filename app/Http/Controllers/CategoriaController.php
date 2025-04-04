@@ -46,11 +46,25 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|string|max:255'
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:255',
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $nombreImagen = time() . '_' . $imagen->getClientOriginalName(); // Evita nombres repetidos
+            $rutaDestino = public_path('images/instrumentos');
+
+            $imagen->move($rutaDestino, $nombreImagen); // Mueve la imagen a public/images/instrumentos
+        } else {
+            return response()->json(['error' => 'Error al subir la imagen'], 400);
+        }
+
         $categoria = Categoria::create([
-            'nombre' => $request->nombre
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'imagen' => $nombreImagen 
         ]);
 
         return response()->json([

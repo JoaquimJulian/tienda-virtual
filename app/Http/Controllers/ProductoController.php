@@ -75,7 +75,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {   
         $request->validate([
-            'codigo' => 'required|string|max:255|unique:productos,codigo',
+            'codigo' => 'required|string|max:255|unique:productos,codigo','regex:/^[A-Za-z]{2}-\d{3}-[A-Za-z]{2}$/',
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'categoria_id' => 'required|exists:categorias,id',

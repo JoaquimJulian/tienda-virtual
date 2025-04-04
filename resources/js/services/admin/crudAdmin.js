@@ -4,6 +4,9 @@ const dropdownMenuCategoria = document.getElementById('dropdownCrearCategoria');
 const btnDropdownCategoria = document.getElementById('btnDropdownCategoria')
 const btnCrearCategoria = document.getElementById('btnCrearCategoria')
 const inputNuevaCategoria = document.getElementById('inputNuevaCategoria')
+const inputNuevaCategoriaDescripcion = document.getElementById('inputNuevaCategoriaDescripcion')
+const inputNuevaCategoriaImagen = document.getElementById('inputNuevaCategoriaImagen')
+
 const listaCategorias = document.getElementById('categoriasLista')
 let hayCategorias = false
 
@@ -26,27 +29,35 @@ document.addEventListener('click', function(event) {
     }
 });
 
-btnCrearCategoria.addEventListener('click', function(event) {
-    event.stopPropagation();
-    let nombreNuevaCategoria = inputNuevaCategoria.value;
+document.getElementById('btnCrearCategoria').addEventListener('click', function(event) {
+    event.preventDefault();
     
+    let nombreNuevaCategoria = document.getElementById('inputNuevaCategoria').value;
+    let descripcionNuevaCategoria = document.getElementById('inputNuevaCategoriaDescripcion').value;
+    let imagenInput = document.getElementById('inputNuevaCategoriaImagen').files[0]; // Obtener la imagen
+
+    let formData = new FormData();
+    formData.append('nombre', nombreNuevaCategoria);
+    formData.append('descripcion', descripcionNuevaCategoria);
+    formData.append('imagen', imagenInput); // Adjuntar la imagen
+
     fetch("/categoria", {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
-        body: JSON.stringify({
-            nombre: nombreNuevaCategoria
-        })
+        body: formData // Enviar como FormData
     })
     .then(response => response.json())
     .then(data => {
-        mostrarCategorias(nombreNuevaCategoria) 
+        console.log('Categoría creada:', data);
+        if (data.success) {
+            mostrarCategorias(nombreNuevaCategoria)
+        }
     })
     .catch(error => console.error('Error:', error));
 
-    dropdownMenuCategoria.classList.add('hidden');
+    dropdownCrearCategoria.classList.add('hidden'); // Cerrar dropdown
 });
 
 function mostrarCategorias(nombreNuevaCategoria){
@@ -62,12 +73,10 @@ function mostrarCategorias(nombreNuevaCategoria){
             hayCategorias = true
         } 
         const listaCategorias = document.getElementById('categoriasLista');
-        console.log(nombreNuevaCategoria)
         if (!nombreNuevaCategoria) {
             // Si no hay una nueva categoría, mostrar todas las categorías
             listaCategorias.innerHTML = ''; // Limpiar solo cuando se cargan todas las categorías
             data.forEach(categoria => {
-                console.log(data)
                 const categoriaElement = document.createElement('div');
                 categoriaElement.setAttribute('id', `categoria_${categoria.id}`);
                 categoriaElement.className = 'w-[90%] flex items-center bg-white p-4 rounded-lg shadow-md mb-4';
@@ -89,7 +98,6 @@ function mostrarCategorias(nombreNuevaCategoria){
                 const botonEditar = document.getElementById(`editarC_${categoria.id}`);
                 botonEditar.addEventListener('click', () => {
                     if (botonEditar.id == `editarC_${categoria.id}`) {
-                        console.log("entra")
                         editarCategoria(categoria.id)
                     }
                 });
@@ -97,9 +105,7 @@ function mostrarCategorias(nombreNuevaCategoria){
         } else {
             let contador = 1
             data.forEach(categoria => {
-                console.log(listaCategorias)
                 if (categoria.nombre == nombreNuevaCategoria && contador === 1) {
-                    console.log('entra')
                     const categoriaElement = document.createElement('div');
                     categoriaElement.setAttribute('id', `categoria_${categoria.id}`);
                     categoriaElement.className = 'w-full flex items-center justify-between bg-white p-4 rounded-lg shadow-md mb-4';
@@ -172,7 +178,6 @@ function editarCategoria(id){
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                console.log("editado")
                 botonEditar.src = "/images/lapiz.png"
                 inputCategoria.setAttribute("readonly", "true");
             } else {
@@ -211,7 +216,6 @@ function mostrarProductos(busqueda = "", pagina = 1){
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         data.data.forEach(producto => {
             if(busqueda == ""){
                 if (!document.getElementById(`producto_${producto.codigo}`)) {

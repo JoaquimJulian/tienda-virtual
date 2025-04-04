@@ -174,12 +174,17 @@ if (userType == 'comprador') { // SI ESTAS LOGUEADO
                             <button class="increment-btn px-2 py-1 text-gray-600 hover:bg-gray-100" data-id="${producto.codigo}">+</button>
                         </div>
                     </div>
+                    <div class="flex justify-between mt-4">
+                        <p class="text-xs text-gray-500">Precio Unidad: </p>
+                        <p class="text-xs text-gray-500">${formatCurrency(producto.precio_unidad)}</p>
+                    </div>
                     <div class="flex">
                         <p class="text-sm font-medium mt-4">Total: </p>
                         <p class="text-sm font-medium mt-4 text-naranja ml-2"> ${formatCurrency(producto.precio_unidad * producto.cantidad)}</p>
                     </div>
                 </div>
             `;
+
             
             // Add event listener to remove button
             productoElement.querySelector('.remove-item').addEventListener('click', () => {
@@ -378,13 +383,13 @@ if (userType == 'comprador') { // SI ESTAS LOGUEADO
             const productoElement = document.createElement('div');
             productoElement.className = 'flex bg-white p-3 rounded-md shadow-sm relative p-2 gap-4';
             productoElement.innerHTML = `
-                <div class="flex-shrink-0 w-1/3 h-auto mr-3">
+                <div class="flex-shrink-0 w-1/3 h-auto">
                     <img src="/storage/${producto.imagen_principal}" alt="${producto.nombre}" class="h-auto object-cover rounded-md w-full">
                 </div>
                 <div class="flex flex-col flex-grow">
                     <div class="flex justify-between items-start">
                         <h3 class="font-medium text-sm">${producto.nombre}</h3>
-                        <button class="remove-item text-gray-400" data-id="${producto.codigo}">
+                        <button class="remove-item text-gray-400" data-id="${producto.id}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -398,6 +403,10 @@ if (userType == 'comprador') { // SI ESTAS LOGUEADO
                             <span class="quantity-display px-3 cantidad" id="${producto.codigo}">${producto.cantidad}</span>
                             <button class="increment-btn px-2 py-1 text-gray-600 hover:bg-gray-100" data-id="${producto.codigo}">+</button>
                         </div>
+                    </div>
+                    <div class="flex mt-4">
+                        <p class="text-xs ">Precio Unidad: </p>
+                        <p class="text-xs ml-2">${formatCurrency(producto.precio_unidad)}</p>
                     </div>
                     <div class="flex">
                         <p class="text-sm font-medium mt-4">Total: </p>

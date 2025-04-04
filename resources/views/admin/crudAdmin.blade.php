@@ -44,15 +44,30 @@
         <p class="text-2xl font-bold text-center mt-4 mb-4 text-marron">Categorias</p>
         <div>
             <div class="flex justify-center mb-4">
-                <button id="btnDropdownCategoria" class="bg-marron text-white rounded-full p-2 text-center font-bold w-[200px]">Nueva categoria</button>
+                <button id="btnDropdownCategoria" class="bg-marron text-white rounded-full p-2 text-center font-bold w-[200px]">
+                    Nueva categoria
+                </button>
             </div>
-            <div id="dropdownCrearCategoria" hidden>
-                <input type="text" id="inputNuevaCategoria" placeholder="Nombre">
-                <button id="btnCrearCategoria">Crear</button>
+            <div id="dropdownCrearCategoria" class="hidden absolute bg-white shadow-lg rounded-lg p-4 mt-2 w-[200px]">
+                <input type="text" id="inputNuevaCategoria" placeholder="Nombre" class="w-full border-b-2 border-marron focus:outline-none focus:ring-0 p-2 mb-2">
+                <input type="text" id="inputNuevaCategoriaDescripcion" placeholder="Descripcion" class="w-full border-b-2 border-marron focus:outline-none focus:ring-0 p-2 mb-2 mt-2">
+                
+                <input type="file" id="inputNuevaCategoriaImagen" class="hidden">
+
+                <label for="inputNuevaCategoriaImagen" class="cursor-pointer flex items-center justify-center w-full border-2 border-marron rounded-lg p-2 mb-2 mt-2 hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-marron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 5v14M5 12h14"></path>
+                    </svg>
+                    <span class="ml-2 text-marron font-medium">Logo</span>
+                </label>
+
+                <button id="btnCrearCategoria" class="bg-marron text-white rounded-full p-2 w-full hover:bg-marron-dark">
+                    Crear
+                </button>
             </div>
         </div>
         
-        <div id="categoriasLista" class="flex flex-wrap justify-center">
+        <div id="categoriasLista" class="flex flex-wrap justify-center mb-40">
         </div>
     </div>
 </div>
