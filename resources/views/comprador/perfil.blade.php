@@ -56,7 +56,7 @@
                 
             </div>
             
-            <input type="submit" value="Enviar" class="bg-marron text-white py-2 px-4 rounded hover:bg-marron-dark cursor-pointer w-full text-center">
+            <input type="submit" value="Guardar datos" class="bg-marron text-white py-2 px-4 rounded hover:bg-marron-dark cursor-pointer w-full text-center">
         </form>
     </div>
 </div>
