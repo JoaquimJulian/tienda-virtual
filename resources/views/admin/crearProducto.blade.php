@@ -54,7 +54,7 @@
 
                     <div class="flex flex-col">
                         <label for="fotografia_principal" class="text-marron font-semibold mb-1">Fotografía principal</label>
-                        <input type="file" name="fotografia_principal" id="fotografia_principal" class="hidden" />
+                        <input type="file" name="fotografia_principal" id="fotografia_principal" class="hidden" required/>
                         <label for="fotografia_principal" class="bg-marron text-white px-4 py-2 rounded cursor-pointer hover:bg-marron-dark text-center">Elegir archivo</label>
                     </div>
 

@@ -82,7 +82,7 @@ class ProductoController extends Controller
             'precio_unidad' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'destacado' => 'sometimes|in:on,off',
-            'fotografia_principal' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'fotografia_principal' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $rutaImagenPrincipal = "";

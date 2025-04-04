@@ -28,6 +28,11 @@
                         <p class="text-marron">{{ $producto->descripcion }}</p>
                         <h2 class="text-marron font-bold text-xl mt-2">Precio</h2>
                         <p class="text-naranja font-bold" id="precioUnidad" data-precio="{{ $producto->precio_unidad }}">{{ $producto->precio_unidad }}$</p>
+                        
+                        <!-- Mostrar el stock disponible -->
+                        <h2 class="text-marron font-bold text-xl mt-2">Stock Disponible</h2>
+                        <p class="text-marron">{{ $producto->stock }} unidades disponibles</p>
+
                         <div class="flex mt-2">
                             <h2 class="text-marron font-bold text-xl">Cantidad:</h2>
                             <div class="flex items-center ml-2">
@@ -64,7 +69,7 @@
                 <div class="sm:h-auto sm:overflow-y-auto sm:scrollbar-thin sm:scrollbar-thumb-marron sm:scrollbar-track-marron pr-2">
                 @foreach($productosRelacionados as $productoRelaccionado)
                     <a href="{{ route('producto.show', ['codigo' => $productoRelaccionado->codigo]) }}" class="mt-2 sm:mt-0 flex flex-col items-center bg-white rounded-xl p-4 mb-4">
-                        <img src="{{ Storage::url($productoRelaccionado->imagen_principal) }}" alt="">
+                        <img src="{{ Storage::url($productoRelaccionado->imagen_principal) }}" alt="Producto relacionado">
                         <p class="text-marron font-semibold mt-2">{{ $productoRelaccionado->nombre }}</p>
                     </a>
                 @endforeach
@@ -76,8 +81,7 @@
 
 <script>
     var userType = "{{ session('user_type') }}"; // Accedes al valor de la sesión en Laravel
-    var userId = "{{ session('comprador_id') }}"
+    var userId = "{{ session('comprador_id') }}";
 </script>
-
 
 @vite(['resources/js/public/producto.js'])

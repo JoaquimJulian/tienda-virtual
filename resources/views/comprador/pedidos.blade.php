@@ -23,7 +23,7 @@
                                         <p class="text-sm text-gray-600 mr-2">Estado del pedido:</p>
                                         @if( $compra->estado == 'pendiente' )
                                             <p class="text-sm text-yellow-500">Pendiente</p>
-                                        @elseif( $compra->estado == 'entregado' )
+                                        @elseif( $compra->estado == 'enviado' )
                                             <p class="text-sm text-green-500">Entregado</p>
                                         @endif
                                     </div>
