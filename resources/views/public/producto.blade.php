@@ -43,8 +43,8 @@
                             </div>
                             <div class="absolute bottom-0 right-0">
                                 @if ($producto->codigo == 'BA000-BP')
-                                    <button value="{{ $producto }}" class="bg-marron hover:bg-marron-dark text-white font-bold py-2 px-2 rounded-lg">
-                                        <a href="{{ route('personalizado.mostrarVista') }}">Personalizar</a>
+                                <button value="{{ $producto }}" class="bg-marron hover:bg-marron-dark text-white font-bold py-2 px-2 rounded-lg">
+                                <a href="{{ route('personalizado.mostrarVista') }}">Personalizar</a>
                                     </button>
                                 @else
                                     <div class="flex flex-col justify-center relative">
