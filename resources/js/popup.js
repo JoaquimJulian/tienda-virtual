@@ -2,7 +2,16 @@
 function abrirPopup(popupId) {
     const popups = document.querySelectorAll('.popup');
     popups.forEach((popup) => {
-        popup.classList.add('hidden');
+        if (popupId.endsWith('Registrado')) {
+            // Ocultar todos los popups excepto "registroPopup"
+            document.querySelectorAll('.popup').forEach(p => {
+                if (p.id !== 'registroPopup') {
+                    p.classList.add('hidden');
+                }
+            });
+        } else {
+            popup.classList.add('hidden');
+        }
     });
 
     // Abrir el popup solicitado

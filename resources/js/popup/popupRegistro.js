@@ -12,3 +12,32 @@ document.getElementById('password').addEventListener('input', function (e) {
         e.target.setCustomValidity(""); // Limpia el mensaje de error
     }
 });
+
+document.getElementById('formRegistro').addEventListener('submit', async function(e) {
+    e.preventDefault(); 
+
+    const telefono = document.getElementById('telefono').value;
+    const email = document.getElementById('emailRegistro').value;
+
+    try {
+        const response = await fetch("/comprador");
+        const compradores = await response.json();
+        const telefonoExiste = compradores.some(c => c.telefono === telefono);
+        const emailExiste = compradores.some(c => c.email === email);
+        
+        if (telefonoExiste && emailExiste) {
+            abrirPopup('telEmailRegistrado')
+        } else if (telefonoExiste) {
+            abrirPopup('telRegistrado')
+        } else if (emailExiste) {
+            abrirPopup('emailRegistrado')
+        } else {
+            // Si todo está OK, enviar el formulario manualmente
+            this.submit();
+        }
+
+    } catch (error) {
+        console.error("Error consultando compradores:", error);
+        alert("Error al verificar los datos. Intenta nuevamente.");
+    }
+});

@@ -17,7 +17,8 @@ class CompradorController extends Controller
      */
     public function index()
     {
-        
+        $compradores = Comprador::all();
+        return $compradores;
     }
 
     /**

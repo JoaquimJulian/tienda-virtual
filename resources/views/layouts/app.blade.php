@@ -39,6 +39,9 @@
     <x-popup-anadirTarjeta />
     <x-popup-dragAndDrop />
     <x-popup-alertaStock />
+    <x-popup-telRegistrado />
+    <x-popup-telEmailRegistrado />
+    <x-popup-emailRegistrado />
 
 
     <!--Start of Tawk.to Script-->

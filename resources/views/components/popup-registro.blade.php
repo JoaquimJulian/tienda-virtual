@@ -7,7 +7,7 @@
         <h2 class="text-xl font-bold mb-4">Registrarse</h2>
 
         <!-- Formulario de registro -->
-        <form method="POST" action="{{ route('comprador.store') }}" class="space-y-4">
+        <form id="formRegistro" method="POST" action="{{ route('comprador.store') }}" class="space-y-4">
             @csrf
 
             <!-- Campo de nombre -->
@@ -65,7 +65,7 @@
                 <label for="email" class="block text-sm text-gray-800 mb-1">Email</label>
                 <input 
                     type="email" 
-                    id="email" 
+                    id="emailRegistro" 
                     name="email" 
                     pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$|^[a-zA-Z0-9._%+-]+@googlemail\.com$"
                     title="Debe ser una dirección de Gmail (ejemplo@gmail.com)"
