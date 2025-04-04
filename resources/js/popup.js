@@ -1,46 +1,49 @@
-// Función para abrir un popup por su ID
-function abrirPopup(popupId) {
-    const popups = document.querySelectorAll('.popup');
-    popups.forEach((popup) => {
+class ManejadorPopups {
+    constructor() {
+        this.popups = document.querySelectorAll('.popup');
+
+        document.addEventListener('click', (event) => this.cerrarDesdeBoton(event));
+    }
+
+    abrirPopup(popupId) {
         if (popupId.endsWith('Registrado')) {
-            // Ocultar todos los popups excepto "registroPopup"
-            document.querySelectorAll('.popup').forEach(p => {
-                if (p.id !== 'registroPopup') {
-                    p.classList.add('hidden');
+            this.popups.forEach(popup => {
+                if (popup.id !== 'registroPopup') {
+                    popup.classList.add('hidden');
                 }
             });
         } else {
-            popup.classList.add('hidden');
+            this.popups.forEach(popup => popup.classList.add('hidden'));
         }
-    });
 
-    // Abrir el popup solicitado
-    const popupAbrir = document.getElementById(popupId);
-    if (popupAbrir) {
-        popupAbrir.classList.remove('hidden');
-    } else {
-        console.log("No existe este popup");
+        const popupAbrir = document.getElementById(popupId);
+        if (popupAbrir) {
+            popupAbrir.classList.remove('hidden');
+        } else {
+            console.log("⚠️ No existe este popup:", popupId);
+        }
     }
-}
 
-// Función para cerrar un popup por su ID
-function cerrarPopup(popupId) {
-    const popup = document.getElementById(popupId);
-    if (popup) {
-        popup.classList.add('hidden');
-    }
-}
-
-// Cerrar el popup con el botón de cerrar
-document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('close')) {
-        const popup = event.target.closest('.popup');
+    cerrarPopup(popupId) {
+        const popup = document.getElementById(popupId);
         if (popup) {
             popup.classList.add('hidden');
         }
     }
-});
 
-// Exponer las funciones al ámbito global
-window.abrirPopup = abrirPopup;
-window.cerrarPopup = cerrarPopup;
+    cerrarDesdeBoton(evento) {
+        if (evento.target.classList.contains('close')) {
+            const popup = evento.target.closest('.popup');
+            if (popup) {
+                popup.classList.add('hidden');
+            }
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const manejador = new ManejadorPopups();
+
+    window.abrirPopup = manejador.abrirPopup.bind(manejador);
+    window.cerrarPopup = manejador.cerrarPopup.bind(manejador);
+});
