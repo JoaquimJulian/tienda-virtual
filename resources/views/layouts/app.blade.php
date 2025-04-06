@@ -23,6 +23,36 @@
         @include ('layouts.header')
     </header>
 
+    <!-- Mensaje de error temporal -->
+    @if (session('error'))
+    <div id="error-message" class="fixed top-20 left-0 right-0 mx-auto w-full max-w-md bg-red-100 border-l-4 border-red-500 text-red-700 p-4 z-50">
+        <div class="flex items-center">
+            <div class="py-1">
+                <svg class="w-6 h-6 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <div>
+                <p class="font-medium">{{ session('error') }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Ocultar mensaje después de 3 segundos
+        setTimeout(function() {
+            const errorMessage = document.getElementById('error-message');
+            if (errorMessage) {
+                errorMessage.style.transition = 'opacity 0.5s ease';
+                errorMessage.style.opacity = '0';
+                setTimeout(function() {
+                    errorMessage.remove();
+                }, 500);
+            }
+        }, 3000);
+    </script>
+    @endif
+
     <!-- Contenedor principal del contenido -->
     <main class="flex-grow bg-beigclaro">
         @yield('content')

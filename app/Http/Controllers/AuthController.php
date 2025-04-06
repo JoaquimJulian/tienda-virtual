@@ -44,10 +44,9 @@ class AuthController extends Controller
         }
         else {
             Log::warning('Intento de login fallido', ['nombre' => $request->nombre]);
+            // Redirigir a app con mensaje de error
+            return redirect()->route('app')->with('error', 'Nombre o contraseña incorrectos');
         }
-        
-
-        return back()->withErrors(['nombre' => 'Credenciales incorrectas']);
     }
 
     public function logout()
