@@ -11,7 +11,7 @@
                 <div class="flex flex-col space-y-4">
                     <div class="flex flex-col">
                         <label for="codigo" class="text-marron font-semibold mb-1">Código</label>
-                        <input type="text" id="codigo" name="codigo" class="bg-beig border-b-2 border-marron focus:outline-none focus:border-marron focus:ring-0 p-2" pattern="[A-Za-z]{2}-\d{3}-[A-Za-z]{2}" title="Formato: AA-000-AA" placeholder="AA-000-AA" required>
+                        <input type="text" id="codigo" name="codigo" class="bg-beig border-b-2 border-marron focus:outline-none focus:border-marron focus:ring-0 p-2" pattern="[A-Za-z]{2}\d{3}-[A-Za-z]{2}"  title="Formato: AA000-AA" placeholder="AA000-AA" required>
                     </div>
                     
                     <div class="flex flex-col">

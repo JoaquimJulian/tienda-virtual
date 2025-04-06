@@ -330,23 +330,41 @@ function mostrarProductos(busqueda = "", pagina = 1){
                     let btnEliminar = document.getElementById(`eliminar_${producto.codigo}`)
                     btnEliminar.onclick = () => eliminarProducto(producto.codigo)
                 }
-            } else {
+            }
+        })
+
+        mostrarPaginacion(data)
+    })
+    .catch(error => console.error('Error:', error));
+
+    if (busqueda != "") {
+        fetch(`/producto/indexSinPaginarJson`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(producto => {
                 if (producto.nombre.toLowerCase().includes(busqueda) || producto.categoria.nombre.toLowerCase().includes(busqueda)) {
                     if (!document.getElementById(`producto_${producto.codigo}`)) {
                         // Crear la fila del producto
                         const fila = document.createElement("tr");
-                        fila.className = "bg-white rounded-xl overflow-hidden mb-2";
+                        fila.className = "bg-white rounded-xl overflow-hidden mb-2 h-16";
                         fila.id = `producto_${producto.codigo}`;
 
                         // Celda de imagen
                         const celdaImagen = document.createElement("td");
-                        celdaImagen.className = "p-4";
+                        celdaImagen.className = "p-4 max-h-full flex items-center justify-center"; // h-full para que ocupe toda la altura del tr
                         const imagen = document.createElement("img");
-                        imagen.src = `storage/${producto.imagen}`;
+                        imagen.src = `/storage/${producto.imagen_principal}`;
                         imagen.alt = producto.nombre;
-                        imagen.className = "object-contain h-2 w-auto";
+                        imagen.className = "object-contain h-full max-h-full w-auto"; // h-full y max-h-full para que se ajuste a la altura de la celda
                         celdaImagen.appendChild(imagen);
                         fila.appendChild(celdaImagen);
+                        
 
                         // Celda de nombre del producto
                         const celdaNombre = document.createElement("td");
@@ -402,12 +420,10 @@ function mostrarProductos(busqueda = "", pagina = 1){
                         btnEliminar.onclick = () => eliminarProducto(producto.codigo)
                     }
                 }
-            }
-        })
+            })
 
-        mostrarPaginacion(data)
-    })
-    .catch(error => console.error('Error:', error));
+        })
+    }
 
 }
 

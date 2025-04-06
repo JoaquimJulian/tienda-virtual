@@ -13,7 +13,7 @@
                 <div class="flex flex-col space-y-4">
                     <div class="flex flex-col">
                         <label for="codigo" class="text-marron font-semibold mb-1">Código</label>
-                        <input type="text" id="codigo" name="codigo" value="{{ old('codigo', $producto->codigo ?? '') }}" class="bg-beig border-b-2 border-marron focus:outline-none focus:border-marron focus:ring-0 p-2" required>
+                        <input type="text" id="codigoEdit" name="codigo" value="{{ old('codigo', $producto->codigo ?? '') }}" class="bg-beig border-b-2 border-marron focus:outline-none focus:border-marron focus:ring-0 p-2" pattern="[A-Za-z]{2}\d{3}-[A-Za-z]{2}" title="Formato: AA000-AA" placeholder="AA000-AA" required>
                     </div>
                     
                     <div class="flex flex-col">
@@ -56,7 +56,7 @@
 
                     <div class="flex flex-col">
                         <label for="fotografia_principal" class="text-marron font-semibold mb-1">Fotografía principal</label>
-                        <input type="file" name="fotografia_principal" id="fotografia_principal" accept="image/*" class="hidden" />
+                        <input type="file" name="fotografia_principal" id="fotografia_principal" class="hidden"/>
                         <label for="fotografia_principal" class="bg-marron text-white px-4 py-2 rounded cursor-pointer hover:bg-marron-dark text-center">Elegir archivo</label>
                     </div>
 
@@ -68,7 +68,7 @@
                 </div>
             </div>
             
-            <input type="submit" value="Enviar" class="bg-marron text-white py-2 px-4 rounded hover:bg-marron-dark cursor-pointer w-full text-center">
+            <input type="submit" value="Guardar cambios" class="bg-marron text-white py-2 px-4 rounded hover:bg-marron-dark cursor-pointer w-full text-center">
         </form>
     </div>
 </div>

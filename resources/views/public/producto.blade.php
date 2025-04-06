@@ -5,7 +5,7 @@
 @section('content')
     <div class="bg-beig p-16 flex flex-col justify-center sm:items-center gap-4">
         <h1 class="text-marron font-bold text-xl text-center">{{ $producto->nombre }}</h1>
-        <div class="sm:flex sm:max-w-fit justify-between">
+        <div class="sm:flex sm:max-w-fit gap-20 justify-center">
             <div class="sm:flex">
                 <div style="max-width: calc(30rem + 3rem);" class="bg-white rounded-xl p-4 h-fit">
                     <div>
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="sm:ml-4">
+                <div class="sm:ml-10">
                     <div class="mt-4">
                         <h2 class="text-marron font-bold text-xl mt-2">Descripcion</h2>
                         <p class="text-marron">{{ $producto->descripcion }}</p>
@@ -41,15 +41,15 @@
                                 <button class="px-2 py-1 bg-gray-200 text-gray-700 rounded-r-md focus:outline-none hover:bg-gray-300" id="btnAumentarCantidad">+</button>
                             </div>
                         </div>
-                        <div class="mt-2 flex justify-between relative">
+                        <div class="mt-2 flex flex-col justify-between relative">
                             <div>
                                 <h2 class="text-marron font-bold text-xl">Total:</h2>
                                 <p class="text-naranja font-bold" id="total" data-precio="{{ $producto->precio_unidad }}">{{ $producto->precio_unidad }}$</p>
                             </div>
-                            <div class="absolute bottom-0 right-0">
+                            <div class="bottom-0 right-0 mt-8">
                                 @if ($producto->codigo == 'BA000-BP')
-                                <button value="{{ $producto }}" class="bg-marron hover:bg-marron-dark text-white font-bold py-2 px-2 rounded-lg">
-                                <a href="{{ route('personalizado.mostrarVista') }}">Personalizar</a>
+                                    <button value="{{ $producto }}" class="bg-marron hover:bg-marron-dark text-white font-bold py-2 px-2 rounded-lg">
+                                        <a href="{{ route('personalizado.mostrarVista') }}">Personalizar</a>
                                     </button>
                                 @else
                                     <div class="flex flex-col justify-center relative">

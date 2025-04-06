@@ -8,6 +8,8 @@ use App\Models\Categoria;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 
 class ProductoController extends Controller
@@ -26,6 +28,11 @@ class ProductoController extends Controller
     public function indexSinPaginar() {
         $productos = Producto::all();
         return view('public.productos', compact('productos'));  
+    }
+
+    public function indexSinPaginarJson() {
+        $productos = Producto::with('categoria')->get();
+        return response()->json($productos);
     }
 
     public function comprobarStock(Request $request)
@@ -75,7 +82,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {   
         $request->validate([
-            'codigo' => 'required|string|max:255|unique:productos,codigo','regex:/^[A-Za-z]{2}-\d{3}-[A-Za-z]{2}$/',
+            'codigo' => 'required|string|max:255|unique:productos,codigo|regex:/^[A-Za-z]{2}\d{3}-[A-Za-z]{2}$/',
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'categoria_id' => 'required|exists:categorias,id',
@@ -144,7 +151,6 @@ class ProductoController extends Controller
     {
         $producto = Producto::findOrFail($id);
         $categorias = Categoria::all();  
-        Log::info('Producto recibido en la vista:', ['producto' => $producto]);
 
         return view('admin.editProducto', compact('producto', 'categorias'));
     }
@@ -155,24 +161,35 @@ class ProductoController extends Controller
      */
     public function update(Request $request, string $codigo)
     {
-
+        
         Log::info('Datos recibidos en update:', [
             'inputs' => $request->all(),
             'files' => $request->file(),
             'content_length' => $request->header('Content-Length'),
         ]);
+    
         $request->validate([
-            'codigo' => 'required|string|max:255|unique:productos,codigo,' . $codigo . ',codigo',
+            'codigo' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('productos', 'codigo')->ignore($codigo, 'codigo'),
+                'regex:/^[A-Za-z]{2}\d{3}-[A-Za-z]{2}$/'
+            ],
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'categoria_id' => 'required|exists:categorias,id',
             'precio_unidad' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
-            'destacado' => 'sometimes|boolean',
-            'fotografia_principal' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'destacado' => 'sometimes|in:on,off',
+            'fotografia_principal' => $request->hasFile('fotografia_principal')
+                ? 'image|mimes:jpeg,png,jpg,gif'
+                : 'nullable',
         ]);
+        
 
         $rutaImagenPrincipal = "";
+
     
         if ($request->hasFile('fotografia_principal')) {
             $imagenPrincipal = $request->file('fotografia_principal');

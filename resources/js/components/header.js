@@ -22,7 +22,7 @@ inputBusqueda.addEventListener('input', function(){
         contenedorResultados.className = "hidden"
     }
 
-    fetch("/producto", {
+    fetch("/producto/indexSinPaginarJson", {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -32,7 +32,8 @@ inputBusqueda.addEventListener('input', function(){
     })
     .then(response => response.json())
     .then(data => {
-        data.data.forEach(producto => {
+        data.forEach(producto => {
+            console.log(producto)
             if (producto.nombre.toLowerCase().includes(busqueda) && busqueda != "" && !document.getElementById(`producto_${producto.codigo}`)) {
                 contenedorResultados.className = "absolute left-0 shadow-md w-full rounded-lg p-4 z-10 bg-white";
 

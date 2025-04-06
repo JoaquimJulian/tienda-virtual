@@ -40,6 +40,8 @@ Route::get('/comprador/{comprador_id}/mostrarPedidos', [CompradorController::cla
 Route::post('/generar-cupon', [CuponController::class, 'generarCupon']);
 Route::get('/compra/descargarFactura/{compraId}', [CompraController::class, 'descargarFactura'])->name('compra.descargarFactura');
 Route::get('/producto/indexSinPaginar', [ProductoController::class, 'indexSinPaginar'])->name('producto.indexSinPaginar');
+Route::get('/producto/indexSinPaginarJson', [ProductoController::class, 'indexSinPaginarJson'])->name('producto.indexSinPaginarJson');
+
 
 
 Route::resources([

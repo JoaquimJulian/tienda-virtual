@@ -30,26 +30,25 @@ document.addEventListener("DOMContentLoaded", function(){
 
     document.getElementById('codigo').addEventListener('input', function(e) {
         let value = e.target.value;
-
+    
         // Eliminar caracteres no válidos (solo letras y números)
-        value = value.replace(/[^A-Za-z0-9]/g, '');  
-
-        // Formatear el valor según el formato AA-000-AA
-        let part1 = value.substring(0, 2); 
-        let part2 = value.substring(2, 5); 
-        let part3 = value.substring(5); 
-
-        // Reemplazar la parte de los números por lo que se haya escrito (si no es un número, no se permite)
-        part2 = part2.replace(/\D/g, '');  
-
-        // Ensamblar el código con las partes correctamente formateadas
-        if (part1.length > 2) part1 = part1.substring(0, 2); 
-        if (part2.length > 3) part2 = part2.substring(0, 3);
-        if (part3.length > 2) part3 = part3.substring(0, 2); 
-
-        value = part1 + (part2.length ? '-' + part2 : '') + (part3.length ? '-' + part3 : '');
-
-        // Asignar el valor formateado al campo de entrada
-        e.target.value = value.toUpperCase(); 
+        value = value.replace(/[^A-Za-z0-9]/g, '');
+    
+        // Convertir a mayúsculas
+        value = value.toUpperCase();
+    
+        // Dividir en partes: 2 letras, 3 números, 2 letras
+        let part1 = value.substring(0, 2).replace(/[^A-Z]/g, '');
+        let part2 = value.substring(2, 5).replace(/\D/g, '');
+        let part3 = value.substring(5, 7).replace(/[^A-Z]/g, '');
+    
+        // Ensamblar el valor como AA000-AA
+        let formatted = part1 + part2;
+        if (part3.length > 0) {
+            formatted += '-' + part3;
+        }
+    
+        // Asignar el valor formateado al input
+        e.target.value = formatted;
     });
 })
