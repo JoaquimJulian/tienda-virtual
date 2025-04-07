@@ -273,7 +273,7 @@ function mostrarProductos(busqueda = "", pagina = 1){
                     const imagen = document.createElement("img");
                     imagen.src = `/storage/${producto.imagen_principal}`;
                     imagen.alt = producto.nombre;
-                    imagen.className = "object-cover";
+                    imagen.className = "object-cover w-12 h-auto";
                     celdaImagen.appendChild(imagen);
                     fila.appendChild(celdaImagen);
 
