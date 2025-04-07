@@ -361,7 +361,7 @@ function mostrarProductos(busqueda = "", pagina = 1){
                         const imagen = document.createElement("img");
                         imagen.src = `/storage/${producto.imagen_principal}`;
                         imagen.alt = producto.nombre;
-                        imagen.className = "object-contain h-full max-h-full w-auto"; // h-full y max-h-full para que se ajuste a la altura de la celda
+                        imagen.className = "object-contain w-12 h-auto"; // h-full y max-h-full para que se ajuste a la altura de la celda
                         celdaImagen.appendChild(imagen);
                         fila.appendChild(celdaImagen);
                         

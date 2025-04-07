@@ -5,6 +5,12 @@
 @section('content')
 <div class="flex flex-col items-center px-6 py-6 bg-beig min-h-screen">
     <div class="w-full max-w-2xl">
+        @if(request('actualizado') == 1)
+            <div class="mb-6 p-4 bg-green-100 text-green-800 rounded shadow text-center font-semibold">
+                Producto actualizado correctamente.
+            </div>
+        @endif
+
     
         <form action="{{ route('producto.update', $producto->codigo) }}" method="POST" class="flex flex-col space-y-4" enctype="multipart/form-data" id="editarProductoForm">
             @csrf
@@ -68,7 +74,7 @@
                 </div>
             </div>
             
-            <input type="submit" value="Guardar cambios" class="bg-marron text-white py-2 px-4 rounded hover:bg-marron-dark cursor-pointer w-full text-center">
+            <input type="submit" value="Guardar cambios" id="submitBtn" class="bg-marron text-white py-2 px-4 rounded hover:bg-marron-dark cursor-pointer w-full text-center">
         </form>
     </div>
 </div>
