@@ -16,7 +16,7 @@
         
         <div class="mt-4 sm:w-2/4 flex">
             @if(session('user_type') === 'comprador')
-                <a href="{{ route('compra.createComprador') }}" id="procederAlPago" class="bg-marron hover:bg-red-950 transition-colors text-white py-2 px-6 rounded-md text-center w-full">PROCEDER AL PAGO</a>
+                <a id="procederAlPago" class="bg-marron hover:bg-red-950 transition-colors text-white py-2 px-6 rounded-md text-center w-full">PROCEDER AL PAGO</a>
             @else
                 <button onclick="abrirPopup('loginPopup')" class="bg-marron hover:bg-red-950 text-white py-2 px-6 rounded-md text-center w-full">INICIE SESION PARA PROCEDER AL PAGO</button>
             @endif
